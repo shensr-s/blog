@@ -19,4 +19,4 @@ logging:
     root: info
     cn.edu.nwafu.blog: debug
 #    指定生成的日志文件 自动切分（若文件过大）
-  file: log/blog-dev.log
+  file: D:/log/blog-dev.log
