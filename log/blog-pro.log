@@ -1,0 +1,10 @@
+2019-09-05 10:31:11.474  INFO 24168 --- [restartedMain] cn.edu.nwafu.blog.BlogApplication        : Starting BlogApplication on WALKER with PID 24168 (D:\IdeaProjects\blog\target\classes started by Walker in D:\IdeaProjects\blog)
+2019-09-05 10:31:11.606 DEBUG 24168 --- [restartedMain] cn.edu.nwafu.blog.BlogApplication        : Running with Spring Boot v2.1.7.RELEASE, Spring v5.1.9.RELEASE
+2019-09-05 10:31:11.609  INFO 24168 --- [restartedMain] cn.edu.nwafu.blog.BlogApplication        : The following profiles are active: pro
+2019-09-05 10:31:13.207  WARN 24168 --- [restartedMain] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[cn.edu.nwafu.blog]' package. Please check your configuration.
+2019-09-05 10:31:13.617 ERROR 24168 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.2.12] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2019-09-05 10:31:13.828 ERROR 24168 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.2.12] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2019-09-05 10:31:14.141 ERROR 24168 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : An incompatible version [1.2.12] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]
+2019-09-05 10:31:15.923  WARN 24168 --- [restartedMain] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-09-05 10:31:16.022  WARN 24168 --- [restartedMain] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-09-05 10:31:16.457  INFO 24168 --- [restartedMain] cn.edu.nwafu.blog.BlogApplication        : Started BlogApplication in 6.118 seconds (JVM running for 7.741)
