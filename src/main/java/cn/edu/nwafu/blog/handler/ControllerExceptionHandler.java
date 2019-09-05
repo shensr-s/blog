@@ -2,8 +2,10 @@ package cn.edu.nwafu.blog.handler;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,10 +23,15 @@ public class ControllerExceptionHandler {
 //   ControllerExceptionHandler.class和this.getClass()一样
 
     @ExceptionHandler(Exception.class)
-    public ModelAndView exceptionHandler(HttpServletRequest request, Exception e) {
+    public ModelAndView exceptionHandler(HttpServletRequest request, Exception e) throws Exception {
 
         //1.记录日志信息
         logger.error("Request URL:{},Exception:{}", request.getRequestURL(), e);
+
+        //指定了注解的就不跳转到error界面
+        if(AnnotationUtils.findAnnotation(e.getClass(), ResponseStatus.class)!=null){
+            throw e;
+        }
         ModelAndView mv = new ModelAndView();
         //2.添加错误信息
         mv.addObject("url", request.getRequestURL());
