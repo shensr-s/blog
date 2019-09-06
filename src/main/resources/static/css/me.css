@@ -1,0 +1,200 @@
+/*-----设置背景-----*/
+body {
+    background: url("../images/bg.png") !important;
+}
+
+/*------padding 内边距------*/
+.m-padded-lr-responsive {
+    /*响应式*/
+    padding-left: 3em;
+    padding-right: 3em;
+}
+
+.m-padded-mini {
+    padding: 0.2em !important;
+}
+
+.m-padded-tiny {
+    padding: 0.3em !important;
+}
+.m-padded {
+    padding: 1em !important;
+}
+.m-padded-tb-mini {
+    /*在semantic框架中 1em=14px*/
+    padding-top: 0.2em !important;
+    padding-bottom: 0.2em !important;
+
+}
+
+.m-padded-tb-tiny {
+    padding-top: 0.3em !important;
+    padding-bottom: 0.3em !important;
+}
+
+.m-padded-tb-small {
+    padding-top: 0.5em !important;
+    padding-bottom: 0.5em !important;
+}
+
+.m-padded-tb {
+    padding-top: 1em !important;
+    padding-bottom: 1em !important;
+}
+
+.m-padded-tb-large {
+    padding-top: 2em !important;
+    padding-bottom: 2em !important;
+}
+
+.m-padded-tb-big {
+    padding-top: 3em !important;
+    padding-bottom: 3em !important;
+}
+
+.m-padded-tb-huge {
+    padding-top: 4em !important;
+    padding-bottom: 4em !important;
+}
+
+.m-padded-tb-massive {
+    padding-top: 5em !important;
+    padding-bottom: 5em !important;
+}
+
+/*text*/
+.m-text {
+    font-weight: 300 !important;
+    letter-spacing: 1px !important;
+    line-height: 1.8;
+}
+
+.m-text-thin {
+    font-weight: 300 !important;
+}
+
+.m-text-spaced {
+    /*字间距*/
+    letter-spacing: 1px !important;
+}
+
+.m-text-lined {
+    /*行间距*/
+    line-height: 1.8;
+}
+
+/*透明度*/
+.m-opacity-mini {
+    opacity: 0.8 !important;
+}
+
+.m-opacity-tiny {
+    opacity: 0.6 !important;
+}
+
+/*display  */
+
+.m-inline-block {
+    display: inline-block;
+}
+
+.m-container {
+    max-width: 72em !important;
+    margin: auto !important;
+}
+
+.m-container-small {
+    max-width: 60em !important;
+    margin: auto !important;
+}
+
+/*----margin 外部间距------*/
+.m-margin-tb-tiny {
+    margin-top: 0.3em !important;
+    margin-bottom: 0.3em !important;
+}
+
+.m-margin-top-small {
+    margin-top: 0.5em !important;
+}
+
+.m-margin-top {
+    margin-top: 1em !important;
+}
+
+.m-margin-top-large {
+    margin-top: 2em !important;
+}
+
+.m-margin-bottom-mini {
+    margin-bottom: 0.2em !important;
+}
+
+.m-margin-bottom-small {
+    margin-bottom: 0.5em !important;
+}
+
+/*---color---*/
+.m-black {
+    color: #333333 !important;
+}
+
+/*-----position------*/
+
+.m-right-top {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.m-fixed{
+    position: fixed;/*--绝对布局--*/
+    z-index: 1 !important;/*--浮动在最上层--*/
+}
+
+.m-right-bottom{
+    bottom:  0!important;/*--底部--*/
+    right: 0 !important;/*--右边--*/
+
+}
+/*----shadow阴影------*/
+
+.m-shadow-small{
+    -webkit-box-shadow: 0 4px 8px rgba(0,0,0,0.4) !important; /*部分浏览器要这样*/
+    box-shadow:  0 4px 8px rgba(0,0,0,0.4) !important;
+}
+
+
+
+/*---宽屏隐藏按钮----*/
+.m-mobile-show {
+    display: none !important;
+}
+
+/*----手机屏幕端隐藏-----*/
+@media screen and (max-width: 768px) {
+    .m-mobile-hide {
+        display: none !important;
+    }
+
+    /*手机端显示按钮*/
+    .m-mobile-show {
+        display: block !important;
+    }
+
+    .m-padded-lr-responsive {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .m-mobile-wide {
+        width: 100% !important;
+    }
+    .m-mobile-lr-clear{
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+}
+
+

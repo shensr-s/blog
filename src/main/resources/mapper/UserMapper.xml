@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.nwafu.blog.dao.UserMapper">
+    <resultMap id="UserResultMap" type="cn.edu.nwafu.blog.entity.User">
+        <result property="id" column="id" jdbcType="BIGINT"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="type" column="type" jdbcType="INTEGER"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
+        <result property="nickName" column="nickname" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="DATE"/>
+        <result property="updateTime" column="update_time" jdbcType="DATE"/>
+        <result property="isDeletedFlag" column="is_deleted_flag" jdbcType="BIT"/>
+    </resultMap>
+
+    <select id="selectUserByUserFlags" resultMap="UserResultMap" >
+    SELECT
+        id,
+        avatar,
+        create_time,
+        email,
+        nickname,
+        `password`,
+        type,
+        update_time,
+        username,
+        is_deleted_flag
+    FROM
+        t_user
+        where username=#{username} or email=#{email}
+    </select>
+</mapper>

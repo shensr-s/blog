@@ -1,8 +1,0 @@
-#配置thymeleaf
-spring:
-  thymeleaf:
-    mode: html
-#指定当前活跃的配置文件
-  profiles:
-    active: dev
-
