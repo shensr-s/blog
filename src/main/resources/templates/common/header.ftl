@@ -18,6 +18,9 @@
                 </div>
                 <#--用户信息:如果登陆了就显示-->
                 <#if user??>
+                    <div class=" item m-mobile-hide m-item">
+                        <a href="${base}/blog/edit" class="ui basic grey min button">写博客</a>
+                    </div>
                     <div class="right  menu m-mobile-hide m-item">
                         <div class="ui dropdown item">
                             <#if user.avatar??>
@@ -52,4 +55,3 @@
         <i class="sidebar icon"></i>
     </a>
 </nav>
-

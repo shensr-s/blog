@@ -13,7 +13,7 @@
 </head>
 <body>
 <!--导航-->
-<#include "common/header.ftl">
+<#include "../common/header.ftl">
 <!--导航结束-->
 
 <!--中间内容-->
@@ -27,6 +27,8 @@
                 </div>
                 <div class="right aligned column">
                     共<h2 class="ui orange header m-inline-block m-text-thin">14</h2>个
+                    &nbsp;
+                    <a href="${base}/blog/type/manage" class="ui basic teal button mini">分类管理</a>
                 </div>
             </div>
         </div>
@@ -209,7 +211,7 @@
 
 
 <!--页面底部-->
-<#include "common/footer.ftl">
+<#include "../common/footer.ftl">
 <!--页面底部结束-->
 
 <!--CDN 引入jquery-->

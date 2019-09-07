@@ -198,3 +198,9 @@ body {
 }
 
 
+/*设置hear 中点击选中的样式 避免和dropdown冲突*/
+.myActive{
+    background: rgba(255,255,255,.15);
+    color: #fff !important;
+}
+

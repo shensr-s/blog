@@ -28,7 +28,7 @@ public class BlogController {
 
     @RequestMapping("/type")
     public String locTypes() {
-        return "types";
+        return "type/types";
     }
 
     @RequestMapping("/tag")
@@ -46,11 +46,13 @@ public class BlogController {
         return "archives";
     }
 
-    @RequestMapping("/type/manage")
-    public String locTypesManage(){
-        return "typesManage";
+    @RequestMapping("/blog")
+    public String locBlog() {
+        return "blog";
     }
-    //分类管理
+
+
+
 
 
 

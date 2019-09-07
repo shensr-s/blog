@@ -1,0 +1,206 @@
+<#assign base=request.contextPath>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--适配移动端-->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--引入CSS-->
+    <link rel="stylesheet" href="${base}/css/me.css">
+    <!--CDN 引入semantic-ui -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <title>分类管理</title>
+</head>
+<body>
+<!--导航-->
+<#include "../common/header.ftl">
+<!--导航结束-->
+
+<!--中间内容-->
+<div class="m-padded-tb-large <#--m-container-small-->">
+    <div class="ui container">
+        <!--header-->
+        <div class="ui top attached segment">
+            <div class="ui middle aligned two column grid">
+                <div class="column">
+                    <h3 class="ui teal header">分类管理</h3>
+                </div>
+                <div class="right aligned column">
+                    <div class="ui icon  input" >
+                        <input type="text" placeholder="Search" id="searchType" name="search" style="width: 100%;">
+                        <i class="search link  icon searchIcon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <#--table-->
+        <div class="ui bottom attached  segment">
+
+
+            <#--型列表-->
+            <div id="typeListTable">
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+</div>
+<!--中间内容结束-->
+
+
+<#---------------------------弹窗--------------------------------------------->
+<#--编辑类型弹窗-->
+<div class="ui modal mini edit">
+    <#--    <i class="close icon"></i>-->
+    <div class="header">
+        编辑类型
+    </div>
+    <div class="content">
+        <div class="field">
+            <div class="ui left labeled input" style=" width: 100% !important;">
+                <label class="ui teal basic label">类型</label>
+                <input type="text" placeholder="请输入类型" name="typeName" id="typeName">
+            </div>
+        </div>
+    </div>
+
+    <div class="actions " style="text-align: center;">
+        <button class="ui approve teal button">更新</button>
+        <button class="ui cancel button">取消</button>
+    </div>
+</div>
+<#--编辑类型弹窗结束-->
+
+
+
+
+<#--新增类型弹窗-->
+<div class="ui modal mini add">
+    <#--    <i class="close icon"></i>-->
+    <div class="header">
+        增加类型
+    </div>
+    <div class="content">
+        <div class="field">
+            <div class="ui left labeled input" style=" width: 100% !important;">
+                <label class="ui teal basic label">类型</label>
+                <input type="text" placeholder="请输入类型" name="typeName" id="typeName">
+            </div>
+        </div>
+    </div>
+
+    <div class="actions " style="text-align: center;">
+        <button class="ui approve teal button">新增</button>
+        <button class="ui cancel button">取消</button>
+    </div>
+</div>
+<#--新增类型弹窗结束-->
+
+<#--删除类型弹窗-->
+<div class="ui modal mini del">
+
+    <div class="header">
+        提示
+    </div>
+    <div class="content">
+        <i class="archive icon large"></i> 确定要删除吗？
+    </div>
+
+    <div class="actions " style="text-align: center;">
+        <button class="ui approve red button">确定</button>
+        <button class="ui cancel button">取消</button>
+    </div>
+</div>
+<#--删除类型弹窗结束-->
+
+
+<#---------------------------弹窗结束--------------------------------------------->
+
+<#--分页参数隐藏域-->
+<input type="hidden" id="currentPage" value="1">
+<input type="hidden" id="pageSize" value="10">
+<#--分页参数隐藏域结束-->
+
+
+
+<!--页面底部-->
+<#include "../common/footer.ftl">
+<!--页面底部结束-->
+
+<!--CDN 引入jquery-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<!--CDN 引入semantic-ui-->
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<#--引入通用js-->
+<script src="${base}/js/common.js"></script>
+<script>
+
+    $(function () {
+
+       typeList(1);
+    });
+
+
+
+    function typeList(currentPage) {
+        //设置隐藏域中currentPage的值
+        $("#currentPage").val(currentPage);
+
+        //搜索的值
+        var search = $("#searchType").val();
+
+        var data = "pageNum=" + currentPage + "&pageSize=" + $("#pageSize").val() + "&search=" + search;
+        // console.log(data);
+        $.ajax({
+            type: "get",
+            url: "/blog/type/ajax/list",
+            data: data,
+            dataType: "html",
+            success: function (data) {
+                $("#typeListTable").empty();
+                $("#typeListTable").html(data);
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $(".loading-box").hide();
+                if (XMLHttpRequest.status == 303) {
+                    window.location.href = "/login";
+                } else {
+                    //layer.msg("获取需求列表失败");
+                    console.log("获取博客类型列表失败")
+                }
+            }
+        });
+
+    };
+
+
+    // $("#addTypeBtn").click(function () {
+    //     //新增类型弹窗
+    //     $('.ui.modal.mini.add').modal('show');
+    // });
+    //
+    // $(".editTypeClass").click(function () {
+    //     //编辑类型弹窗
+    //     $('.ui.modal.mini.edit').modal('show');
+    // });
+    // $(".delTypeClass").click(function () {
+    //     //删除类型弹窗
+    //     $('.ui.modal.mini.del').modal('show');
+    // });
+
+
+    $("#type").addClass("active");
+    $(".menu.toggle").click(function () {
+        $(".m-item").toggleClass('m-mobile-hide');
+    })
+
+    $(".searchIcon").click(function () {
+        typeList(1);
+    })
+</script>
+</body>
+</html>

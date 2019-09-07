@@ -2,8 +2,6 @@ package cn.edu.nwafu.blog.service;
 
 import cn.edu.nwafu.blog.dao.UserMapper;
 import cn.edu.nwafu.blog.entity.User;
-import cn.edu.nwafu.blog.entity.vo.UserVO;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +20,6 @@ public class UserServiceImpl implements IUserService {
     /**
      * 校验用户登录
      * @param username
-     * @param password
      * @return
      */
     @Override
