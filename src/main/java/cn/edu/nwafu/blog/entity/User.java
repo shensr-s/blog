@@ -33,7 +33,7 @@ public class User {
 
     private Date updateTime;//更新时间
 
-    private boolean isDeletedFlag;//删除标记
+    private Boolean isDeletedFlag;//删除标记
 
 
 }

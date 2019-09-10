@@ -14,7 +14,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserVO implements Serializable {
+public class UserVO extends BaseVO {
 
     private Long id;//id
 

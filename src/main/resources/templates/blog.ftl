@@ -26,7 +26,7 @@
 
 <!--中间内容-->
 
-<div class="m-padded-tb-large m-container-small animated fadeInUp" id="waypoint"><!--animated:动画-->
+<div class="m-padded-tb-large <#--m-container-small--> animated fadeInUp" id="waypoint"><!--animated:动画-->
     <div class="ui container">
         <div class="ui top attached segment">
             <!--头部-->
@@ -349,8 +349,9 @@ a+=1;</code></pre>
 
     //生成二维码
     //QRCode("qrCode", {}); 第一个元素为存放二维码的div（或其他标签）的id
+    var locUrl = window.location.href;
     var qrcode = new QRCode("qrCode", {
-        text: "http://jindo.dev.naver.com/collie",
+        text: locUrl,
         width: 106,//生成二维码的宽度
         height: 106,//生成二维码的高度
         colorDark: "#177eb5",//生成二维码的颜色

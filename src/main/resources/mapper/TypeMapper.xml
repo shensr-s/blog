@@ -4,19 +4,43 @@
     <resultMap id="typeResultMap" type="cn.edu.nwafu.blog.entity.Type">
         <result property="id" column="id" jdbcType="BIGINT"/>
         <result property="name" column="name" jdbcType="VARCHAR"/>
-        <result property="createTime" column="create_time" jdbcType="DATE"/>
-        <result property="updateTime" column="update_time" jdbcType="DATE"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP" />
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP" />
         <result property="isDeletedFlag" column="is_deleted_flag" jdbcType="BIT"/>
     </resultMap>
-    <insert id="saveType" parameterType="type"></insert>
-    <update id="updateTypeById" parameterType="type"></update>
-    <delete id="deleteTypeById"></delete>
-    <select id="selectTypePageList" resultType="type">
+    <insert id="saveType" >
+        insert t_type(name, is_deleted_flag, create_time, update_time)
+        values (#{name}, #{isDeletedFlag}, #{createTime}, #{updateTime})
+    </insert>
+    <update id="updateTypeById" parameterType="cn.edu.nwafu.blog.entity.vo.TypeVO">
+        update t_type
+        <set>
+            <if test="name!=null">
+                name=#{name},
+            </if>
+            <if test="createTime!=null">
+                create_time=#{createTime},
+            </if>
+            <if test="updateTime!=null">
+                update_time = #{updateTime},
+            </if>
+            <if test="isDeletedFlag!=null">
+                is_deleted_flag=#{isDeletedFlag},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <delete id="deleteTypeById">
+        delete
+        from t_type
+        where id = #{id}
+    </delete>
+    <select id="selectTypePageList" resultMap="typeResultMap">
         select
-            id,
-            name,
-            createTime,
-            updateTime
+        id,
+        name,
+        create_time,
+        update_time
         from t_type
         where is_deleted_flag = 0
         <if test="name!=null and name!=''">
@@ -24,15 +48,28 @@
         </if>
     </select>
 
-    <select id="selectTypeById" resultType="type"></select>
-    <select id="selectTypeByName" resultType="type">
-        select
-        id,
-        name,
-        createTime,
-        updateTime
+    <select id="selectTypeById" resultMap="typeResultMap">
+        select id,
+               name,
+               create_time,
+               update_time
         from t_type
         where is_deleted_flag = 0
-        and name=#{name}
+          and id = #{id}
+    </select>
+    <select id="selectTypeByName" resultType="type">
+        select id,
+               name,
+               create_time,
+               update_time
+        from t_type
+        where is_deleted_flag = 0
+          and name = #{name}
+    </select>
+    <select id="selectTypes" resultMap="typeResultMap">
+        select id,
+               name
+        from t_type
+        where is_deleted_flag = 0
     </select>
 </mapper>

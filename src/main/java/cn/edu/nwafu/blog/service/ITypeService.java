@@ -1,6 +1,7 @@
 package cn.edu.nwafu.blog.service;
 
 import cn.edu.nwafu.blog.entity.Type;
+import cn.edu.nwafu.blog.entity.vo.TypeVO;
 
 import java.util.List;
 
@@ -13,15 +14,17 @@ import java.util.List;
 
 public interface ITypeService {
 
-    Type saveType(Type type);
+    int saveType(TypeVO type);
 
     Type selectTypeById(Long id);
 
     List<Type> selectTypePageList(Integer pageNum, Integer pageSize,String name);
 
-    Type updateTypeById(Type type);
+    int updateTypeById(TypeVO type);
 
-    Type deleteTypeById(Long id);
+    int deleteTypeById(Long id);
 
     Type selectTypeByName(String name);
+
+    public List<Type> selectTypes();
 }

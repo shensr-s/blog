@@ -2,6 +2,7 @@ package cn.edu.nwafu.blog.service;
 
 import cn.edu.nwafu.blog.dao.TypeMapper;
 import cn.edu.nwafu.blog.entity.Type;
+import cn.edu.nwafu.blog.entity.vo.TypeVO;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,8 +22,9 @@ public class TypeServiceImpl implements ITypeService {
 
     @Autowired
     private TypeMapper typeMapper;
+
     @Override
-    public Type saveType(Type type) {
+    public int saveType(TypeVO type) {
         return typeMapper.saveType(type);
     }
 
@@ -32,23 +34,28 @@ public class TypeServiceImpl implements ITypeService {
     }
 
     @Override
-    public List<Type> selectTypePageList(Integer pageNum, Integer pageSize,String name) {
-        PageHelper.startPage(pageNum,pageSize);
+    public List<Type> selectTypePageList(Integer pageNum, Integer pageSize, String name) {
+        PageHelper.startPage(pageNum, pageSize);
         return typeMapper.selectTypePageList(name);
     }
 
     @Override
-    public Type updateTypeById(Type type) {
+    public int updateTypeById(TypeVO type) {
         return typeMapper.updateTypeById(type);
     }
 
     @Override
-    public Type deleteTypeById(Long id) {
+    public int deleteTypeById(Long id) {
         return typeMapper.deleteTypeById(id);
     }
 
     @Override
     public Type selectTypeByName(String name) {
         return typeMapper.selectTypeByName(name);
+    }
+
+    @Override
+    public List<Type> selectTypes() {
+        return typeMapper.selectTypes();
     }
 }

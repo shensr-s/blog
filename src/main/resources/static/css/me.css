@@ -17,9 +17,11 @@ body {
 .m-padded-tiny {
     padding: 0.3em !important;
 }
+
 .m-padded {
     padding: 1em !important;
 }
+
 .m-padded-tb-mini {
     /*在semantic框架中 1em=14px*/
     padding-top: 0.2em !important;
@@ -147,23 +149,29 @@ body {
     right: 0;
 }
 
-.m-fixed{
-    position: fixed;/*--绝对布局--*/
-    z-index: 1 !important;/*--浮动在最上层--*/
+.m-fixed {
+    position: fixed; /*--绝对布局--*/
+    z-index: 1 !important; /*--浮动在最上层--*/
 }
 
-.m-right-bottom{
-    bottom:  0!important;/*--底部--*/
-    right: 0 !important;/*--右边--*/
+.m-center-top {
+    top: 0 !important; /*--顶部--*/
+    left: 0 !important;
+    right: 0 !important;
+}
+
+.m-right-bottom {
+    bottom: 0 !important; /*--底部--*/
+    right: 0 !important; /*--右边--*/
 
 }
+
 /*----shadow阴影------*/
 
-.m-shadow-small{
-    -webkit-box-shadow: 0 4px 8px rgba(0,0,0,0.4) !important; /*部分浏览器要这样*/
-    box-shadow:  0 4px 8px rgba(0,0,0,0.4) !important;
+.m-shadow-small {
+    -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4) !important; /*部分浏览器要这样*/
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4) !important;
 }
-
 
 
 /*---宽屏隐藏按钮----*/
@@ -190,7 +198,8 @@ body {
     .m-mobile-wide {
         width: 100% !important;
     }
-    .m-mobile-lr-clear{
+
+    .m-mobile-lr-clear {
         padding-left: 0 !important;
         padding-right: 0 !important;
     }
@@ -199,8 +208,21 @@ body {
 
 
 /*设置hear 中点击选中的样式 避免和dropdown冲突*/
-.myActive{
-    background: rgba(255,255,255,.15);
+.myActive {
+    background: rgba(255, 255, 255, .15);
     color: #fff !important;
 }
 
+/*header导航栏位置固定*/
+.m-nav-fixed {
+    height: 58px !important;
+    z-index: 1 !important;
+    position: fixed !important;
+}
+
+/*写博客按钮的大小*/
+.m-blog-btn {
+    width: 60px;
+    padding: 4px 4px 22px 4px !important;
+    height: 22px;
+}

@@ -1,15 +1,16 @@
-package cn.edu.nwafu.blog.entity;
+package cn.edu.nwafu.blog.entity.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author shensr
  * @Date 2019/9/5
- *
+ * <p>
  * 博客实体类
  */
 
@@ -21,7 +22,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Blog {
+public class BlogVO extends BaseVO {
 
     private Long id;//id
 
@@ -51,12 +52,14 @@ public class Blog {
 
     private Boolean isDeletedFlag;//是否删除
 
-    private Long typeId;//博客类型id
+    //  分页参数
+    private Integer pageNum;
 
-    private String typeName;//博客类型
+    private Integer pageSize;
+
+//    private Long typeId;//博客类型id
 //
 //    private List<Long> tagId;//博客标签list
-
 
 
 }

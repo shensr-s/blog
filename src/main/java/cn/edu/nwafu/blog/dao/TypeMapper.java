@@ -1,6 +1,7 @@
 package cn.edu.nwafu.blog.dao;
 
 import cn.edu.nwafu.blog.entity.Type;
+import cn.edu.nwafu.blog.entity.vo.TypeVO;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,15 +16,17 @@ import java.util.List;
 @Repository
 public interface TypeMapper {
 
-    Type saveType(Type type);
+    int saveType(TypeVO type);
 
     Type selectTypeById(Long id);
 
     List<Type> selectTypePageList(String name);
 
-    Type updateTypeById(Type type);
+    int updateTypeById(TypeVO type);
 
-    Type deleteTypeById(Long id);
+    int deleteTypeById(Long id);
 
     Type selectTypeByName(String name);
+
+    List<Type> selectTypes();
 }

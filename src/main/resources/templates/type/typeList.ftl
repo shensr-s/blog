@@ -27,8 +27,10 @@
                     </#if>
                 </td>
                 <td>
-                    <button type="button" class="ui mini teal basic button editTypeClass">编辑</button>
-                    <button type="button" class="ui mini red basic button delTypeClass">删除</button>
+                    <button type="button" class="ui mini teal basic button editTypeClass" value="${typeItem.id}" value-name="${typeItem.name}">编辑
+                    </button>
+                    <button type="button" class="ui mini red basic button delTypeClass" value="${typeItem.id}">删除
+                    </button>
                 </td>
             </tr>
         </#list>
@@ -36,7 +38,7 @@
     </table>
 <#else >
     <div class="ui center aligned">
-        <img src="${request.contextPath}/images/myWeChat.jpg" alt="" class="ui rounded image">
+        <img src="${request.contextPath}/images/noData.jpg" alt="" class="ui rounded image">
     </div>
 </#if>
 <!--bottom -->
@@ -56,12 +58,10 @@
                 <div class="m-inline-block">
                     共<h4 class="ui orange header m-inline-block m-text-thin">${page.total}</h4>条数据
                 </div>
-
             </#if>
         </div>
         <div class="center aligned column">
             <#if types??>
-
                 <#if page.pages gt 1>
                 <#--页数大于1，显示上一页下一页-->
                     <#if page.prePage!=0>
@@ -107,10 +107,13 @@
 
     $(".editTypeClass").click(function () {
         //编辑类型弹窗
+        $("#editId").val($(this).val());
+        $(".typeName").val($(this).attr("value-name"));
         $('.ui.modal.mini.edit').modal('show');
     });
     $(".delTypeClass").click(function () {
         //删除类型弹窗
+        $("#delId").val($(this).val());
         $('.ui.modal.mini.del').modal('show');
     });
 

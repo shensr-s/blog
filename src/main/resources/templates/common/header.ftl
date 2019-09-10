@@ -1,6 +1,6 @@
 <#assign base=request.contextPath>
-<nav class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
-    <div class="ui inverted menu">
+<nav class="ui inverted attached segment m-padded-tb-mini m-shadow-small " style="height: 58px;">
+    <div class="ui inverted menu" style="height: 100%;">
         <div class="ui container">
             <div class="ui inverted secondary stackable menu" style="width: 100%;" id="headerMenu">
                 <h2 class="ui header teal item">Blog</h2>
@@ -18,8 +18,8 @@
                 </div>
                 <#--用户信息:如果登陆了就显示-->
                 <#if user??>
-                    <div class=" item m-mobile-hide m-item">
-                        <a href="${base}/blog/edit" class="ui basic grey min button">写博客</a>
+                    <div class="right item m-mobile-hide m-item">
+                        <a href="${base}/blog/add" class="ui basic grey inverted mini button circular m-blog-btn">写博客</a>
                     </div>
                     <div class="right  menu m-mobile-hide m-item">
                         <div class="ui dropdown item">
@@ -32,6 +32,9 @@
                             &nbsp;${user.username}
                             <i class="ui dropdown icon"></i>
                             <div class="menu">
+
+                                <a href="${base}/blog/index" class="item">个人中心</a>
+                                <a href="${base}/blog/manage" class="item">博客管理</a>
                                 <a href="#" class="item">修改密码</a>
                                 <a href="${base}/logout" class="item">退出登录</a>
                             </div>
@@ -40,9 +43,9 @@
                 <#else >
                 <#--没有登陆就提示登陆-->
                     <div class="right item m-mobile-hide m-item">
-                        <a class="ui inverted button" href="${base}/login">Log in</a>
+                        <a class="ui inverted button m-blog-btn circular" href="${base}/login">Log in</a>
                         &nbsp;
-                        <a class="ui inverted button" href="${base}/signup">Sign Up</a>
+                        <a class="ui inverted button m-blog-btn circular" href="${base}/signup">Sign Up</a>
                     </div>
                 </#if>
 

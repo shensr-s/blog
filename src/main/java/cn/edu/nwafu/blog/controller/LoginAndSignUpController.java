@@ -3,6 +3,7 @@ package cn.edu.nwafu.blog.controller;
 import cn.edu.nwafu.blog.entity.User;
 import cn.edu.nwafu.blog.entity.vo.ResultVO;
 import cn.edu.nwafu.blog.entity.vo.UserVO;
+import cn.edu.nwafu.blog.service.BlogServiceImpl;
 import cn.edu.nwafu.blog.service.UserServiceImpl;
 import cn.edu.nwafu.blog.util.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +24,16 @@ public class LoginAndSignUpController {
 
     @Autowired
     private UserServiceImpl userService;
+    @Autowired
+    private BlogServiceImpl blogService;
 
 
 
     @RequestMapping("/")
-    public String index(){
+    public String index(@RequestParam(defaultValue = "1",required = false) Integer pageNum,
+                        @RequestParam(defaultValue = "5",required = false)Integer pageSize){
+
+//        blogService.selectBlogHomeList(pageNum,pageSize);
         return "home";
     }
     /**

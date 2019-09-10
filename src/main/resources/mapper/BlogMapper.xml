@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.nwafu.blog.dao.BlogMapper">
+    <resultMap id="blogResultMap" type="cn.edu.nwafu.blog.entity.Blog">
+        <result property="id" column="id" jdbcType="BIGINT"/>
+        <result property="title" column="title" jdbcType="VARCHAR"/>
+        <result property="recommend" column="recommend" jdbcType="BIT"/>
+        <result property="typeId" column="type_id" jdbcType="BIGINT"/>
+        <result property="updateTime" column="update_time" jdbcType="TIME"/>
+        <result property="typeName" column="name" jdbcType="VARCHAR"/>
+        <result property="firstPicture" column="first_picture" jdbcType="VARCHAR"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="typeId" column="type_id" jdbcType="BIGINT"/>
+        <result property="recommend" column="recommend" jdbcType="BIT"/>
+        <result property="shareStatement" column="share_statement" jdbcType="BIT"/>
+        <result property="appreciation" column="appreciation" jdbcType="BIT"/>
+        <result property="commentAbled" column="commentabled" jdbcType="BIT"/>
+        <result property="flag" column="flag" jdbcType="VARCHAR"/>
+
+    </resultMap>
+    <insert id="saveBlog" parameterType="blog"></insert>
+    <update id="updateBlogById" parameterType="blog"></update>
+    <delete id="deleteBlogById"></delete>
+    <select id="selectBlogPageList" resultMap="blogResultMap" parameterType="blog">
+        SELECT tb.id,
+               tb.title,
+               tb.recommend,
+               tt.name,
+               tb.update_time,
+               tb.content
+        FROM t_blog tb
+                 LEFT JOIN t_type tt ON tb.type_id = tt.id
+    </select>
+    <select id="selectBlogById" resultMap="blogResultMap">
+        SELECT tb.id,
+               tb.title,
+               tb.recommend,
+               tt.name,
+               tb.update_time,
+               tb.first_picture,
+               tb.content,
+               tb.type_id,
+               tb.recommend,
+               tb.appreciation,
+               tb.share_statement,
+               tb.commentabled,
+               tb.flag
+        FROM t_blog tb
+                 LEFT JOIN t_type tt ON tb.type_id = tt.id
+        where tb.id = #{id}
+    </select>
+</mapper>

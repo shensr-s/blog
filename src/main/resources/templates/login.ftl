@@ -108,12 +108,9 @@
                             rules: [
                                 {
                                     type   : 'empty',
-                                    prompt : 'Please enter your e-mail'
-                                },
-                                {
-                                    type   : 'email',
-                                    prompt : 'Please enter a valid e-mail'
+                                    prompt : '请输入用户名/邮箱'
                                 }
+
                             ]
                         },
                         password: {
@@ -121,7 +118,7 @@
                             rules: [
                                 {
                                     type   : 'empty',
-                                    prompt : 'Please enter your password'
+                                    prompt : '请输入密码'
                                 }
                             ]
                         }
@@ -163,7 +160,7 @@
             success: function (data){
                 console.log("success")
                 if(data.code==200){
-                    window.location.href="/blog/home"
+                    window.location.href="/"
                 }
                 if(data.code==300){
                     console.log(data.msg)

@@ -46,7 +46,7 @@
                                         "<input type=\"text\" value=\"http://\" data-url />" +
                                         "<br/>" + 
                                         "<label>" + linkLang.urlTitle + "</label>" + 
-                                        "<input type=\"text\" value=\"" + selection + "\" data-title />" + 
+                                        "<input type=\"text\" value=\"" + selection + "\" data-title />" +
                                         "<br/>" +
                                     "</div>";
 

@@ -17,7 +17,7 @@
 <!--导航结束-->
 
 <!--中间内容-->
-<div class="m-padded-tb-large m-container-small">
+<div class="m-padded-tb-large <#--m-container-small-->">
     <div class="ui container">
         <!--header-->
         <div class="ui top attached segment">
@@ -92,7 +92,7 @@
 <#--引入通用js-->
 <script src="${base}/js/common.js"></script>
 <script>
-    $("#archives").addClass("active");
+    // $("#archives").addClass("active");
     $(".menu.toggle").click(function () {
         $(".m-item").toggleClass('m-mobile-hide');
     })

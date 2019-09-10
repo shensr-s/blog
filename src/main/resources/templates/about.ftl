@@ -17,7 +17,7 @@
 <!--导航结束-->
 
 <!--中间内容-->
-<div class="m-padded-tb-large m-container-small">
+<div class="m-padded-tb-large <#--m-container-small-->">
     <div class="ui container">
         <div class="ui stackable grid">
             <!--图片-->
@@ -95,7 +95,7 @@
 <script src="${base}/js/common.js"></script>
 <script>
 
-    $("#about").addClass("active");
+    // $("#about").addClass("active");
     $(".menu.toggle").click(function () {
         $(".m-item").toggleClass('m-mobile-hide');
     });

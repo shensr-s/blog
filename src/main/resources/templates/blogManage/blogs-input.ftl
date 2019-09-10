@@ -20,15 +20,15 @@
 <div class="ui menu attached">
     <div class="ui container ">
         <div class="right menu">
-            <a href="" class="active teal item">发布</a>
-            <a href="" class="item">列表</a>
+            <a href="${base}/blog/add" class="active teal item">发布</a>
+            <a href="${base}/blog/manage" class="item">列表</a>
         </div>
     </div>
 </div>
 <!--导航结束-->
 
 <!--中间内容-->
-<div class="m-padded-tb-large m-container-small">
+<div class="m-padded-tb-large <#--m-container-small-->">
     <div class="ui container">
         <form action="#" method="post" class="ui form">
             <!--博客标题编辑区域-->
@@ -36,9 +36,9 @@
                 <div class="ui left labeled input">
                     <!--compact 适应文本宽度-->
                     <div class="ui teal compact basic selection dropdown label">
-                        <input type="hidden" value="原创" placeholder="请选择">
+                        <input type="hidden" <#if blog??> value="${blog.flag!"原创"}"</#if> placeholder="请选择">
                         <i class="dropdown icon"></i>
-                        <div class="text">原创</div>
+                        <div class="text"> 原创</div>
 
                         <div class="menu">
                             <div class="item" data-value="原创">原创</div>
@@ -46,15 +46,14 @@
                             <div class="item" data-value="翻译">翻译</div>
                         </div>
                     </div>
-                    <input type="text" placeholder="标题" name="title">
+                    <input type="text" placeholder="标题" name="title" <#if blog??>value="${blog.title!}" </#if>>
                 </div>
             </div>
             <!--博客内容编辑区域-->
             <div class="field">
                 <!--z-index: 这是层叠的样式 下边是把编辑区域放在最顶层-->
                 <div id="md-content" style="z-index: 1 !important;">
-                    <textarea name="content" id="" cols="30" rows="10" placeholder="博客内容" style="display: none">
-                    </textarea>
+                    <textarea name="content" id="content" cols="30" rows="10" placeholder="博客内容" style="display: none"><#if blog??>${blog.content!}</#if></textarea>
                 </div>
             </div>
 
@@ -63,14 +62,18 @@
                 <div class="field">
                     <div class="ui left labeled action input">
                         <label class="ui compact teal basic label">分类</label>
-                        <div class="ui fluid selection dropdown"><!--fluid 撑满整个-->
-                            <input type="hidden" name="type">
+                        <div class="ui fluid  selection dropdown"><!--fluid 撑满整个-->
+                            <#--这里的input的value值和item中的data-value值相等 就选中该项-->
+                            <input type="hidden" name="type"
+                                   <#if blog??>value="${blog.typeId}"</#if>>
                             <i class="dropdown icon"></i><!--图标-->
-                            <div class="default text">分类</div> <!--默认显示的值-->
+                            <div class="default text" id="blogType">分类
+                            </div> <!--默认显示的值-->
                             <div class="menu">
                                 <!--选择的内容-->
-                                <div class="item" data-value="1">学习笔记</div>
-                                <div class="item" data-value="2">教程</div>
+                                <#list typeList as type>
+                                    <div class="item" data-value="${type.id}">${type.name}</div>
+                                </#list>
                             </div>
 
                         </div>
@@ -104,36 +107,46 @@
             <div class="field">
                 <div class="ui left labeled input">
                     <label class="ui teal basic label">首图</label>
-                    <input type="text" placeholder="首图引用地址" name="picture">
+                    <input type="text" placeholder="首图引用地址" name="picture"
+                           <#if blog??>value="${blog.firstPicture!}" </#if>>
                 </div>
+            </div>
+
+            <div class="required field">
+                <textarea name="description" th:text="*{description}" placeholder="博客描述..." maxlength="200"></textarea>
             </div>
 
             <div class="inline fields">
                 <!--是否推荐-->
                 <div class="field">
                     <div class="ui checkbox">
-                        <input type="checkbox" name="recommend" id="recommend" class="hidden">
+                        <input type="checkbox" name="recommend" id="recommend" class="hidden"
+                               <#if blog??><#if blog.recommend==true>checked</#if></#if>>
                         <label for="recommend">推荐</label>
                     </div>
                 </div>
                 <!--转载声明-->
                 <div class="field">
                     <div class="ui checkbox">
-                        <input type="checkbox" name="shareInfo" id="shareInfo" class="hidden">
+                        <input type="checkbox" name="shareInfo" id="shareInfo" class="hidden"
+
+                                <#if blog??><#if blog.shareStatement==true>checked</#if></#if>>
                         <label for="shareInfo">转载声明</label>
                     </div>
                 </div>
                 <!--是否显示赞赏-->
                 <div class="field">
                     <div class="ui checkbox">
-                        <input type="checkbox" name="appreciation" id="appreciation" class="hidden">
+                        <input type="checkbox" name="appreciation" id="appreciation" class="hidden"
+                               <#if blog??><#if blog.appreciation==true>checked</#if></#if>>
                         <label for="appreciation">赞赏</label>
                     </div>
                 </div>
                 <!--是否开启评论功能-->
                 <div class="field">
                     <div class="ui checkbox">
-                        <input type="checkbox" name="comment" id="comment" class="hidden">
+                        <input type="checkbox" name="comment" id="comment" class=
+                        <#if blog??><#if blog.commentAbled==true>checked</#if></#if>>
                         <label for="comment">评论</label>
                     </div>
                 </div>
@@ -171,7 +184,7 @@
     $(".ui.dropdown").dropdown();
 
     $(".ui.form").form({
-        inline:true,
+        inline: true,
         fields: {
             title: {
                 identifier: 'title',
@@ -201,6 +214,13 @@
                     prompt: '标签：请选择博客标签'
                 }]
             },
+            description : {
+                identifier: 'description',
+                rules: [{
+                    type : 'empty',
+                    prompt: '标题：请输入博客描述'
+                }]
+            }
 
         }
     });
@@ -209,12 +229,12 @@
 <script type="text/javascript">
     var testEditor;
 
-    $(function() {
+    $(function () {
         testEditor = editormd("md-content", {
-            width   : "100%",
-            height  : 640,
-            syncScrolling : "single",
-            path    : "${base}/lib/editormd/lib/"
+            width: "100%",
+            height: 640,
+            syncScrolling: "single",
+            path: "${base}/lib/editormd/lib/"
         });
 
         /*

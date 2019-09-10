@@ -1,4 +1,4 @@
-package cn.edu.nwafu.blog.entity;
+package cn.edu.nwafu.blog.entity.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,14 +8,15 @@ import java.util.Date;
 
 /**
  * @author shensr
- * @Date 2019/9/5
- * 博客类型
- */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class Type {
+ * @version V1.0
+ * @description:
+ * @create 2019/9/10
+ **/
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class TypeVO extends BaseVO {
     private Long id;//id
 
     private String name;//类型名称
