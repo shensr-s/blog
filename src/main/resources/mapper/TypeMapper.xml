@@ -72,4 +72,15 @@
         from t_type
         where is_deleted_flag = 0
     </select>
+
+    <select id="selectTypesAndCount" resultMap="typeResultMap">
+        SELECT
+            tt.id,
+            tt.NAME,
+            ( SELECT COUNT( type_id ) FROM t_blog tb WHERE tb.type_id = tt.id AND tb.is_deleted_flag = 0 ) AS count
+        FROM
+            t_type tt
+        WHERE
+            tt.is_deleted_flag = 0
+    </select>
 </mapper>

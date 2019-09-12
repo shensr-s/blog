@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author shensr
@@ -54,7 +55,17 @@ public class Blog {
     private Long typeId;//博客类型id
 
     private String typeName;//博客类型
-//
+
+    private Long userId;//用户id
+
+    private String userName;//用户名
+
+    private String description;//博客描述
+
+    private String tagId;//博客标签list
+
+    private List<Tag> tagList; //标签
+
 //    private List<Long> tagId;//博客标签list
 
 

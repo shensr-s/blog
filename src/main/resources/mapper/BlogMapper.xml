@@ -7,7 +7,6 @@
         <result property="recommend" column="recommend" jdbcType="BIT"/>
         <result property="typeId" column="type_id" jdbcType="BIGINT"/>
         <result property="updateTime" column="update_time" jdbcType="TIME"/>
-        <result property="typeName" column="name" jdbcType="VARCHAR"/>
         <result property="firstPicture" column="first_picture" jdbcType="VARCHAR"/>
         <result property="content" column="content" jdbcType="VARCHAR"/>
         <result property="typeId" column="type_id" jdbcType="BIGINT"/>
@@ -16,20 +15,104 @@
         <result property="appreciation" column="appreciation" jdbcType="BIT"/>
         <result property="commentAbled" column="commentabled" jdbcType="BIT"/>
         <result property="flag" column="flag" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <collection property="tagList" column="id" ofType="cn.edu.nwafu.blog.entity.Tag" javaType="java.util.List" select="selectTagByBlogId">
+
+        </collection>
 
     </resultMap>
-    <insert id="saveBlog" parameterType="blog"></insert>
-    <update id="updateBlogById" parameterType="blog"></update>
-    <delete id="deleteBlogById"></delete>
+
+    <insert id="saveBlog" parameterType="blog" useGeneratedKeys="true" keyProperty="id">
+        insert into t_blog(appreciation, commentabled, content, create_time, description, first_picture, flag,
+                           published, recommend, share_statement, title, update_time, views, type_id, user_id,
+                           is_deleted_flag)
+        VALUES (#{appreciation}, #{commentAbled}, #{content}, #{createTime}, #{description}, #{firstPicture}, #{flag},
+                #{published}, #{recommend}, #{shareStatement}, #{title}, #{updateTime}, #{views}, #{typeId}, #{userId},
+                #{isDeletedFlag})
+    </insert>
+    <update id="updateBlogById" parameterType="blog">
+        update t_blog
+        <set>
+            <if test="isDeletedFlag!=null">
+                is_deleted_flag=#{isDeletedFlag},
+            </if>
+            <if test="appreciation!=null">
+                appreciation=#{appreciation},
+            </if>
+            <if test="commentAbled!=null">
+                commentabled=#{commentAbled},
+            </if>
+            <if test="content!=null">
+                content=#{content},
+            </if>
+            <if test="createTime!=null">
+                create_time=#{createTime},
+            </if>
+            <if test="description!=null">
+                description=#{description},
+            </if>
+            <if test="firstPicture!=null">
+                first_picture=#{firstPicture},
+            </if>
+            <if test="flag!=null">
+                flag=#{flag},
+            </if>
+            <if test="published!=null">
+                published=#{published},
+            </if>
+            <if test="recommend!=null">
+                recommend=#{recommend},
+            </if>
+            <if test="shareStatement!=null">
+                share_statement=#{shareStatement},
+            </if>
+            <if test="title!=null">
+                title=#{title},
+            </if>
+            <if test="updateTime!=null">
+                update_time=#{updateTime},
+            </if>
+            <if test="views!=null">
+                views=#{views},
+            </if>
+            <if test="typeId!=null">
+                type_id=#{typeId},
+            </if>
+            <if test="userId!=null">
+                user_id=#{userId},
+            </if>
+            <if test="typeId!=null">
+                type_id=#{typeId},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+    <delete id="deleteBlogById">
+        delete
+        from t_blog
+        where id = #{id}
+    </delete>
     <select id="selectBlogPageList" resultMap="blogResultMap" parameterType="blog">
-        SELECT tb.id,
-               tb.title,
-               tb.recommend,
-               tt.name,
-               tb.update_time,
-               tb.content
-        FROM t_blog tb
-                 LEFT JOIN t_type tt ON tb.type_id = tt.id
+        SELECT
+            tb.id,
+            tb.title,
+            tb.content,
+            tb.first_picture,
+            tb.description,
+            tb.recommend,
+            tb.views,
+            tt.id AS typeId,
+            tt.NAME AS typeName,
+            tb.update_time,
+            tb.content,
+            tb.user_id,
+            tu.username
+        FROM
+            t_blog tb
+                LEFT JOIN t_type tt ON tb.type_id = tt.id
+                LEFT JOIN t_user tu ON tb.user_id = tu.id
+        ORDER BY
+            update_time DESC
     </select>
     <select id="selectBlogById" resultMap="blogResultMap">
         SELECT tb.id,
@@ -44,9 +127,17 @@
                tb.appreciation,
                tb.share_statement,
                tb.commentabled,
-               tb.flag
+               tb.flag,
+               tb.description
         FROM t_blog tb
                  LEFT JOIN t_type tt ON tb.type_id = tt.id
         where tb.id = #{id}
+    </select>
+
+    <select id="selectTagByBlogId" resultType="tag">
+        select id, name
+        from t_tag tt
+                 left join t_blog_tag tbt on tt.id = tbt.tag_id
+        where tbt.blog_id=#{id}
     </select>
 </mapper>

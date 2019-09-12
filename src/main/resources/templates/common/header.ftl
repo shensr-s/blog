@@ -8,7 +8,9 @@
                 <a href="${base}/blog/type" class="item m-mobile-hide m-item" id="type"><i class="idea small icon"></i>分类</a>
                 <a href="${base}/blog/tag" class="item m-mobile-hide m-item" id="tag"><i class="tags small icon"></i>标签</a>
                 <a href="${base}/blog/archives" class="item m-mobile-hide m-item" id="archives"><i class="clone small icon"></i>归档</a>
+                <#if user??>
                 <a href="${base}/blog/about" class="item m-mobile-hide m-item" id="about"><i class="info small icon"></i>关于我</a>
+                </#if>
                 <#--全文检索-->
                 <div class="right item m-mobile-hide m-item">
                     <div class="ui icon  input">

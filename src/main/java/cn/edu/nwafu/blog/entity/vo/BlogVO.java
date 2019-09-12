@@ -1,11 +1,13 @@
 package cn.edu.nwafu.blog.entity.vo;
 
+import cn.edu.nwafu.blog.entity.Tag;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author shensr
@@ -52,14 +54,26 @@ public class BlogVO extends BaseVO {
 
     private Boolean isDeletedFlag;//是否删除
 
+    private Long typeId;//博客类型id
+
+    private String typeName;//博客类型
+
+    private Long userId;//用户id
+
+    private String userName;//用户名
+
+    private String description;//博客描述
+
+    private String tagId;//博客标签list
+
+    private List<Tag> tagList; //标签
+
+
+
     //  分页参数
     private Integer pageNum;
 
     private Integer pageSize;
-
-//    private Long typeId;//博客类型id
-//
-//    private List<Long> tagId;//博客标签list
 
 
 }

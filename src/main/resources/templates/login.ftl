@@ -97,78 +97,66 @@
 <script>
 
     // form表单验证
-    $(document).ready(function() {
-            $('.ui.form')
-                .form({
-                    on:"blur",
-                    inline:true,
-                    fields: {
-                        email: {
-                            identifier  : 'username',
-                            rules: [
-                                {
-                                    type   : 'empty',
-                                    prompt : '请输入用户名/邮箱'
-                                }
 
-                            ]
-                        },
-                        password: {
-                            identifier  : 'password',
-                            rules: [
-                                {
-                                    type   : 'empty',
-                                    prompt : '请输入密码'
-                                }
-                            ]
+    var $messageForm=$('.ui.form');
+    $messageForm.form({
+            on: "blur",
+            inline: true,
+            fields: {
+                email: {
+                    identifier: 'username',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: '请输入用户名/邮箱'
                         }
-                    }
-                })
-            ;
+
+                    ]
+                },
+                password: {
+                    identifier: 'password',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: '请输入密码'
+                        }
+                    ]
+                }
+            }
         });
+
     $("#loginBtn").click(function () {
-        var username=$("#username").val();
-        var password=$("#password").val();
-
-        // if(!username){
-        //     $("#username").attr("data-content","用户名为空");
-        //     $("#username").popup('show');
-        //     return;
-        // }
-        // if(!password){
-        //     $("#username").attr("data-content","");
-        //     $("#password").attr("data-content","密码为空");
-        //     $("#password").popup('show');
-        //
-        //     return;
-        // }
-
-        $("#username").attr("data-content","");
-        $("#password").attr("data-content","");
+        var username = $("#username").val();
+        var password = $("#password").val();
+        
+        $("#username").attr("data-content", "");
+        $("#password").attr("data-content", "");
         var data = {};
 
-        data.username=username;
-        data.password=password;
+        data.username = username;
+        data.password = password;
         console.log(data);
         $.ajax({
             type: "post",
             url: "/ajax/login",
             contentType: "application/json;charset=UTF-8",
             data: JSON.stringify(data),
-            sync:false,
+            sync: false,
             dataType: "json",
-            success: function (data){
-                console.log("success")
-                if(data.code==200){
-                    window.location.href="/"
+            success: function (data) {
+                console.log("success");
+                if (data.code === 200) {
+                    window.location.href = "/"
                 }
-                if(data.code==300){
-                    console.log(data.msg)
-                    $("#password").attr("data-content",data.msg);
+                if (data.code === 300) {
+                    // console.log(data.msg);
+                    // 密码错误
+                    $messageForm.form('add prompt', "password", data.msg);
                 }
-                if(data.code=301){
-                    console.log(data.msg)
-                    $("#username").attr("data-content",data.msg);
+                if (data.code === 301) {
+                    // console.log(data.msg);
+                    // 用户名不存在
+                    $messageForm.form('add prompt', "username", data.msg);
                 }
 
             },
@@ -177,9 +165,7 @@
             }
 
 
-
         })
-
 
 
     })

@@ -162,8 +162,7 @@
         var recommend = 1;
         if ($("#BlogRecommend").val() == "on") {
             recommend = 0;
-        }
-        ;
+        };
         var data = {};
         data.title = title;
         data.type = type;

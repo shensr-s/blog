@@ -58,4 +58,10 @@ public class TypeServiceImpl implements ITypeService {
     public List<Type> selectTypes() {
         return typeMapper.selectTypes();
     }
+
+    @Override
+    public List<Type> selectTypesAndCount() {
+        return typeMapper.selectTypesAndCount();
+    }
+
 }

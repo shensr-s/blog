@@ -1,6 +1,8 @@
 package cn.edu.nwafu.blog.dao;
 
 import cn.edu.nwafu.blog.entity.Blog;
+import cn.edu.nwafu.blog.entity.Tag;
+import cn.edu.nwafu.blog.entity.vo.BlogVO;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,10 +20,12 @@ public interface BlogMapper {
 
     List<Blog> selectBlogPageList( Blog blog);
 
-    Blog saveBlog(Blog blog);
+    int saveBlog(BlogVO blog);
 
-    Blog updateBlogById(Blog blog);
+    int updateBlogById(BlogVO blog);
 
     int deleteBlogById(Long id);
+
+    List<Tag> selectTagByBlogId(Long id);
 }
 

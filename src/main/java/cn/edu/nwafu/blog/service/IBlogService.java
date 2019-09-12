@@ -1,6 +1,7 @@
 package cn.edu.nwafu.blog.service;
 
 import cn.edu.nwafu.blog.entity.Blog;
+import cn.edu.nwafu.blog.entity.vo.BlogVO;
 
 import java.util.List;
 
@@ -17,11 +18,13 @@ public interface IBlogService {
 
     List<Blog> selectBlogPageList(Integer pageNum, Integer pageSize,Blog blog);
 
-    Blog saveBlog(Blog blog);
+    Long saveBlog(BlogVO blog);
 
-    Blog updateBlogById(Blog blog);
+    int updateBlogById(BlogVO blog);
 
     int deleteBlogById(Long id);
+
+    List<Blog> selectBlogHomeList(Integer pageNum, Integer pageSize);
 
 //    List<> selectBlogHomeList(int pageNum, int pageSize);
 }

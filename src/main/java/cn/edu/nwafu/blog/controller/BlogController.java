@@ -1,20 +1,25 @@
 package cn.edu.nwafu.blog.controller;
 
-import cn.edu.nwafu.blog.entity.Blog;
-import cn.edu.nwafu.blog.entity.Tag;
-import cn.edu.nwafu.blog.entity.Type;
+import cn.edu.nwafu.blog.entity.*;
 import cn.edu.nwafu.blog.entity.vo.BlogVO;
+import cn.edu.nwafu.blog.entity.vo.ResultVO;
 import cn.edu.nwafu.blog.service.BlogServiceImpl;
+import cn.edu.nwafu.blog.service.TagServiceImpl;
 import cn.edu.nwafu.blog.service.TypeServiceImpl;
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.sun.xml.internal.bind.v2.TODO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,7 +37,12 @@ public class BlogController {
     private BlogServiceImpl blogService;
 
     @Autowired
+    private TagServiceImpl tagService;
+
+    @Autowired
     private TypeServiceImpl typeService;
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
     //获取博客列表
@@ -50,7 +60,13 @@ public class BlogController {
         return "blogManage/blogList";
     }
 
-    //编辑博客
+    /**
+     * 跳转到编辑博客页面
+     *
+     * @param model
+     * @param id
+     * @return
+     */
 
     @RequestMapping("/edit/{id}")
     public String editBlog(Model model, @PathVariable Long id) {
@@ -60,12 +76,116 @@ public class BlogController {
         model.addAttribute("typeList", typeList);
 
         //查询标签
-
+        List<Tag> tagList = tagService.selectTags();
+        model.addAttribute("tagList", tagList);
         //TODO
 
         //查询博客
         Blog blog = blogService.selectBlogById(id);
+        List<BlogTag> blogTags = tagService.selectTagByBlogId(id);
+        StringBuffer tagStr = new StringBuffer();
+        blogTags.forEach(item -> tagStr.append(item.getTagId() + ","));
+        String blogTag = tagStr.toString();
+        blogTag = blogTag.substring(0, blogTag.length() - 1);
         model.addAttribute("blog", blog);
+        model.addAttribute("blogTag", blogTag);
         return "blogManage/blogs-input";
+    }
+
+
+    /**
+     * 保存博客 新增
+     *
+     * @param blog
+     * @param session
+     * @return
+     */
+    @RequestMapping("/ajax/save")
+    @ResponseBody
+    public ResultVO saveOrPublishBlog(@RequestBody BlogVO blog, HttpSession session) {
+        ResultVO resultVO = new ResultVO(200, "");
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            resultVO.setMsg("您还未登录，请登录后在进行操作。");
+            resultVO.setCode(301);
+        } else {
+            blog.setUserId(user.getId());
+
+            blog.setUpdateTime(new Date());
+            //未删除
+            blog.setIsDeletedFlag(false);
+
+            //推荐 转载 赞赏 评论
+            if (blog.getRecommend() == null) {
+                blog.setRecommend(false);
+            }
+            if (blog.getShareStatement() == null) {
+                blog.setShareStatement(false);
+            }
+            if (blog.getAppreciation() == null) {
+                blog.setAppreciation(false);
+            }
+            if (blog.getCommentAbled() == null) {
+                blog.setCommentAbled(false);
+            }
+
+            if (blog.getId() == null) {//新增
+                blog.setCreateTime(new Date());
+                //设置浏览次数
+                blog.setViews(0);
+                try {
+                    //保存
+                    Long blogId = blogService.saveBlog(blog);
+                    resultVO.setMsg("保存成功");
+                    resultVO.setData(blogId);
+                } catch (Exception e) {
+                    resultVO.setMsg("保存失败");
+                    resultVO.setCode(601);
+                    logger.error("错误：{}；Exception：{}", resultVO.getMsg(), e);
+                }
+            } else {
+                //更新
+                try {
+                    blogService.updateBlogById(blog);
+
+                    if (blog.getPublished() == false) {
+                        //保存成功
+                        resultVO.setMsg("保存成功");
+                        resultVO.setData(blog.getId());
+                    } else if (blog.getPublished() == true) {
+                        //发布成功
+                        resultVO.setMsg("发布成功");
+                        resultVO.setData(blog.getId());
+                    }
+                } catch (Exception e) {
+                    if (blog.getPublished() == false) {
+                        //保存失败
+                        resultVO.setMsg("保存失败");
+                        resultVO.setCode(601);
+                    } else if (blog.getPublished() == true) {
+                        //发布失败
+                        resultVO.setMsg("发布失败");
+                        resultVO.setCode(601);
+                    }
+                    logger.error("错误：{}；Exception：{}", resultVO.getMsg(), e);
+                }
+            }
+
+
+        }
+
+
+        return resultVO;
+
+    }
+
+    @RequestMapping("/ajax/home/list")
+    public String selectBlogPageHome(Integer pageNum, Integer pageSize, Model model) {
+        List<Blog> blogList = blogService.selectBlogHomeList(pageNum, pageSize);
+        PageInfo pageInfo = new PageInfo(blogList);
+        model.addAttribute("blogList", pageInfo.getList());
+        model.addAttribute("total", blogList.size());
+        model.addAttribute("page",pageInfo);
+        return "home/blogHomeList";
     }
 }

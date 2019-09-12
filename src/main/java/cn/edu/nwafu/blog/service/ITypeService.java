@@ -27,4 +27,6 @@ public interface ITypeService {
     Type selectTypeByName(String name);
 
     public List<Type> selectTypes();
+
+    List<Type> selectTypesAndCount();
 }

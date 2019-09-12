@@ -1,6 +1,8 @@
 package cn.edu.nwafu.blog.controller;
 
+import cn.edu.nwafu.blog.entity.Tag;
 import cn.edu.nwafu.blog.entity.Type;
+import cn.edu.nwafu.blog.service.TagServiceImpl;
 import cn.edu.nwafu.blog.service.TypeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,13 +25,16 @@ public class BlogNavController {
     @Autowired
     private TypeServiceImpl typeService;
 
+    @Autowired
+    private TagServiceImpl tagService;
+
     //跳转到相应的页面
     //博客管理页面
     @RequestMapping("/manage")
     public String locHome(Model model) {
         List<Type> typeList = typeService.selectTypes();
 
-        model.addAttribute("typeList",typeList);
+        model.addAttribute("typeList", typeList);
         return "blogManage/blogManage";
     }
 
@@ -40,17 +45,29 @@ public class BlogNavController {
         model.addAttribute("typeList", typeList);
 
         //查询标签
+        List<Tag> tagList = tagService.selectTags();
+        model.addAttribute("tagList",tagList);
         return "blogManage/blogs-input";
     }
 
+    //博客类型页面
     @RequestMapping("/type")
-    public String locTypes() {
+    public String locTypes(Model model) {
+
+        List<Type> typeList = typeService.selectTypesAndCount();
+        model.addAttribute("typeList", typeList);
+        model.addAttribute("total",typeList.size());
         return "type/types";
     }
 
+    //博客标签页面
     @RequestMapping("/tag")
-    public String locTags() {
-        return "tags";
+    public String locTags(Model model) {
+
+        List<Tag> tagList = tagService.selectTagsAndCount();
+        model.addAttribute("tagList",tagList);
+        model.addAttribute("total",tagList.size());
+        return "tag/tags";
     }
 
     @RequestMapping("/about")
@@ -70,12 +87,8 @@ public class BlogNavController {
 
     @RequestMapping("/index")
     public String locIndex() {
-        return "index";
+        return "home";
     }
-
-
-
-
 
 
 }

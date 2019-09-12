@@ -15,4 +15,6 @@ public interface IUserService {
      * @return
      */
     User checkUser(String username);
+
+    int saveUser(User user);
 }

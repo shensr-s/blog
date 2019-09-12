@@ -18,7 +18,7 @@ public class UserServiceImpl implements IUserService {
     private UserMapper userMapper;
 
     /**
-     * 校验用户登录
+     * 校验用户（登录和注册）
      * @param username
      * @return
      */
@@ -27,5 +27,15 @@ public class UserServiceImpl implements IUserService {
         String email=username;
         User user = userMapper.selectUserByUserFlags(username, email);
         return user;
+    }
+
+    /**
+     * 用户注册
+     * @param user
+     * @return
+     */
+    @Override
+    public int saveUser(User user) {
+        return userMapper.saveUser(user);
     }
 }

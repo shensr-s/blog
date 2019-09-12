@@ -27,7 +27,7 @@ public class User {
 
     private String avatar;//头像
 
-    private Integer type;//用户类型
+    private Long roleId;//用户类型
 
     private Date createTime;//创建时间
 

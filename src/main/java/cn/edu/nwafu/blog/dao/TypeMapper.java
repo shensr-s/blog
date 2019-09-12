@@ -29,4 +29,6 @@ public interface TypeMapper {
     Type selectTypeByName(String name);
 
     List<Type> selectTypes();
+
+    List<Type> selectTypesAndCount();
 }

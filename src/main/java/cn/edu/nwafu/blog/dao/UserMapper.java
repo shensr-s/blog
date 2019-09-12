@@ -16,4 +16,6 @@ public interface UserMapper {
      * @return
      */
     User selectUserByUserFlags(@Param("username") String username,@Param("email") String email);
+
+    int saveUser(User user);
 }

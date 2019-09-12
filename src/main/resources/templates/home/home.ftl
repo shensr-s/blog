@@ -119,35 +119,11 @@
 
     </style>
 
-    <script src="assets/library/jquery.min.js"></script>
-    <script src="../dist/components/visibility.js"></script>
-    <script src="../dist/components/sidebar.js"></script>
-    <script src="../dist/components/transition.js"></script>
-    <script>
-        $(document)
-            .ready(function () {
+<#--    <script src="assets/library/jquery.min.js"></script>-->
+<#--    <script src="../dist/components/visibility.js"></script>-->
+<#--    <script src="../dist/components/sidebar.js"></script>-->
+<#--    <script src="../dist/components/transition.js"></script>-->
 
-                // fix menu when passed
-                $('.masthead')
-                    .visibility({
-                        once: false,
-                        onBottomPassed: function () {
-                            $('.fixed.menu').transition('fade in');
-                        },
-                        onBottomPassedReverse: function () {
-                            $('.fixed.menu').transition('fade out');
-                        }
-                    })
-                ;
-
-                // create sidebar and attach to menu open
-                $('.ui.sidebar')
-                    .sidebar('attach events', '.toc.item')
-                ;
-
-            })
-        ;
-    </script>
 </head>
 <body>
 
@@ -166,6 +142,7 @@
                 <div class="eleven wide column">
                     <!--header-->
                     <!--top attached 和attached 可以将两部分连接在一块-->
+
                     <div class="ui top attached segment">
                         <div class="ui middle aligned two column grid">
                             <div class="column">
@@ -183,53 +160,6 @@
                         <div class="ui padded vertical segment">
                             <!--mobile reversed 手机端翻转-->
                             <!--stackable 可以堆叠 响应手机端-->
-                            <#-- middle aligned垂直居中-->
-                            <div class="ui middle aligned mobile reversed stackable grid">
-                                <div class="eleven wide column">
-
-                                    <h3 class="ui header">你理解什么是真正的幸福吗？</h3>
-                                    <p class="m-text">
-                                        这个例子演示了如何使用JavaScript来改变元素的不透明度。这个例子演示了如何使用JavaScript来改变元素的不透明度。这个例子演示了如何使用JavaScript来改变元素的不透明度。</p>
-                                    <div class="ui stackable grid">
-                                        <div class="eleven wide column">
-                                            <div class="ui mini link list horizontal">
-                                                <div class="item">
-                                                    <img src="https://picsum.photos/100/100?image=1027" alt=""
-                                                         class="ui avatar image">
-                                                    <div class="content">
-                                                        <a href="#" class="header">子墨同学</a>
-                                                    </div>
-
-                                                </div>
-                                                <div class="item">
-                                                    <i class="calendar icon"></i>2019-09-03
-                                                </div>
-                                                <div class="item">
-                                                    <i class="eye icon"></i>336
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="right aligned five wide column">
-                                            <a href="#" target="_blank" class="ui label teal  mini m-text-thin">认知升级</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="five wide column">
-                                    <a href="#" target="_blank">
-                                        <img src="https://picsum.photos/300/200?image=1027" alt=""
-                                             class="ui rounded image">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="ui attached  segment m-padded-tb-mini m-mobile-lr-clear">
-                        <div class="ui padded vertical segment">
-                            <!--mobile reversed 手机端翻转-->
-                            <!--stackable 可以堆叠 响应手机端-->
                             <div class="ui mobile reversed stackable grid">
                                 <div class="eleven wide column">
 
@@ -260,64 +190,26 @@
                                             <a href="#" target="_blank" class="ui label teal  mini m-text-thin">认知升级</a>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="five wide column">
-                                    <a href="#" target="_blank">
-                                        <img src="https://picsum.photos/300/200?image=1027" alt=""
-                                             class="ui rounded image">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="ui attached  segment m-padded-tb-mini m-mobile-lr-clear">
-                        <div class="ui padded vertical segment">
-                            <!--mobile reversed 手机端翻转-->
-                            <!--stackable 可以堆叠 响应手机端-->
-                            <div class="ui mobile reversed stackable grid">
-                                <div class="eleven wide column">
-
-                                    <h3 class="ui header">你理解什么是真正的幸福吗？</h3>
-                                    <p class="m-text">
-                                        这个例子演示了如何使用JavaScript来改变元素的不透明度。这个例子演示了如何使用JavaScript来改变元素的不透明度。这个例子演示了如何使用JavaScript来改变元素的不透明度。</p>
-                                    <div class="ui stackable grid">
-                                        <div class="eleven wide column">
-                                            <div class="ui mini link list horizontal">
-                                                <div class="item">
-                                                    <img src="https://picsum.photos/100/100?image=1027" alt=""
-                                                         class="ui avatar image">
-                                                    <div class="content">
-                                                        <a href="#" class="header">子墨同学</a>
-                                                    </div>
-
-                                                </div>
-                                                <div class="item">
-                                                    <i class="calendar icon"></i>2019-09-03
-                                                </div>
-                                                <div class="item">
-                                                    <i class="eye icon"></i>336
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="right aligned five wide column">
-                                            <a href="#" target="_blank" class="ui label teal  mini m-text-thin">认知升级</a>
-                                        </div>
+                                    <!--标签-->
+                                    <div class="row">
+                                        <i class="ui tags icon"></i>
+                                        <a href="#" class="ui  teal  m-padded-mini m-margin-tb-tiny m-text-thin label">JAVA</a>
+                                        <a href="#" class="ui  teal  m-padded-mini m-margin-tb-tiny m-text-thin label">JAVA</a>
+                                        <a href="#" class="ui  teal  m-padded-mini m-margin-tb-tiny m-text-thin label">JAVA</a>
                                     </div>
                                 </div>
 
                                 <div class="five wide column">
                                     <a href="#" target="_blank">
-                                        <img src="https://picsum.photos/300/200?image=1027" alt=""
-                                             class="ui rounded image">
+                                        <img src="https://picsum.photos/300/200?image=1027" alt="" class="ui rounded image">
                                     </a>
                                 </div>
                             </div>
                         </div>
 
                     </div>
+
 
                     <!--bottom -->
                     <div class="ui bottom attached segment">
@@ -444,7 +336,7 @@
     </div>
     <!--中间内容结束-->
     <!--页面底部-->
-    <#include "common/footer.ftl">
+    <#include "../common/footer.ftl">
     <!--页面底部结束-->
 <#else >
     <div class="pusher">
@@ -554,7 +446,10 @@
     </div>
 </#if>
 
-
+<#--分页参数隐藏域-->
+<input type="hidden" id="currentPage" value="1">
+<input type="hidden" id="pageSize" value="6">
+<#--分页参数隐藏域结束-->
 <!--CDN 引入jquery-->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
 <!--CDN 引入semantic-ui-->
@@ -563,6 +458,62 @@
 <script src="${base}/js/common.js"></script>
 <script>
     // $("#home").addClass("active");
+</script>
+<script>
+    $(document).ready(function () {
+
+            // fix menu when passed
+            $('.masthead').visibility({
+                    once: false,
+                    onBottomPassed: function () {
+                        $('.fixed.menu').transition('fade in');
+                    },
+                    onBottomPassedReverse: function () {
+                        $('.fixed.menu').transition('fade out');
+                    }
+                });
+
+            // create sidebar and attach to menu open
+            $('.ui.sidebar').sidebar('attach events', '.toc.item');
+
+
+            //查询博客列表
+        homeBlogList(1);
+
+    });
+
+
+
+    function homeBlogList(currentPage) {
+        //设置隐藏域中currentPage的值
+        $("#currentPage").val(currentPage);
+
+        var data = {};
+        data.pageNum = $("#currentPage").val();
+        data.pageSize = $("#pageSize").val();
+        console.log(data);
+        $.ajax({
+            type: "get",
+            url: "/blog/ajax/home/list",
+            data: data,
+            dataType: "html",
+            contentType: 'application/json;charset=UTF-8',
+            success: function (data) {
+                $(".eleven.wide.column").empty();
+                $(".eleven.wide.column").html(data);
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $(".loading-box").hide();
+                if (XMLHttpRequest.status == 303) {
+                    window.location.href = "/login";
+                } else {
+                    //layer.msg("获取需求列表失败");
+                    console.log("获取博客列表失败")
+                }
+            }
+        });
+
+    };
 </script>
 </body>
 

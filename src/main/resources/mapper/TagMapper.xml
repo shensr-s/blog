@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.nwafu.blog.dao.TagMapper">
+
+    <resultMap id="tagResultMap" type="cn.edu.nwafu.blog.entity.Tag">
+        <result property="id" column="id" jdbcType="BIGINT"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="isDeletedFlag" column="is_deleted_flag" jdbcType="BIT"/>
+    </resultMap>
+
+    <resultMap id="blogTagResultMap" type="cn.edu.nwafu.blog.entity.BlogTag">
+        <result property="blogId" column="blog_id" jdbcType="BIGINT"/>
+        <result property="tagId" column="tag_id" jdbcType="BIGINT"/>
+
+    </resultMap>
+
+    <insert id="saveTag" parameterType="tagVO">
+        insert t_tag(name, is_deleted_flag, create_time, update_time)
+        values (#{name}, #{isDeletedFlag}, #{createTime}, #{updateTime})
+    </insert>
+    <insert id="saveBlogTag">
+        insert into t_blog_tag(blog_id, tag_id) values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.blogId},
+            #{item.tagId}
+            )
+        </foreach>
+    </insert>
+    <update id="updateTagById" parameterType="tagVO">
+        update t_tag
+        <set>
+            <if test="name!=null">
+                name=#{name},
+            </if>
+            <if test="createTime!=null">
+                create_time=#{createTime},
+            </if>
+            <if test="updateTime!=null">
+                update_time = #{updateTime},
+            </if>
+            <if test="isDeletedFlag!=null">
+                is_deleted_flag=#{isDeletedFlag},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <delete id="deleteTagById">
+        delete
+        from t_tag
+        where id = #{id}
+    </delete>
+    <select id="selectTagById" resultType="tag"></select>
+    <select id="selectTagPageList" resultMap="tagResultMap">
+        SELECT
+        id,
+        NAME,
+        update_time
+        FROM
+        t_tag
+        WHERE
+        is_deleted_flag =0
+        <if test="name!=null and name!=''">
+            and name like concat('%',#{name},'%')
+        </if>
+    </select>
+    <select id="selectTagByName" resultMap="tagResultMap">
+        select id,
+               name,
+               create_time,
+               update_time
+        from t_tag
+        where is_deleted_flag = 0
+          and name = #{name}
+    </select>
+    <select id="selectTags" resultType="tag">
+        select id,
+               name
+        from t_tag
+        where is_deleted_flag = 0
+    </select>
+    <select id="selectTagsAndCount" resultMap="tagResultMap">
+        SELECT id,
+               name,
+               (SELECT count(tag_id) FROM t_blog_tag WHERE tag_id = tt.id) AS count
+        FROM t_tag tt
+        WHERE is_deleted_flag = 0
+    </select>
+
+    <select id="selectTagByBlogId" resultMap="blogTagResultMap">
+        select blog_id, tag_id
+        from t_blog_tag
+        where blog_id = #{id}
+
+    </select>
+    <delete id="deleteBlogTagByBlogId">
+        delete
+        from t_blog_tag
+        where blog_id = #{id}
+    </delete>
+</mapper>

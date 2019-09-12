@@ -95,41 +95,40 @@
 <script>
 
     // form表单验证
-    $(document).ready(function() {
-            $('.ui.form')
-                .form({
-                    on:"blur",
-                    inline:true,
-                    fields: {
-                        email: {
-                            identifier  : 'username',
-                            rules: [
-                                {
-                                    type   : 'empty',
-                                    prompt : 'Please enter your e-mail'
-                                },
-                                {
-                                    type   : 'email',
-                                    prompt : 'Please enter a valid e-mail'
-                                }
-                            ]
+
+    $('.ui.form')
+        .form({
+            on: "blur",
+            inline: true,
+            fields: {
+                email: {
+                    identifier: 'username',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Please enter your e-mail'
                         },
-                        password: {
-                            identifier  : 'password',
-                            rules: [
-                                {
-                                    type   : 'empty',
-                                    prompt : 'Please enter your password'
-                                }
-                            ]
+                        {
+                            type: 'email',
+                            prompt: 'Please enter a valid e-mail'
                         }
-                    }
-                })
-            ;
+                    ]
+                },
+                password: {
+                    identifier: 'password',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Please enter your password'
+                        }
+                    ]
+                }
+            }
         });
+
     $("#loginBtn").click(function () {
-        var username=$("#username").val();
-        var password=$("#password").val();
+        var username = $("#username").val();
+        var password = $("#password").val();
 
         // if(!username){
         //     $("#username").attr("data-content","用户名为空");
@@ -144,32 +143,32 @@
         //     return;
         // }
 
-        $("#username").attr("data-content","");
-        $("#password").attr("data-content","");
+        $("#username").attr("data-content", "");
+        $("#password").attr("data-content", "");
         var data = {};
 
-        data.username=username;
-        data.password=password;
+        data.username = username;
+        data.password = password;
         console.log(data);
         $.ajax({
             type: "post",
             url: "/ajax/login",
             contentType: "application/json;charset=UTF-8",
             data: JSON.stringify(data),
-            sync:false,
+            sync: false,
             dataType: "json",
-            success: function (data){
+            success: function (data) {
                 console.log("success")
-                if(data.code==200){
-                    window.location.href="/home"
+                if (data.code == 200) {
+                    window.location.href = "/home"
                 }
-                if(data.code==300){
+                if (data.code == 300) {
                     console.log(data.msg)
-                    $("#password").attr("data-content",data.msg);
+                    $("#password").attr("data-content", data.msg);
                 }
-                if(data.code=301){
+                if (data.code = 301) {
                     console.log(data.msg)
-                    $("#username").attr("data-content",data.msg);
+                    $("#username").attr("data-content", data.msg);
                 }
 
             },
@@ -178,9 +177,7 @@
             }
 
 
-
         })
-
 
 
     })

@@ -5,7 +5,7 @@
         <result property="id" column="id" jdbcType="BIGINT"/>
         <result property="username" column="username" jdbcType="VARCHAR"/>
         <result property="password" column="password" jdbcType="VARCHAR"/>
-        <result property="type" column="type" jdbcType="INTEGER"/>
+        <result property="roleId" column="role_id" jdbcType="BIGINT"/>
         <result property="email" column="email" jdbcType="VARCHAR"/>
         <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
         <result property="nickName" column="nickname" jdbcType="VARCHAR"/>
@@ -14,20 +14,27 @@
         <result property="isDeletedFlag" column="is_deleted_flag" jdbcType="BIT"/>
     </resultMap>
 
-    <select id="selectUserByUserFlags" resultMap="UserResultMap" >
-    SELECT
-        id,
-        avatar,
-        create_time,
-        email,
-        nickname,
-        `password`,
-        type,
-        update_time,
-        username,
-        is_deleted_flag
-    FROM
-        t_user
-        where username=#{username} or email=#{email}
+    <select id="selectUserByUserFlags" resultMap="UserResultMap">
+        SELECT id,
+               avatar,
+               create_time,
+               email,
+               nickname,
+               `password`,
+               role_id,
+               update_time,
+               username,
+               is_deleted_flag
+        FROM t_user
+        where username = #{username}
+           or email = #{email}
     </select>
+
+
+    <insert id="saveUser" parameterType="user" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_user
+            ( username, password, create_time, update_time, is_deleted_flag, role_id )
+        VALUES
+        (#{username}, #{password},#{createTime},#{updateTime},#{isDeletedFlag},#{roleId})
+    </insert>
 </mapper>

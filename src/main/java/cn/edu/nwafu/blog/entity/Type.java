@@ -25,4 +25,6 @@ public class Type {
     private Date updateTime;//更新时间
 
     private Boolean isDeletedFlag;//删除标记
+
+    private Integer count;//博客数量，非数据库字段
 }
