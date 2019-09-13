@@ -226,5 +226,12 @@ public class BlogController {
         return "home/typeHomeList";
     }
 
+    @RequestMapping("/blog/{id}")
+    public String locBlogById(@PathVariable Long id,Model model) {
+        Blog blog = blogService.getAndConvert(id);
+
+        model.addAttribute("blog",blog);
+        return "blog";
+    }
 
 }

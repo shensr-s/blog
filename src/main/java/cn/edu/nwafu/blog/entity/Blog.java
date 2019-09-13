@@ -66,6 +66,9 @@ public class Blog {
 
     private List<Tag> tagList; //标签
 
+
+    private String avatar;//用户头像
+
 //    private List<Long> tagId;//博客标签list
 
 

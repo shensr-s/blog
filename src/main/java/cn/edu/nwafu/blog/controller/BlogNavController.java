@@ -82,14 +82,9 @@ public class BlogNavController {
         return "archives";
     }
 
-    @RequestMapping("/blog")
-    public String locBlog() {
-        return "blog";
-    }
-
     @RequestMapping("/index")
     public String locIndex() {
-        return "home";
+        return "home/home";
     }
 
 

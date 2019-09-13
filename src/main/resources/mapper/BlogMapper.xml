@@ -106,7 +106,8 @@
             tb.update_time,
             tb.content,
             tb.user_id,
-            tu.username
+            tu.username,
+            tu.avatar as avatar
         FROM
             t_blog tb
                 LEFT JOIN t_type tt ON tb.type_id = tt.id
@@ -115,22 +116,28 @@
             update_time DESC
     </select>
     <select id="selectBlogById" resultMap="blogResultMap">
-        SELECT tb.id,
-               tb.title,
-               tb.recommend,
-               tt.name,
-               tb.update_time,
-               tb.first_picture,
-               tb.content,
-               tb.type_id,
-               tb.recommend,
-               tb.appreciation,
-               tb.share_statement,
-               tb.commentabled,
-               tb.flag,
-               tb.description
-        FROM t_blog tb
-                 LEFT JOIN t_type tt ON tb.type_id = tt.id
+        SELECT
+            tb.id,
+            tb.title,
+            tb.recommend,
+            tt.NAME,
+            tb.update_time,
+            tb.first_picture,
+            tb.content,
+            tb.type_id,
+            tb.recommend,
+            tb.appreciation,
+            tb.share_statement,
+            tb.commentabled,
+            tb.flag,
+            tb.description,
+            tu.username as userName,
+            tb.user_id as userId
+        FROM
+            t_blog tb
+                LEFT JOIN t_type tt ON tb.type_id = tt.id
+                LEFT JOIN t_user tu ON tb.user_id =tu.id
+
         where tb.id = #{id}
     </select>
 

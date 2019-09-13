@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="${base}/lib/prism/css/prism.css">
     <!--引入生成目录的tocbot的css-->
     <link rel="stylesheet" href="${base}/lib/tocbot/tocbot.css">
-    <title>博客详情页面</title>
+    <title>${blog.title!"博客详情页"}</title>
 </head>
 <body>
 <!--导航-->
@@ -32,68 +32,49 @@
             <!--头部-->
             <div class="ui  link list horizontal">
                 <div class="item">
-                    <img src="https://picsum.photos/100/100?image=1027" alt=""
-                         class="ui avatar image">
+                    <#if blog.avatar??>
+                        <img src="${blog.avatar}" alt=""
+                             class="ui avatar image">
+                    <#else >
+                        <img src="https://picsum.photos/100/100?image=1027" alt=""
+                             class="ui avatar image">
+                    </#if>
+
                     <div class="content">
-                        <a href="#" class="header">子墨同学</a>
+                        <a href="#" class="header">${blog.userName!}</a>
                     </div>
 
                 </div>
                 <div class="item">
-                    <i class="calendar icon"></i>2019-09-03
+                    <i class="calendar icon"></i>
+                    <#if blog.updateTime??>
+                        ${blog.updateTime?string("yyyy-MM-dd")}
+                    </#if>
                 </div>
                 <div class="item">
-                    <i class="eye icon"></i>336
+                    <i class="eye icon"></i>${blog.views!}
                 </div>
             </div>
         </div>
-        <div class="ui attached segment">
+        <div class="ui attached segment" style="height: 200px;">
             <!--图片区域-->
-            <img src="https://picsum.photos/300/200?image=1000" alt="" class="ui fluid rounded image">
+            <#if blog.firstPicture??>
+                <img src="${blog.firstPicture}" alt="" class="ui fluid rounded image" style="height: 90%;">
+            <#else >
+                <img src="https://picsum.photos/300/200?image=1000" alt="" class="ui fluid rounded image" style="height: 90%;">
+            </#if>
+
         </div>
         <div class="ui attached segment">
             <!--内容部分-->
             <div class="ui right aligned basic segment">
-                <div class="ui orange label">原创</div>
+                <div class="ui orange label">${blog.flag!}</div>
             </div>
-            <h2 class="ui center aligned header">关于可以练习的清单</h2>
+            <h2 class="ui center aligned header">${blog.title!}</h2>
             <!--typo typo-selection 排版的样式-->
             <div id="content" class="typo  typo-selection m-padded-lr-responsive js-toc-content">
-                <h4 id="title4">中文排版的重点和难点</h4>
-
-                <pre><code class="language-css line-numbers">
-                    .slideOutUp {
-                    -webkit-animation-name: slideOutUp;
-                    animation-name: slideOutUp;
-                    }
-
-                    .animated {
-                    -webkit-animation-duration: 1s;
-                    animation-duration: 1s;
-                    -webkit-animation-fill-mode: both;
-                    animation-fill-mode: both;
-                    }
-
-                    .animated.infinite {
-                    -webkit-animation-iteration-count: infinite;
-                    animation-iteration-count: infinite;
-                    }</code> </pre>
-
-                <pre><code class="language-java line-numbers">int a=9;
-for(int i=0;i<5;i++)
-a+=1;</code></pre>
-
-                <p>在中文排版中，HTML4 的很多标准在语义在都有照顾到。但从视觉效果上，却很难利用单独的 CSS 来实现，像<abbr title="在文字下多加一个点">着重号</abbr>（例：这里<em
-                        class="typo-em">强调一下</em>）。在 HTML4 中，专名号标签（<code>&lt;u&gt;</code>）已经被放弃，而
-                    HTML5 被<a href="http://html5doctor.com/u-element/">重新提起</a>。<i class="serif">Typo.css</i>
-                    也根据实际情况提供相应的方案。我们重要要注意的两点是：</p>
-                <ol>
-                    <li>语义：语义对应的用法和样式是否与中文排版一致</li>
-                    <li>表现：在各浏览器中的字体、大小和缩放是否如排版预期</li>
-                </ol>
-
-                <p>css代码</p>
-                <h5 id="title5">标题5</h5>
+                <#--博客类容-->
+                ${blog.content!}
 
             </div>
 
@@ -137,8 +118,8 @@ a+=1;</code></pre>
                 <div class="eleven wide column">
 
                     <ui class="list">
-                        <li>作者：子墨同学</li>
-                        <li>发表时间：2019-09-03 23:18:12</li>
+                        <li>作者：${blog.userName}</li>
+                        <li>发表时间：${blog.updateTime?string("yyyy-MM-hh HH:mm:ss")}</li>
                         <li>版权声明：自由转载</li>
                         <li>公众号转载：~~~~~</li>
                     </ui>
@@ -315,6 +296,8 @@ a+=1;</code></pre>
     $(".menu.toggle").click(function () {
         $(".m-item").toggleClass('m-mobile-hide');
     });
+    //头像下拉
+    $(".ui.dropdown").dropdown();
 
     //赞赏按钮
     $("#payButton").popup({
@@ -372,14 +355,14 @@ a+=1;</code></pre>
     var waypoint = new Waypoint({
         //element：检测哪一个元素
         element: document.getElementById('waypoint'),
-        handler: function(direction) {
+        handler: function (direction) {
             // direction 向上滚动 up 行下滚动 down
             //滚动的时候触发的函数
             // console.log('Scrolled to waypoint!'+direction)
-            if(direction=='down'){
+            if (direction == 'down') {
                 //下滑显示
                 $("#toolbar").show(500);
-            }else {
+            } else {
                 $("#toolbar").hide(500);
             }
         }

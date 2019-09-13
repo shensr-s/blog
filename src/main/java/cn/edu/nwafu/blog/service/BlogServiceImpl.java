@@ -5,7 +5,9 @@ import cn.edu.nwafu.blog.dao.TagMapper;
 import cn.edu.nwafu.blog.entity.Blog;
 import cn.edu.nwafu.blog.entity.BlogTag;
 import cn.edu.nwafu.blog.entity.vo.BlogVO;
+import cn.edu.nwafu.blog.util.MarkdownUtils;
 import com.github.pagehelper.PageHelper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -96,6 +98,19 @@ public class BlogServiceImpl implements IBlogService {
     public List<Blog> selectBlogHomeList(Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum,pageSize);
         return blogMapper.selectBlogPageList(null);
+    }
+
+    //根据id查询博客 并将markdown转化为HTML在页面展示
+    @Override
+    public Blog getAndConvert(Long id) {
+        Blog blog = blogMapper.selectBlogById(id);
+        Blog b = new Blog();
+        //复制新查询的值到新建的blog
+        BeanUtils.copyProperties(blog,b);
+        String content = b.getContent();
+        String contentResult = MarkdownUtils.markdownToHtmlExtensions(content);
+        b.setContent(contentResult);
+        return  b;
     }
 
 }

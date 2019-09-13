@@ -26,5 +26,7 @@ public interface IBlogService {
 
     List<Blog> selectBlogHomeList(Integer pageNum, Integer pageSize);
 
+    Blog getAndConvert(Long id);
+
 //    List<> selectBlogHomeList(int pageNum, int pageSize);
 }

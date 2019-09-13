@@ -21,7 +21,6 @@
                 <!--stackable 可以堆叠 响应手机端-->
                 <div class="ui mobile reversed stackable grid">
                     <div class="eleven wide column">
-
                         <h3 class="ui header">${blog.title!}</h3>
                         <p class="m-text">
                            ${blog.description!}</p>
@@ -34,7 +33,6 @@
                                         <div class="content">
                                             <a href="#" class="header">${blog.userName!}</a>
                                         </div>
-
                                     </div>
                                     <div class="item">
                                         <i class="calendar icon"></i>${blog.updateTime?string('yyyy-MM-dd')}
@@ -43,33 +41,26 @@
                                         <i class="eye icon"></i>${blog.views!}
                                     </div>
                                 </div>
-
                             </div>
                             <div class="right aligned five wide column">
                                 <a href="#" target="_blank" class="ui label teal  mini m-text-thin">${blog.typeName!}</a>
                             </div>
                         </div>
-
                         <!--标签-->
                         <div class="row">
                             <i class="ui tags icon"></i>
-
                             <#list blog.tagList as tag>
                                 <a href="#" class="ui  teal  m-padded-mini m-margin-tb-tiny m-text-thin label">${tag.name!}</a>
                             </#list>
-
-
                         </div>
                     </div>
-
                     <div class="five wide column">
-                        <a href="#" target="_blank">
+                        <a href="${request.contextPath}/blog/blog/${blog.id}" target="_blank">
                             <img src="https://picsum.photos/300/200?image=1027" alt="" class="ui rounded image">
                         </a>
                     </div>
                 </div>
             </div>
-
         </div>
     </#list>
     <!--bottom -->
