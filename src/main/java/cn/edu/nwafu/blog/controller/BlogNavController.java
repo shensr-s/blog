@@ -54,7 +54,8 @@ public class BlogNavController {
     @RequestMapping("/type")
     public String locTypes(Model model) {
 
-        List<Type> typeList = typeService.selectTypesAndCount();
+        //flag为空 查询全部
+        List<Type> typeList = typeService.selectTypesAndCount(0);
         model.addAttribute("typeList", typeList);
         model.addAttribute("total",typeList.size());
         return "type/types";
@@ -64,7 +65,8 @@ public class BlogNavController {
     @RequestMapping("/tag")
     public String locTags(Model model) {
 
-        List<Tag> tagList = tagService.selectTagsAndCount();
+        //flag为0 查询所有标签
+        List<Tag> tagList = tagService.selectTagsAndCount(0);
         model.addAttribute("tagList",tagList);
         model.addAttribute("total",tagList.size());
         return "tag/tags";
@@ -89,6 +91,10 @@ public class BlogNavController {
     public String locIndex() {
         return "home";
     }
+
+
+
+
 
 
 }

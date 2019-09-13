@@ -71,10 +71,12 @@
 <#--引入通用js-->
 <script src="${base}/js/common.js"></script>
 <script>
-    // $("#type").addClass("active");
+    $("#type").addClass("active");
     $(".menu.toggle").click(function () {
         $(".m-item").toggleClass('m-mobile-hide');
-    })
+    });
+    //头像下拉
+    $(".ui.dropdown").dropdown();
     $(function () {
         //选中第一个类型
         $(".ui.attached.segment.types").find(".ui.labeled.button.m-margin-tb-tiny").eq(0).find("button").addClass("teal");

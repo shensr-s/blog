@@ -119,10 +119,10 @@
 
     </style>
 
-<#--    <script src="assets/library/jquery.min.js"></script>-->
-<#--    <script src="../dist/components/visibility.js"></script>-->
-<#--    <script src="../dist/components/sidebar.js"></script>-->
-<#--    <script src="../dist/components/transition.js"></script>-->
+    <#--    <script src="assets/library/jquery.min.js"></script>-->
+    <#--    <script src="../dist/components/visibility.js"></script>-->
+    <#--    <script src="../dist/components/sidebar.js"></script>-->
+    <#--    <script src="../dist/components/transition.js"></script>-->
 
 </head>
 <body>
@@ -143,86 +143,6 @@
                     <!--header-->
                     <!--top attached 和attached 可以将两部分连接在一块-->
 
-                    <div class="ui top attached segment">
-                        <div class="ui middle aligned two column grid">
-                            <div class="column">
-                                <div class="ui teal  header">博客</div>
-                            </div>
-                            <div class="right aligned column">
-                                共<h3 class="ui orange header m-inline-block">14</h3>篇
-                            </div>
-
-                        </div>
-                    </div>
-                    <!--content list-->
-
-                    <div class="ui attached  segment m-padded-tb-mini m-mobile-lr-clear">
-                        <div class="ui padded vertical segment">
-                            <!--mobile reversed 手机端翻转-->
-                            <!--stackable 可以堆叠 响应手机端-->
-                            <div class="ui mobile reversed stackable grid">
-                                <div class="eleven wide column">
-
-                                    <h3 class="ui header">你理解什么是真正的幸福吗？</h3>
-                                    <p class="m-text">
-                                        这个例子演示了如何使用JavaScript来改变元素的不透明度。这个例子演示了如何使用JavaScript来改变元素的不透明度。这个例子演示了如何使用JavaScript来改变元素的不透明度。</p>
-                                    <div class="ui stackable grid">
-                                        <div class="eleven wide column">
-                                            <div class="ui mini link list horizontal">
-                                                <div class="item">
-                                                    <img src="https://picsum.photos/100/100?image=1027" alt=""
-                                                         class="ui avatar image">
-                                                    <div class="content">
-                                                        <a href="#" class="header">子墨同学</a>
-                                                    </div>
-
-                                                </div>
-                                                <div class="item">
-                                                    <i class="calendar icon"></i>2019-09-03
-                                                </div>
-                                                <div class="item">
-                                                    <i class="eye icon"></i>336
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="right aligned five wide column">
-                                            <a href="#" target="_blank" class="ui label teal  mini m-text-thin">认知升级</a>
-                                        </div>
-                                    </div>
-
-                                    <!--标签-->
-                                    <div class="row">
-                                        <i class="ui tags icon"></i>
-                                        <a href="#" class="ui  teal  m-padded-mini m-margin-tb-tiny m-text-thin label">JAVA</a>
-                                        <a href="#" class="ui  teal  m-padded-mini m-margin-tb-tiny m-text-thin label">JAVA</a>
-                                        <a href="#" class="ui  teal  m-padded-mini m-margin-tb-tiny m-text-thin label">JAVA</a>
-                                    </div>
-                                </div>
-
-                                <div class="five wide column">
-                                    <a href="#" target="_blank">
-                                        <img src="https://picsum.photos/300/200?image=1027" alt="" class="ui rounded image">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                    <!--bottom -->
-                    <div class="ui bottom attached segment">
-                        <div class="ui middle aligned two column grid">
-                            <div class="column">
-                                <a href="#" class="ui teal basic mini button">上一页</a>
-                            </div>
-                            <div class="right aligned column">
-                                <a href="#" class="ui teal basic mini button">下一页</a>
-                            </div>
-
-                        </div>
-                    </div>
                 </div>
                 <!--右边的top-->
                 <div class="five wide column">
@@ -233,71 +153,45 @@
                             <div class="ui two column grid">
                                 <div class="column"><i class="idea icon"></i>分类</div>
                                 <div class="right aligned column">
-                                    <a href="#" target="_blank">more <i class="angle double right icon"></i></a>
+                                    <a href="${base}/blog/type" target="_blank">more <i class="angle double right icon"></i></a>
                                 </div>
                             </div>
                         </div>
                         <div class="ui teal segment">
                             <!--fluid填充满父类div-->
-                            <div class="ui vertical fluid menu">
-                                <a href="#" class="item">学习日志
-                                    <!--left pointing 小三角向左-->
-                                    <div class="ui teal basic left pointing label">13</div>
-                                </a>
-                                <a href="#" class="item">学习日志
-                                    <!--left pointing 小三角向左-->
-                                    <div class="ui teal basic left pointing label">13</div>
-                                </a>
-                                <a href="#" class="item">学习日志
-                                    <!--left pointing 小三角向左-->
-                                    <div class="ui teal basic left pointing label">13</div>
-                                </a>
-                                <a href="#" class="item">学习日志
-                                    <!--left pointing 小三角向左-->
-                                    <div class="ui teal basic left pointing label">13</div>
-                                </a>
-                                <a href="#" class="item">学习日志
-                                    <!--left pointing 小三角向左-->
-                                    <div class="ui teal basic left pointing label">13</div>
-                                </a>
-                                <a href="#" class="item">学习日志
-                                    <!--left pointing 小三角向左-->
-                                    <div class="ui teal basic left pointing label">13</div>
-                                </a>
+                            <div class="ui vertical fluid menu typeFlag">
+
+
+                                <#--博客分类插入 -->
+                                <#--   博客分类插入 -->
+                                <#--     博客分类插入 -->
+
 
                             </div>
                         </div>
 
                     </div>
                     <!--标签-->
-                    <div class="ui segments">
+                    <div class="ui segments tagFlag">
+
                         <div class="ui secondary segment">
                             <div class="ui two column grid">
                                 <div class="column">
                                     <i class="tags icon"></i>标签
                                 </div>
                                 <div class="right aligned column">
-                                    <a href="#" target="_blank">more <i class="angle double right icon"></i></a>
+                                    <a href="${base}/blog/tag" target="_blank">more <i
+                                                class="angle double right icon"></i></a>
                                 </div>
 
                             </div>
                         </div>
-                        <div class="ui teal segment">
-                            <a href="#" class="ui teal basic label m-margin-tb-tiny">Java
-                                <div class="detail">11</div>
-                            </a>
-                            <a href="#" class="ui teal basic label m-margin-tb-tiny">C++
-                                <div class="detail">11</div>
-                            </a>
-                            <a href="#" class="ui teal basic label m-margin-tb-tiny">Python
-                                <div class="detail">11</div>
-                            </a>
-                            <a href="#" class="ui teal basic label m-margin-tb-tiny">数据结构
-                                <div class="detail">11</div>
-                            </a>
-                            <a href="#" class="ui teal basic label m-margin-tb-tiny">算法设计与实现
-                                <div class="detail">11</div>
-                            </a>
+                        <div class="ui teal segment tagFlag">
+                            <!--标签插入的地方-->
+                            <!--标签插入的地方-->
+                            <!--标签插入的地方-->
+
+
                         </div>
                     </div>
                     <!--最新推荐-->
@@ -347,7 +241,7 @@
                     Imagine-a-Company
                 </h1>
                 <h2>Do whatever you want when you want to.</h2>
-                <div class="ui huge primary button">Get Started <i class="right arrow icon"></i></div>
+                <a href="${base}/login" class="ui huge primary button">Get Started <i class="right arrow icon"></i></a>
             </div>
 
         </div>
@@ -457,33 +351,41 @@
 <#--引入通用js-->
 <script src="${base}/js/common.js"></script>
 <script>
-    // $("#home").addClass("active");
+    $("#home").addClass("active");
+    $(".menu.toggle").click(function () {
+        $(".m-item").toggleClass('m-mobile-hide');
+    });
+    //头像下拉
+    $(".ui.dropdown").dropdown();
 </script>
 <script>
     $(document).ready(function () {
 
-            // fix menu when passed
-            $('.masthead').visibility({
-                    once: false,
-                    onBottomPassed: function () {
-                        $('.fixed.menu').transition('fade in');
-                    },
-                    onBottomPassedReverse: function () {
-                        $('.fixed.menu').transition('fade out');
-                    }
-                });
+        // fix menu when passed
+        $('.masthead').visibility({
+            once: false,
+            onBottomPassed: function () {
+                $('.fixed.menu').transition('fade in');
+            },
+            onBottomPassedReverse: function () {
+                $('.fixed.menu').transition('fade out');
+            }
+        });
 
-            // create sidebar and attach to menu open
-            $('.ui.sidebar').sidebar('attach events', '.toc.item');
+        // create sidebar and attach to menu open
+        $('.ui.sidebar').sidebar('attach events', '.toc.item');
 
 
-            //查询博客列表
+        //查询博客列表
         homeBlogList(1);
+        //查询博客标签
+        homeTagList();
+        //查询博客类型
+        homeTypeList();
 
     });
 
-
-
+    //查询博客列表
     function homeBlogList(currentPage) {
         //设置隐藏域中currentPage的值
         $("#currentPage").val(currentPage);
@@ -513,6 +415,49 @@
             }
         });
 
+    };
+    //    查询标签
+    function homeTagList() {
+        $.ajax({
+            type: "get",
+            url: "/blog/ajax/home/tag",
+            dataType: "html",
+            contentType: 'application/json;charset=UTF-8',
+            success: function (data) {
+                $(".ui.teal.segment.tagFlag").empty();
+                $(".ui.teal.segment.tagFlag").html(data);
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $(".loading-box").hide();
+                if (XMLHttpRequest.status == 303) {
+                    window.location.href = "/login";
+                } else {
+                    //layer.msg("获取需求列表失败");
+                    console.log("获取博客标签失败")
+                }
+            }
+        });
+    };
+    function homeTypeList() {
+        $.ajax({
+            type: "get",
+            url: "/blog/ajax/home/type",
+            dataType: "html",
+            contentType: 'application/json;charset=UTF-8',
+            success: function (data) {
+                $(".ui.vertical.fluid.menu.typeFlag").empty();
+                $(".ui.vertical.fluid.menu.typeFlag").html(data);
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $(".loading-box").hide();
+                if (XMLHttpRequest.status == 303) {
+                    window.location.href = "/login";
+                } else {
+
+                    console.log("获取博客类型失败")
+                }
+            }
+        });
     };
 </script>
 </body>

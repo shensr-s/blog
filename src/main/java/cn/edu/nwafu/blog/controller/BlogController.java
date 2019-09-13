@@ -86,6 +86,7 @@ public class BlogController {
         StringBuffer tagStr = new StringBuffer();
         blogTags.forEach(item -> tagStr.append(item.getTagId() + ","));
         String blogTag = tagStr.toString();
+        //博客标签
         blogTag = blogTag.substring(0, blogTag.length() - 1);
         model.addAttribute("blog", blog);
         model.addAttribute("blogTag", blogTag);
@@ -179,13 +180,51 @@ public class BlogController {
 
     }
 
+    /**
+     * 查询博客列表
+     * @param pageNum
+     * @param pageSize
+     * @param model
+     * @return
+     */
     @RequestMapping("/ajax/home/list")
     public String selectBlogPageHome(Integer pageNum, Integer pageSize, Model model) {
+        //查询博客
         List<Blog> blogList = blogService.selectBlogHomeList(pageNum, pageSize);
         PageInfo pageInfo = new PageInfo(blogList);
         model.addAttribute("blogList", pageInfo.getList());
-        model.addAttribute("total", blogList.size());
+        model.addAttribute("total", pageInfo.getTotal());
         model.addAttribute("page",pageInfo);
+
         return "home/blogHomeList";
     }
+
+    /**
+     * 首页查询博客标签
+     * @param model
+     * @return
+     */
+    @RequestMapping("/ajax/home/tag")
+    public String selectTags(Model model){
+        //参数为1 只查询前六条
+        List<Tag> tagList = tagService.selectTagsAndCount(1);
+        model.addAttribute("tagList",tagList);
+        return "home/tagHomeList";
+    }
+
+    /**
+     * 首页查询博客类型
+     * @param model
+     * @return
+     */
+
+    @RequestMapping("/ajax/home/type")
+    public String selectType(Model model){
+        //参数为1 只查询前六条
+        List<Type> typeList = typeService.selectTypesAndCount(1);
+        model.addAttribute("typeList",typeList);
+        return "home/typeHomeList";
+    }
+
+
 }

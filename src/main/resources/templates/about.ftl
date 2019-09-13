@@ -95,10 +95,13 @@
 <script src="${base}/js/common.js"></script>
 <script>
 
-    // $("#about").addClass("active");
+    $("#about").addClass("active");
     $(".menu.toggle").click(function () {
         $(".m-item").toggleClass('m-mobile-hide');
     });
+    //头像下拉
+    $(".ui.dropdown").dropdown();
+
 
     //微信弹窗
     $(".weixin").popup({

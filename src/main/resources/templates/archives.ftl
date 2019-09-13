@@ -92,10 +92,12 @@
 <#--引入通用js-->
 <script src="${base}/js/common.js"></script>
 <script>
-    // $("#archives").addClass("active");
+    $("#archives").addClass("active");
     $(".menu.toggle").click(function () {
         $(".m-item").toggleClass('m-mobile-hide');
-    })
+    });
+    //头像下拉
+    $(".ui.dropdown").dropdown();
 </script>
 </body>
 </html>

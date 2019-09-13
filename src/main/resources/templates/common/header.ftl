@@ -34,7 +34,6 @@
                             &nbsp;${user.username}
                             <i class="ui dropdown icon"></i>
                             <div class="menu">
-
                                 <a href="${base}/blog/index" class="item">个人中心</a>
                                 <a href="${base}/blog/manage" class="item">博客管理</a>
                                 <a href="#" class="item">修改密码</a>

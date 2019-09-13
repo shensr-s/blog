@@ -60,8 +60,17 @@ public class TypeServiceImpl implements ITypeService {
     }
 
     @Override
-    public List<Type> selectTypesAndCount() {
-        return typeMapper.selectTypesAndCount();
+    public List<Type> selectTypesAndCount(Integer flag) {
+        List<Type> typeList = null;
+        if(flag==1){
+            //flag为1分页查询
+            PageHelper.startPage(1,6);
+            typeList =typeMapper.selectTypesAndCount();
+        }else {
+            //flag为0查询全部
+            typeList =typeMapper.selectTypesAndCount();
+        }
+        return typeList;
     }
 
 }

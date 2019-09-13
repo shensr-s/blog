@@ -22,7 +22,7 @@
 
     </resultMap>
 
-    <insert id="saveBlog" parameterType="blog" useGeneratedKeys="true" keyProperty="id">
+    <insert id="saveBlog"  useGeneratedKeys="true" keyProperty="id">
         insert into t_blog(appreciation, commentabled, content, create_time, description, first_picture, flag,
                            published, recommend, share_statement, title, update_time, views, type_id, user_id,
                            is_deleted_flag)
@@ -30,7 +30,7 @@
                 #{published}, #{recommend}, #{shareStatement}, #{title}, #{updateTime}, #{views}, #{typeId}, #{userId},
                 #{isDeletedFlag})
     </insert>
-    <update id="updateBlogById" parameterType="blog">
+    <update id="updateBlogById" >
         update t_blog
         <set>
             <if test="isDeletedFlag!=null">
@@ -92,7 +92,7 @@
         from t_blog
         where id = #{id}
     </delete>
-    <select id="selectBlogPageList" resultMap="blogResultMap" parameterType="blog">
+    <select id="selectBlogPageList" resultMap="blogResultMap" >
         SELECT
             tb.id,
             tb.title,
@@ -134,7 +134,7 @@
         where tb.id = #{id}
     </select>
 
-    <select id="selectTagByBlogId" resultType="tag">
+    <select id="selectTagByBlogId" resultType="cn.edu.nwafu.blog.entity.Tag">
         select id, name
         from t_tag tt
                  left join t_blog_tag tbt on tt.id = tbt.tag_id

@@ -31,7 +31,7 @@ public interface ITagService {
 
     public List<Tag> selectTags();
 
-    List<Tag> selectTagsAndCount();
+    List<Tag> selectTagsAndCount(Integer flag);
 
     List<BlogTag> selectTagByBlogId(Long id);
 }

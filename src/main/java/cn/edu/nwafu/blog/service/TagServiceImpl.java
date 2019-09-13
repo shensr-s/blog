@@ -62,9 +62,23 @@ public class TagServiceImpl implements ITagService {
         return tagMapper.selectTags();
     }
 
+    /**
+     *
+     * @param flag 为1 只查询前6条数据
+     * @return
+     */
     @Override
-    public List<Tag> selectTagsAndCount() {
-        return tagMapper.selectTagsAndCount();
+    public List<Tag> selectTagsAndCount(Integer flag) {
+        List<Tag> tagList=null;
+        if(flag==1){
+            //flag为1分页查询
+            PageHelper.startPage(1,10);
+            tagList=tagMapper.selectTagsAndCount();
+        }else {
+            //查询全部
+            tagList=tagMapper.selectTagsAndCount();
+        }
+        return tagList;
     }
 
     @Override

@@ -217,7 +217,7 @@
 <script>
     $(".menu.toggle").click(function () {
         $(".m-item").toggleClass('m-mobile-hide');
-    })
+    });
     $(".ui.dropdown").dropdown();
 
 

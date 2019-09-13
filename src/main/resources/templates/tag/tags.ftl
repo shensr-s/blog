@@ -76,10 +76,12 @@
 <#--引入通用js-->
 <script src="${base}/js/common.js"></script>
 <script>
-    // $("#tag").addClass("active");
+    $("#tag").addClass("active");
     $(".menu.toggle").click(function () {
         $(".m-item").toggleClass('m-mobile-hide');
-    })
+    });
+    //头像下拉
+    $(".ui.dropdown").dropdown();
 
     $(function () {
         //选中第一个标签

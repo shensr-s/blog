@@ -28,7 +28,7 @@
                 </td>
                 <td>
                     <#if blog.updateTime??>
-                        ${blog.updateTime?sting('yyyy-MM-ddr HH:mm:ss')}
+                        ${blog.updateTime?string('yyyy-MM-dd HH:mm:ss')}
                     </#if>
                 </td>
                 <td>
