@@ -1,5 +1,5 @@
 <#assign base=request.contextPath>
-<nav class="ui inverted attached segment m-padded-tb-mini m-shadow-small " style="height: 58px;">
+<nav class="ui inverted attached segment m-padded-tb-mini m-shadow-small " >
     <div class="ui inverted menu" style="height: 100%;">
         <div class="ui container">
             <div class="ui inverted secondary stackable menu" style="width: 100%;" id="headerMenu">
