@@ -221,9 +221,10 @@
     $(".ui.dropdown").dropdown();
 
 
+    //校验表单
+
     $(".ui.form").form({
         inline: true,
-        on: 'blur',
         fields: {
             title: {
                 identifier: 'title',
@@ -239,15 +240,15 @@
                     prompt: '内容：请输入博客内容'
                 }]
             },
-            type: {
-                identifier: 'type',
+            typeId: {
+                identifier: 'typeId',
                 rules: [{
                     type: 'empty',
                     prompt: '分类：请选择博客分类'
                 }]
             },
-            tag: {
-                identifier: 'tag',
+            tagId: {
+                identifier: 'tagId',
                 rules: [{
                     type: 'empty',
                     prompt: '标签：请选择博客标签'
@@ -264,9 +265,10 @@
         }
     });
 
+
     //保存博客
     $(".saveBlogBtn").click(function () {
-       saveOrUpdateBlog(1);
+        saveOrUpdateBlog(1);
     });
 
     //更新博客
@@ -280,7 +282,13 @@
 
 
     //blog保存 与更新
-    function saveOrUpdateBlog(type){
+    function saveOrUpdateBlog(type) {
+        //校验表单
+        var check = $(".ui.form").form("validate form");
+
+        if (!check) {
+            return;
+        }
         var t = $(".ui.form").serializeArray();
         var data = {};
         //form表单数据转json
@@ -297,15 +305,15 @@
                 data [this.name] = this.value;
             }
         });
-        if(type===1){
+        if (type === 1) {
             data.published = false;
         }
-        if(type===2){
+        if (type === 2) {
             data.published = true;
         }
         console.log(data);
 
-        if(type===1) {
+        if (type === 1) {
             $.ajax({
                 type: "post",
                 url: "/blog/ajax/save",
