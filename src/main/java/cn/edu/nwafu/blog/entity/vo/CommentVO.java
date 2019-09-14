@@ -1,4 +1,4 @@
-package cn.edu.nwafu.blog.entity;
+package cn.edu.nwafu.blog.entity.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,13 +8,15 @@ import java.util.Date;
 
 /**
  * @author shensr
- * @Date 2019/9/5
- * 博客评论
- */
+ * @version V1.0
+ * @description:
+ * @create 2019/9/14
+ **/
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Comment {
+public class CommentVO extends BaseVO{
     private Long id;//id
 
     private String nickName;//昵称
@@ -30,5 +32,4 @@ public class Comment {
     private Long blogId;//博客Id
 
     private Long parentCommentId;//父级评论id
-
 }

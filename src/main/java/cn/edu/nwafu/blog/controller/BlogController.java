@@ -8,6 +8,7 @@ import cn.edu.nwafu.blog.service.TagServiceImpl;
 import cn.edu.nwafu.blog.service.TypeServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.jws.WebParam;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
@@ -224,6 +226,19 @@ public class BlogController {
         List<Type> typeList = typeService.selectTypesAndCount(1);
         model.addAttribute("typeList",typeList);
         return "home/typeHomeList";
+    }
+
+    /**
+     * 首页获取最新博客推荐
+     * @param model
+     * @return
+     */
+
+    @RequestMapping("/ajax/home/newBlog")
+    public String selectNewBlog(Model model){
+        List<Blog> blogList = blogService.selectBlogHomeList(1, 6);
+        model.addAttribute("blogList",blogList);
+        return "home/newHomeList";
     }
 
     @RequestMapping("/blog/{id}")

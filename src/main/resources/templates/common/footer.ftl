@@ -14,24 +14,23 @@
             </div>
 
             <div class="three wide column">
-                <h4 class="ui inverted header">最新博客</h4>
+                <h4 class="ui inverted header">本项目地址</h4>
                 <div class="ui inverted link list">
-                    <a href="#" class="item">Spring IOC</a>
-                    <a href="#" class="item">Spring AOP</a>
-                    <a href="#" class="item">SpringBoot</a>
+                    <a href="https://github.com/HansGerry/blog" target="_blank" class="item">点击这里查看</a>
+
                 </div>
             </div>
             <div class="three wide column">
                 <h4 class="ui inverted header">联系我</h4>
                 <div class="ui inverted link list">
-                    <a href="#" class="item">QQ:11111</a>
-                    <a href="#" class="item">微信:1111</a>
-                    <a href="#" class="item">GitHub:HansGerry</a>
+                    QQ:<a href="#" class="item" style="display: inline-block">11111</a> <br>
+                    微信:<a href="#" class="item" style="display: inline-block">1111</a><br>
+                    GitHub:<a href="https://github.com/HansGerry" target="_blank" class="item" style="display: inline-block">HansGerry</a>
                 </div>
             </div>
             <div class="seven wide column">
                 <h4 class="ui inverted header">ZiMo</h4>
-                <p class="m-opacity-mini">这是我的博客 在这里写介绍的相关内容</p>
+                <p class="m-opacity-mini">本系统使用SpringBoot搭建，欢迎各位相互学习，共同进步！</p>
             </div>
 
         </div>

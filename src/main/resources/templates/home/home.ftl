@@ -134,7 +134,7 @@
 <!-- Page Contents -->
 <#if user??>
     <!--中间内容-->
-    <div class="m-padded-tb-large m-container">
+    <div class="m-padded-tb-large ">
         <div class="ui container">
 
             <div class="ui stackable grid">
@@ -153,7 +153,8 @@
                             <div class="ui two column grid">
                                 <div class="column"><i class="idea icon"></i>分类</div>
                                 <div class="right aligned column">
-                                    <a href="${base}/blog/type" target="_blank">more <i class="angle double right icon"></i></a>
+                                    <a href="${base}/blog/type" target="_blank">more <i
+                                                class="angle double right icon"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -165,14 +166,15 @@
                                 <#--博客分类插入 -->
                                 <#--   博客分类插入 -->
                                 <#--     博客分类插入 -->
+                                暂无数据,点击
+                                <a href="${request.contextPath}/blog/type/manage" class=" item">新建</a>
 
 
                             </div>
                         </div>
-
                     </div>
                     <!--标签-->
-                    <div class="ui segments tagFlag">
+                    <div class="ui segments">
 
                         <div class="ui secondary segment">
                             <div class="ui two column grid">
@@ -200,23 +202,17 @@
                             <i class="bookmark icon"></i>最新推荐
                         </div>
 
-                        <div class="ui segment">
-                            <a href="#" class="m-black">JVM</a>
-                        </div>
-                        <div class="ui segment">
-                            <a href="#" class="m-black">GC算法</a>
-                        </div>
-                        <div class="ui segment">
-                            <a href="#" class="m-black">数据结构</a>
-                        </div>
-                        <div class="ui segment">
-                            <a href="#" class="m-black">设计模式</a>
-                        </div>
-                        <div class="ui segment">
-                            <a href="#" class="m-black">spring</a>
-                        </div>
+                        <div class="ui teal segment">
+                            <div class="ui vertical fluid menu newFlag">
+                                <#--最新推荐插入-->
+                                <#--最新推荐插入-->
+                                <#--最新推荐插入-->
+                                <#--最新推荐插入-->
+                                暂无数据,点击
+                                <a href="${request.contextPath}/blog/add" class=" item">新建</a>
+                            </div>
 
-
+                        </div>
                     </div>
 
                     <!--二维码-->
@@ -238,9 +234,10 @@
 
             <div class="ui text container">
                 <h1 class="ui inverted header">
-                    Imagine-a-Company
+                    ZiMo's Blog System
                 </h1>
                 <h2>Do whatever you want when you want to.</h2>
+<#--                <h2>想做什么就做什么。</h2>-->
                 <a href="${base}/login" class="ui huge primary button">Get Started <i class="right arrow icon"></i></a>
             </div>
 
@@ -309,34 +306,9 @@
         </div>
 
 
-        <div class="ui inverted vertical footer segment">
-            <div class="ui container">
-                <div class="ui stackable inverted divided equal height stackable grid">
-                    <div class="three wide column">
-                        <h4 class="ui inverted header">About</h4>
-                        <div class="ui inverted link list">
-                            <a href="#" class="item">Sitemap</a>
-                            <a href="#" class="item">Contact Us</a>
-                            <a href="#" class="item">Religious Ceremonies</a>
-                            <a href="#" class="item">Gazebo Plans</a>
-                        </div>
-                    </div>
-                    <div class="three wide column">
-                        <h4 class="ui inverted header">Services</h4>
-                        <div class="ui inverted link list">
-                            <a href="#" class="item">Banana Pre-Order</a>
-                            <a href="#" class="item">DNA FAQ</a>
-                            <a href="#" class="item">How To Access</a>
-                            <a href="#" class="item">Favorite X-Men</a>
-                        </div>
-                    </div>
-                    <div class="seven wide column">
-                        <h4 class="ui inverted header">Footer Header</h4>
-                        <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!--页面底部-->
+        <#include "../common/footer.ftl">
+        <!--页面底部结束-->
     </div>
 </#if>
 
@@ -382,6 +354,8 @@
         homeTagList();
         //查询博客类型
         homeTypeList();
+        //查询最新博客推荐
+        homeNewBlogList();
 
     });
 
@@ -416,7 +390,8 @@
         });
 
     };
-    //    查询标签
+
+    //查询博客标签
     function homeTagList() {
         $.ajax({
             type: "get",
@@ -438,6 +413,8 @@
             }
         });
     };
+
+    //查询博客类型
     function homeTypeList() {
         $.ajax({
             type: "get",
@@ -455,6 +432,29 @@
                 } else {
 
                     console.log("获取博客类型失败")
+                }
+            }
+        });
+    };
+
+    //查询最新博客推荐
+    function homeNewBlogList() {
+        $.ajax({
+            type: "get",
+            url: "/blog/ajax/home/newBlog",
+            dataType: "html",
+            contentType: 'application/json;charset=UTF-8',
+            success: function (data) {
+                $(".ui.vertical.fluid.menu.newFlag").empty();
+                $(".ui.vertical.fluid.menu.newFlag").html(data);
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $(".loading-box").hide();
+                if (XMLHttpRequest.status == 303) {
+                    window.location.href = "/login";
+                } else {
+
+                    console.log("获取最新推荐失败")
                 }
             }
         });

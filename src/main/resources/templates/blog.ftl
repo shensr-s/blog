@@ -61,7 +61,8 @@
             <#if blog.firstPicture??>
                 <img src="${blog.firstPicture}" alt="" class="ui fluid rounded image" style="height: 90%;">
             <#else >
-                <img src="https://picsum.photos/300/200?image=1000" alt="" class="ui fluid rounded image" style="height: 90%;">
+                <img src="https://picsum.photos/300/200?image=1000" alt="" class="ui fluid rounded image"
+                     style="height: 90%;">
             </#if>
 
         </div>
@@ -85,9 +86,12 @@
             </div>
             <!--赞赏-->
 
-            <div class="ui center aligned basic segment">
-                <button class="ui orange basic circular button" id="payButton">赞赏</button>
-            </div>
+            <#if blog.appreciation==true>
+                <div class="ui center aligned basic segment">
+                    <button class="ui orange basic circular button" id="payButton">赞赏</button>
+                </div>
+            </#if>
+
 
             <div class="ui payQR flowing popup transition hidden">
 
@@ -132,11 +136,13 @@
             </div>
         </div>
         <!--留言区域-->
+        <#if blog.commentAbled==true>
         <div class="ui bottom attached segment" id="comment-container">
 
             <div class="ui teal segment">
                 <div class="ui comments">
                     <h3 class="ui dividing header">评论</h3>
+
                     <div class="comment">
                         <a class="avatar">
                             <img src="${base}/images/bg.png">
@@ -203,46 +209,54 @@
                     </div>
                     <form class="ui reply form">
                         <div class="field">
-                            <textarea></textarea>
+                            <textarea name="repltContent" id="repltContent"></textarea>
                         </div>
-                        <div class="ui blue labeled submit icon button"><i class="icon edit"></i> 添加回复</div>
+                        <button type="button" id="commentBtn"  class="ui blue labeled submit icon button"><i class="icon edit"></i> 添加回复</button>
                     </form>
                 </div>
             </div>
 
 
             <!--提交留言-->
-            <div class="ui form">
-                <div class="field">
-                    <textarea placeholder="请输入评论信息..." name="content"></textarea>
-                </div>
-                <!--m-mobile-wide m-margin-bottom-mini
-                    手机端充满一行-->
-                <div class="fields">
-                    <div class="field m-mobile-wide m-margin-bottom-mini">
-                        <div class="ui left icon input">
-                            <i class="user icon"></i>
-                            <input type="text" name="nickname" placeholder="姓名">
-                        </div>
-                    </div>
-                    <div class="field m-mobile-wide m-margin-bottom-mini">
-                        <div class="ui left icon input">
-                            <i class="mail icon"></i>
-                            <input type="text" name="email" placeholder="邮箱">
-                        </div>
-                    </div>
-                    <div class="field m-mobile-wide m-margin-bottom-mini">
+<#--            <div class="ui form">-->
+<#--                <div class="field">-->
+<#--                    <textarea placeholder="请输入评论信息..." name="content"></textarea>-->
+<#--                </div>-->
+<#--                <!--m-mobile-wide m-margin-bottom-mini-->
+<#--                    手机端充满一行&ndash;&gt;-->
+<#--                <div class="fields">-->
+<#--                    <div class="field m-mobile-wide m-margin-bottom-mini">-->
+<#--                        <div class="ui left icon input">-->
+<#--                            <i class="user icon"></i>-->
+<#--                            <input type="text" name="nickname" placeholder="姓名">-->
+<#--                        </div>-->
+<#--                    </div>-->
+<#--                    <div class="field m-mobile-wide m-margin-bottom-mini">-->
+<#--                        <div class="ui left icon input">-->
+<#--                            <i class="mail icon"></i>-->
+<#--                            <input type="text" name="email" placeholder="邮箱">-->
+<#--                        </div>-->
+<#--                    </div>-->
+<#--                    <div class="field m-mobile-wide m-margin-bottom-mini">-->
 
-                        <button class="ui teal button m-mobile-wide"><i class="edit icon"></i>发布</button>
-                    </div>
+<#--                        <button class="ui teal button m-mobile-wide"><i class="edit icon"></i>发布</button>-->
+<#--                    </div>-->
 
-                </div>
-            </div>
+<#--                </div>-->
+<#--            </div>-->
 
         </div>
+        </#if>
     </div>
 </div>
 <!--中间内容结束-->
+
+
+
+<#--隐藏域-->
+<input type="text" id="blogId" value="${blog.id}">
+<input type="text" id="blogId" value="${blog.id}">
+<#--隐藏域结束-->
 
 
 <!--工具条-->
@@ -292,6 +306,12 @@
 <script src="${base}/lib/waypoint/jquery.waypoints.min.js"></script>
 <script>
 
+    $(function () {
+        console.log(window.location.href)
+
+    });
+
+
 
     $(".menu.toggle").click(function () {
         $(".m-item").toggleClass('m-mobile-hide');
@@ -333,6 +353,7 @@
     //生成二维码
     //QRCode("qrCode", {}); 第一个元素为存放二维码的div（或其他标签）的id
     var locUrl = window.location.href;
+
     var qrcode = new QRCode("qrCode", {
         text: locUrl,
         width: 106,//生成二维码的宽度
@@ -366,7 +387,30 @@
                 $("#toolbar").hide(500);
             }
         }
-    })
+    });
+
+    //回复表单验证
+    $(".ui.reply.form").form({
+        inline: true,
+        fields:{
+            repltContent: {
+                identifier: 'repltContent',
+                rules: [{
+                    type: 'empty',
+                    prompt: '评论：评论回复不能为空'
+                }]
+            },
+        }
+    });
+    //留言提交
+    $("#commentBtn").click(function () {
+        //校验表单
+        var check = $(".ui.reply.form").form("validate form");
+
+        if (!check) {
+            return;
+        }
+    });
 
 </script>
 </body>
