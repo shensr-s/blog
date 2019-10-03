@@ -26,7 +26,7 @@
                     <h3 class="ui teal header">归档</h3>
                 </div>
                 <div class="right aligned column">
-                    共<h2 class="ui orange header m-inline-block m-text-thin">14</h2>篇
+                    共<h2 class="ui orange header m-inline-block m-text-thin">${count!}</h2>篇
                 </div>
             </div>
         </div>

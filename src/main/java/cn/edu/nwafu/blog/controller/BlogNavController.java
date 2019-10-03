@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author shensr
@@ -93,8 +94,18 @@ public class BlogNavController {
 
         Map<String, List<Blog>> archiveBlog = blogService.archiveBlog();
 
+        //TODO 计算博客总数 待优化
+        AtomicInteger count = new AtomicInteger();
+        archiveBlog.forEach((key,value)->{
+            value.forEach(item->{
+                if(item!=null){
+                    count.getAndIncrement();
+                }
+            });
+        });
         model.addAttribute("archiveBlog",archiveBlog);
 
+        model.addAttribute("count",count.toString());
         return "archives/archives";
     }
 
