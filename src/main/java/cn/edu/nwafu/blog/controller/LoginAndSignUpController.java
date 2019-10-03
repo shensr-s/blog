@@ -7,6 +7,7 @@ import cn.edu.nwafu.blog.entity.vo.UserVO;
 import cn.edu.nwafu.blog.service.BlogServiceImpl;
 import cn.edu.nwafu.blog.service.UserServiceImpl;
 import cn.edu.nwafu.blog.util.MD5Utils;
+import cn.edu.nwafu.blog.util.UserSessionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,7 +107,7 @@ public class LoginAndSignUpController {
      */
     @RequestMapping("/logout")
     public String logOut(HttpServletRequest request){
-        request.getSession().removeAttribute("user");
+        UserSessionUtils.logOut(request);
         return "/";
     }
 

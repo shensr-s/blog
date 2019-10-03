@@ -52,8 +52,7 @@ public class BlogController {
     public String selectBlogPageList(@RequestBody BlogVO blog, Model model) {
 
         Blog searchBlog = new Blog();
-//        searchBlog.setTitle(blog.getTitle());
-//        searchBlog.
+
         List<Blog> blogList = blogService.selectBlogPageList(blog.getPageNum(), blog.getPageSize(), searchBlog);
 
         PageInfo pageInfo = new PageInfo(blogList);
