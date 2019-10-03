@@ -4,6 +4,7 @@ import cn.edu.nwafu.blog.entity.Blog;
 import cn.edu.nwafu.blog.entity.vo.BlogVO;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author shensr
@@ -29,4 +30,5 @@ public interface IBlogService {
     Blog getAndConvert(Long id);
 
 //    List<> selectBlogHomeList(int pageNum, int pageSize);
+    Map<String,List<Blog>> archiveBlog();
 }

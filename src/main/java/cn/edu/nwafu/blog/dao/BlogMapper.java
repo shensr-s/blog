@@ -27,5 +27,9 @@ public interface BlogMapper {
     int deleteBlogById(Long id);
 
     List<Tag> selectTagByBlogId(Long id);
+
+    List<String> selectGroupByYears();
+
+    List<Blog> selectBlogByYear(String year);
 }
 

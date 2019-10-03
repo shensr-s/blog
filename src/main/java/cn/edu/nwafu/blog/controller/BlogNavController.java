@@ -1,7 +1,9 @@
 package cn.edu.nwafu.blog.controller;
 
+import cn.edu.nwafu.blog.entity.Blog;
 import cn.edu.nwafu.blog.entity.Tag;
 import cn.edu.nwafu.blog.entity.Type;
+import cn.edu.nwafu.blog.service.BlogServiceImpl;
 import cn.edu.nwafu.blog.service.TagServiceImpl;
 import cn.edu.nwafu.blog.service.TypeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author shensr
@@ -27,6 +30,9 @@ public class BlogNavController {
 
     @Autowired
     private TagServiceImpl tagService;
+
+    @Autowired
+    private BlogServiceImpl blogService;
 
     //跳转到相应的页面
     //博客管理页面
@@ -77,9 +83,19 @@ public class BlogNavController {
         return "about";
     }
 
+    /**
+     * 定位定归档页面，并完成相应数据查询
+     * @param model
+     * @return
+     */
     @RequestMapping("/archives")
-    public String locArchives() {
-        return "archives";
+    public String locArchives(Model model) {
+
+        Map<String, List<Blog>> archiveBlog = blogService.archiveBlog();
+
+        model.addAttribute("archiveBlog",archiveBlog);
+
+        return "archives/archives";
     }
 
     @RequestMapping("/index")

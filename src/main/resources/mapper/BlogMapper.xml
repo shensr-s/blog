@@ -6,7 +6,7 @@
         <result property="title" column="title" jdbcType="VARCHAR"/>
         <result property="recommend" column="recommend" jdbcType="BIT"/>
         <result property="typeId" column="type_id" jdbcType="BIGINT"/>
-        <result property="updateTime" column="update_time" jdbcType="TIME"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
         <result property="firstPicture" column="first_picture" jdbcType="VARCHAR"/>
         <result property="content" column="content" jdbcType="VARCHAR"/>
         <result property="typeId" column="type_id" jdbcType="BIGINT"/>
@@ -16,13 +16,14 @@
         <result property="commentAbled" column="commentabled" jdbcType="BIT"/>
         <result property="flag" column="flag" jdbcType="VARCHAR"/>
         <result property="description" column="description" jdbcType="VARCHAR"/>
-        <collection property="tagList" column="id" ofType="cn.edu.nwafu.blog.entity.Tag" javaType="java.util.List" select="selectTagByBlogId">
+        <collection property="tagList" column="id" ofType="cn.edu.nwafu.blog.entity.Tag" javaType="java.util.List"
+                    select="selectTagByBlogId">
 
         </collection>
 
     </resultMap>
 
-    <insert id="saveBlog"  useGeneratedKeys="true" keyProperty="id">
+    <insert id="saveBlog" useGeneratedKeys="true" keyProperty="id">
         insert into t_blog(appreciation, commentabled, content, create_time, description, first_picture, flag,
                            published, recommend, share_statement, title, update_time, views, type_id, user_id,
                            is_deleted_flag)
@@ -30,7 +31,7 @@
                 #{published}, #{recommend}, #{shareStatement}, #{title}, #{updateTime}, #{views}, #{typeId}, #{userId},
                 #{isDeletedFlag})
     </insert>
-    <update id="updateBlogById" >
+    <update id="updateBlogById">
         update t_blog
         <set>
             <if test="isDeletedFlag!=null">
@@ -92,51 +93,46 @@
         from t_blog
         where id = #{id}
     </delete>
-    <select id="selectBlogPageList" resultMap="blogResultMap" >
-        SELECT
-            tb.id,
-            tb.title,
-            tb.content,
-            tb.first_picture,
-            tb.description,
-            tb.recommend,
-            tb.views,
-            tt.id AS typeId,
-            tt.NAME AS typeName,
-            tb.update_time,
-            tb.content,
-            tb.user_id,
-            tu.username,
-            tu.avatar as avatar
-        FROM
-            t_blog tb
-                LEFT JOIN t_type tt ON tb.type_id = tt.id
-                LEFT JOIN t_user tu ON tb.user_id = tu.id
-        ORDER BY
-            update_time DESC
+    <select id="selectBlogPageList" resultMap="blogResultMap">
+        SELECT tb.id,
+               tb.title,
+               tb.content,
+               tb.first_picture,
+               tb.description,
+               tb.recommend,
+               tb.views,
+               tt.id     AS typeId,
+               tt.NAME   AS typeName,
+               tb.update_time,
+               tb.content,
+               tb.user_id,
+               tu.username,
+               tu.avatar as avatar
+        FROM t_blog tb
+                 LEFT JOIN t_type tt ON tb.type_id = tt.id
+                 LEFT JOIN t_user tu ON tb.user_id = tu.id
+        ORDER BY update_time DESC
     </select>
     <select id="selectBlogById" resultMap="blogResultMap">
-        SELECT
-            tb.id,
-            tb.title,
-            tb.recommend,
-            tt.NAME,
-            tb.update_time,
-            tb.first_picture,
-            tb.content,
-            tb.type_id,
-            tb.recommend,
-            tb.appreciation,
-            tb.share_statement,
-            tb.commentabled,
-            tb.flag,
-            tb.description,
-            tu.username as userName,
-            tb.user_id as userId
-        FROM
-            t_blog tb
-                LEFT JOIN t_type tt ON tb.type_id = tt.id
-                LEFT JOIN t_user tu ON tb.user_id =tu.id
+        SELECT tb.id,
+               tb.title,
+               tb.recommend,
+               tt.NAME,
+               tb.update_time,
+               tb.first_picture,
+               tb.content,
+               tb.type_id,
+               tb.recommend,
+               tb.appreciation,
+               tb.share_statement,
+               tb.commentabled,
+               tb.flag,
+               tb.description,
+               tu.username as userName,
+               tb.user_id  as userId
+        FROM t_blog tb
+                 LEFT JOIN t_type tt ON tb.type_id = tt.id
+                 LEFT JOIN t_user tu ON tb.user_id = tu.id
 
         where tb.id = #{id}
     </select>
@@ -145,6 +141,28 @@
         select id, name
         from t_tag tt
                  left join t_blog_tag tbt on tt.id = tbt.tag_id
-        where tbt.blog_id=#{id}
+        where tbt.blog_id = #{id}
+    </select>
+    <select id="selectGroupByYears" resultType="java.lang.String">
+        select date_format(b.update_time, '%Y') as year
+        from t_blog b
+        group by year
+        order by year desc
+    </select>
+    <select id="selectBlogByYear" resultMap="blogResultMap">
+        SELECT tb.id,
+               tb.title,
+               tb.content,
+               tb.first_picture,
+               tb.description,
+               tb.recommend,
+               tb.views,
+               tb.update_time,
+               tb.content,
+               tb.user_id,
+               tb.flag
+        FROM t_blog tb
+        where date_format(tb.update_time,'%Y')=#{year}
+        ORDER BY update_time DESC
     </select>
 </mapper>

@@ -9,8 +9,8 @@
         <result property="email" column="email" jdbcType="VARCHAR"/>
         <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
         <result property="nickName" column="nickname" jdbcType="VARCHAR"/>
-        <result property="createTime" column="create_time" jdbcType="DATE"/>
-        <result property="updateTime" column="update_time" jdbcType="DATE"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
         <result property="isDeletedFlag" column="is_deleted_flag" jdbcType="BIT"/>
     </resultMap>
 

@@ -113,4 +113,19 @@ public class BlogServiceImpl implements IBlogService {
         return  b;
     }
 
+    //归档页面 根据年份显示当前年份的博客
+    @Override
+    public Map<String, List<Blog>> archiveBlog() {
+        List<String> years = blogMapper.selectGroupByYears();
+
+        Map<String, List<Blog>> map = new HashMap<>();
+        //TODO 待优化
+        for (int i = 0; i <years.size() ; i++) {
+            List<Blog> blogList = blogMapper.selectBlogByYear(years.get(i));
+            map.put(years.get(i),blogList);
+        }
+
+        return map;
+    }
+
 }
