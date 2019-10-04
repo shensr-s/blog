@@ -35,5 +35,9 @@ public class User {
 
     private Boolean isDeletedFlag;//删除标记
 
+    private Integer sex;//性别
+
+    private String description;//个人简介
+
 
 }

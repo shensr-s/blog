@@ -35,6 +35,8 @@ public class BlogNavController {
     @Autowired
     private BlogServiceImpl blogService;
 
+
+
     //跳转到相应的页面
     //博客管理页面
     @RequestMapping("/manage")
@@ -109,10 +111,7 @@ public class BlogNavController {
         return "archives/archives";
     }
 
-    @RequestMapping("/index")
-    public String locIndex() {
-        return "home/home";
-    }
+
 
 
 

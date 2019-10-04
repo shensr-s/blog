@@ -4,6 +4,7 @@ package cn.edu.nwafu.blog.util;
 import cn.edu.nwafu.blog.entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -19,29 +20,38 @@ public class UserSessionUtils {
 
     /**
      * 判断用户是否存在
+     *
      * @param request
      * @return
      */
-    public static Long isExist(HttpServletRequest request){
-        Long userId=null;
+    public static Long isExist(HttpServletRequest request) {
+        Long userId = null;
 
         User user = (User) request.getSession().getAttribute("user");
-        if(user!=null){
+        if (user != null) {
             //用户存在
-            userId=user.getId();
+            userId = user.getId();
         }
         return userId;
     }
 
     /**
      * 用户注销
+     *
      * @param request
      */
-    public static void logOut(HttpServletRequest request){
+    public static void logOut(HttpServletRequest request) {
         request.getSession().removeAttribute("user");
     }
 
-
+    /**
+     * 从session中获取用户
+     * @param request
+     * @return
+     */
+    public static User getUser(HttpServletRequest request) {
+        return (User) request.getSession().getAttribute("user");
+    }
 
 
 }

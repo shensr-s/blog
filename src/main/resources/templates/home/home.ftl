@@ -70,59 +70,21 @@
             margin: 3em 0em;
         }
 
-        .quote.stripe.segment {
-            padding: 0em;
-        }
+
 
         .quote.stripe.segment .grid .column {
             padding-top: 5em;
             padding-bottom: 5em;
         }
 
-        .footer.segment {
-            padding: 5em 0em;
-        }
+
 
         .secondary.pointing.menu .toc.item {
             display: none;
         }
 
-        @media only screen and (max-width: 700px) {
-            .ui.fixed.menu {
-                display: none !important;
-            }
-
-            .secondary.pointing.menu .item,
-            .secondary.pointing.menu .menu {
-                display: none;
-            }
-
-            .secondary.pointing.menu .toc.item {
-                display: block;
-            }
-
-            .masthead.segment {
-                min-height: 350px;
-            }
-
-            .masthead h1.ui.header {
-                font-size: 2em;
-                margin-top: 1.5em;
-            }
-
-            .masthead h2 {
-                margin-top: 0.5em;
-                font-size: 1.5em;
-            }
-        }
-
-
     </style>
 
-    <#--    <script src="assets/library/jquery.min.js"></script>-->
-    <#--    <script src="../dist/components/visibility.js"></script>-->
-    <#--    <script src="../dist/components/sidebar.js"></script>-->
-    <#--    <script src="../dist/components/transition.js"></script>-->
 
 </head>
 <body>
@@ -135,7 +97,7 @@
 <#if user??>
     <!--中间内容-->
     <div class="m-padded-tb-large ">
-        <div class="ui container">
+        <div class="ui  container">
 
             <div class="ui stackable grid">
                 <!--左边博客列表-->
@@ -225,12 +187,10 @@
         </div>
     </div>
     <!--中间内容结束-->
-    <!--页面底部-->
-    <#include "../common/footer.ftl">
-    <!--页面底部结束-->
+
 <#else >
     <div class="pusher">
-        <div class="ui inverted vertical masthead center aligned segment">
+        <div class="ui inverted vertical  center aligned segment" style="min-height: 720px;padding: padding: 1em 0em;">
 
             <div class="ui text container">
                 <h1 class="ui inverted header">
@@ -336,17 +296,12 @@
             </div>
         </div>
 
-
-
-
-
-
-
-        <!--页面底部-->
-        <#include "../common/footer.ftl">
-        <!--页面底部结束-->
     </div>
 </#if>
+
+<!--页面底部-->
+<#include "../common/footer.ftl">
+<!--页面底部结束-->
 
 <#--分页参数隐藏域-->
 <input type="hidden" id="currentPage" value="1">
@@ -369,19 +324,19 @@
 <script>
     $(document).ready(function () {
 
-        // fix menu when passed
-        $('.masthead').visibility({
-            once: false,
-            onBottomPassed: function () {
-                $('.fixed.menu').transition('fade in');
-            },
-            onBottomPassedReverse: function () {
-                $('.fixed.menu').transition('fade out');
-            }
-        });
-
-        // create sidebar and attach to menu open
-        $('.ui.sidebar').sidebar('attach events', '.toc.item');
+        // // fix menu when passed
+        // $('.masthead').visibility({
+        //     once: false,
+        //     onBottomPassed: function () {
+        //         $('.fixed.menu').transition('fade in');
+        //     },
+        //     onBottomPassedReverse: function () {
+        //         $('.fixed.menu').transition('fade out');
+        //     }
+        // });
+        //
+        // // create sidebar and attach to menu open
+        // $('.ui.sidebar').sidebar('attach events', '.toc.item');
 
 
         //查询博客列表

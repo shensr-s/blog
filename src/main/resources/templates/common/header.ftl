@@ -1,4 +1,5 @@
 <#assign base=request.contextPath>
+<div class="ui fixed inverted menu m-shadow-small">
 <nav class="ui inverted attached segment m-padded-tb-mini m-shadow-small " >
     <div class="ui inverted menu" style="height: 100%;">
         <div class="ui container">
@@ -34,9 +35,9 @@
                             &nbsp;${user.username}
                             <i class="ui dropdown icon"></i>
                             <div class="menu">
-                                <a href="${base}/blog/index" class="item">个人中心</a>
+                                <a href="${base}/blog/user/center" class="item">个人中心</a>
                                 <a href="${base}/blog/manage" class="item">博客管理</a>
-                                <a href="#" class="item">修改密码</a>
+                                <a href="#" class="item">账号管理</a>
                                 <a href="${base}/logout" class="item">退出登录</a>
                             </div>
                         </div>
@@ -58,4 +59,7 @@
     <a href="#" class="ui menu toggle black button icon m-right-top m-mobile-show">
         <i class="sidebar icon"></i>
     </a>
+</nav>
+</div>
+<nav class="ui inverted attached segment m-padded-tb-mini " style="height: 69px;">
 </nav>

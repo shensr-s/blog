@@ -12,6 +12,8 @@
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
         <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
         <result property="isDeletedFlag" column="is_deleted_flag" jdbcType="BIT"/>
+        <result property="sex" column="sex" jdbcType="INTEGER"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
     </resultMap>
 
     <select id="selectUserByUserFlags" resultMap="UserResultMap">
@@ -24,7 +26,9 @@
                role_id,
                update_time,
                username,
-               is_deleted_flag
+               is_deleted_flag,
+               sex,
+               description
         FROM t_user
         where username = #{username}
            or email = #{email}
