@@ -70,14 +70,18 @@
             margin: 3em 0em;
         }
 
-
+        .quote.stripe.segment {
+            padding: 0em;
+        }
 
         .quote.stripe.segment .grid .column {
             padding-top: 5em;
             padding-bottom: 5em;
         }
 
-
+        .footer.segment {
+            padding: 5em 0em;
+        }
 
         .secondary.pointing.menu .toc.item {
             display: none;
@@ -190,7 +194,7 @@
 
 <#else >
     <div class="pusher">
-        <div class="ui inverted vertical  center aligned segment" style="min-height: 720px;padding: padding: 1em 0em;">
+        <div class="ui inverted vertical masthead center aligned segment" >
 
             <div class="ui text container">
                 <h1 class="ui inverted header">

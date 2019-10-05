@@ -16,6 +16,7 @@
         <result property="commentAbled" column="commentabled" jdbcType="BIT"/>
         <result property="flag" column="flag" jdbcType="VARCHAR"/>
         <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="views" column="views" jdbcType="INTEGER"/>
         <collection property="tagList" column="id" ofType="cn.edu.nwafu.blog.entity.Tag" javaType="java.util.List"
                     select="selectTagByBlogId">
 
@@ -129,7 +130,8 @@
                tb.flag,
                tb.description,
                tu.username as userName,
-               tb.user_id  as userId
+               tb.user_id  as userId,
+               tb.views
         FROM t_blog tb
                  LEFT JOIN t_type tt ON tb.type_id = tt.id
                  LEFT JOIN t_user tu ON tb.user_id = tu.id
@@ -162,7 +164,12 @@
                tb.user_id,
                tb.flag
         FROM t_blog tb
-        where date_format(tb.update_time,'%Y')=#{year}
+        where date_format(tb.update_time, '%Y') = #{year}
         ORDER BY update_time DESC
     </select>
+    <update id="updateBlogViews">
+        update t_blog
+        set views=views + 1
+        where id = #{id}
+    </update>
 </mapper>

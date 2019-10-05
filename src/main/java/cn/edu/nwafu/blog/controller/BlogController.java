@@ -242,8 +242,11 @@ public class BlogController {
 
     @RequestMapping("/blog/{id}")
     public String locBlogById(@PathVariable Long id,Model model) {
-        Blog blog = blogService.getAndConvert(id);
+        //浏览器访问当前页面时，浏览量加一，
+        blogService.updateBlogViews(id);
 
+
+        Blog blog = blogService.getAndConvert(id);
         model.addAttribute("blog",blog);
         return "blog";
     }

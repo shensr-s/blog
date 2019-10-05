@@ -137,125 +137,126 @@
         </div>
         <!--留言区域-->
         <#if blog.commentAbled==true>
-        <div class="ui bottom attached segment" id="comment-container">
+            <div class="ui bottom attached segment" id="comment-container">
 
-            <div class="ui teal segment">
-                <div class="ui comments">
-                    <h3 class="ui dividing header">评论</h3>
+                <div class="ui teal segment">
+                    <div class="ui comments">
+                        <h3 class="ui dividing header">评论</h3>
 
-                    <div class="comment">
-                        <a class="avatar">
-                            <img src="${base}/images/bg.png">
-                        </a>
-                        <div class="content">
-                            <a class="author">Matt</a>
-                            <div class="metadata">
-                                <span class="date">今天下午 5:42</span>
-                            </div>
-                            <div class="text">太赞了！</div>
-                            <div class="actions">
-                                <a class="reply">回复</a>
+                        <div class="comment">
+                            <a class="avatar">
+                                <img src="${base}/images/bg.png">
+                            </a>
+                            <div class="content">
+                                <a class="author">Matt</a>
+                                <div class="metadata">
+                                    <span class="date">今天下午 5:42</span>
+                                </div>
+                                <div class="text">太赞了！</div>
+                                <div class="actions">
+                                    <a class="reply">回复</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="comment">
-                        <a class="avatar">
-                            <img src="${base}/images/myWeChat.jpg">
-                        </a>
-                        <div class="content">
-                            <a class="author">Elliot Fu</a>
-                            <div class="metadata">
-                                <span class="date">昨天上午12:30</span>
+                        <div class="comment">
+                            <a class="avatar">
+                                <img src="${base}/images/myWeChat.jpg">
+                            </a>
+                            <div class="content">
+                                <a class="author">Elliot Fu</a>
+                                <div class="metadata">
+                                    <span class="date">昨天上午12:30</span>
+                                </div>
+                                <div class="text">
+                                    <p>這對我的研究是非常有用.謝謝!</p>
+                                </div>
+                                <div class="actions">
+                                    <a class="reply">回复</a>
+                                </div>
                             </div>
-                            <div class="text">
-                                <p>這對我的研究是非常有用.謝謝!</p>
-                            </div>
-                            <div class="actions">
-                                <a class="reply">回复</a>
-                            </div>
-                        </div>
-                        <div class="comments">
-                            <div class="comment">
-                                <a class="avatar">
-                                    <img src="${base}/images/myWeChat.jpg">
-                                </a>
-                                <div class="content">
-                                    <a class="author">Jenny Hess</a>
-                                    <div class="metadata">
-                                        <span class="date">刚刚</span>
-                                    </div>
-                                    <div class="text">艾略特你永远是多么正确 :)</div>
-                                    <div class="actions">
-                                        <a class="reply">回复</a>
+                            <div class="comments">
+                                <div class="comment">
+                                    <a class="avatar">
+                                        <img src="${base}/images/myWeChat.jpg">
+                                    </a>
+                                    <div class="content">
+                                        <a class="author">Jenny Hess</a>
+                                        <div class="metadata">
+                                            <span class="date">刚刚</span>
+                                        </div>
+                                        <div class="text">艾略特你永远是多么正确 :)</div>
+                                        <div class="actions">
+                                            <a class="reply">回复</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="comment">
-                        <a class="avatar">
-                            <img src="${base}/images/myWeChat.jpg">
-                        </a>
-                        <div class="content">
-                            <a class="author">Joe Henderson</a>
-                            <div class="metadata">
-                                <span class="date">5 天以前</span>
-                            </div>
-                            <div class="text">老兄，这太棒了。非常感谢。</div>
-                            <div class="actions">
-                                <a class="reply">回复</a>
+                        <div class="comment">
+                            <a class="avatar">
+                                <img src="${base}/images/myWeChat.jpg">
+                            </a>
+                            <div class="content">
+                                <a class="author">Joe Henderson</a>
+                                <div class="metadata">
+                                    <span class="date">5 天以前</span>
+                                </div>
+                                <div class="text">老兄，这太棒了。非常感谢。</div>
+                                <div class="actions">
+                                    <a class="reply">回复</a>
+                                </div>
                             </div>
                         </div>
+                        <form class="ui reply form">
+                            <div class="field">
+                                <textarea name="repltContent" id="repltContent"></textarea>
+                            </div>
+                            <button type="button" id="commentBtn" class="ui blue labeled submit icon button"><i
+                                        class="icon edit"></i> 添加回复
+                            </button>
+                        </form>
                     </div>
-                    <form class="ui reply form">
-                        <div class="field">
-                            <textarea name="repltContent" id="repltContent"></textarea>
-                        </div>
-                        <button type="button" id="commentBtn"  class="ui blue labeled submit icon button"><i class="icon edit"></i> 添加回复</button>
-                    </form>
                 </div>
+
+
+                <!--提交留言-->
+                <#--            <div class="ui form">-->
+                <#--                <div class="field">-->
+                <#--                    <textarea placeholder="请输入评论信息..." name="content"></textarea>-->
+                <#--                </div>-->
+                <#--                <!--m-mobile-wide m-margin-bottom-mini-->
+                <#--                    手机端充满一行&ndash;&gt;-->
+                <#--                <div class="fields">-->
+                <#--                    <div class="field m-mobile-wide m-margin-bottom-mini">-->
+                <#--                        <div class="ui left icon input">-->
+                <#--                            <i class="user icon"></i>-->
+                <#--                            <input type="text" name="nickname" placeholder="姓名">-->
+                <#--                        </div>-->
+                <#--                    </div>-->
+                <#--                    <div class="field m-mobile-wide m-margin-bottom-mini">-->
+                <#--                        <div class="ui left icon input">-->
+                <#--                            <i class="mail icon"></i>-->
+                <#--                            <input type="text" name="email" placeholder="邮箱">-->
+                <#--                        </div>-->
+                <#--                    </div>-->
+                <#--                    <div class="field m-mobile-wide m-margin-bottom-mini">-->
+
+                <#--                        <button class="ui teal button m-mobile-wide"><i class="edit icon"></i>发布</button>-->
+                <#--                    </div>-->
+
+                <#--                </div>-->
+                <#--            </div>-->
+
             </div>
-
-
-            <!--提交留言-->
-<#--            <div class="ui form">-->
-<#--                <div class="field">-->
-<#--                    <textarea placeholder="请输入评论信息..." name="content"></textarea>-->
-<#--                </div>-->
-<#--                <!--m-mobile-wide m-margin-bottom-mini-->
-<#--                    手机端充满一行&ndash;&gt;-->
-<#--                <div class="fields">-->
-<#--                    <div class="field m-mobile-wide m-margin-bottom-mini">-->
-<#--                        <div class="ui left icon input">-->
-<#--                            <i class="user icon"></i>-->
-<#--                            <input type="text" name="nickname" placeholder="姓名">-->
-<#--                        </div>-->
-<#--                    </div>-->
-<#--                    <div class="field m-mobile-wide m-margin-bottom-mini">-->
-<#--                        <div class="ui left icon input">-->
-<#--                            <i class="mail icon"></i>-->
-<#--                            <input type="text" name="email" placeholder="邮箱">-->
-<#--                        </div>-->
-<#--                    </div>-->
-<#--                    <div class="field m-mobile-wide m-margin-bottom-mini">-->
-
-<#--                        <button class="ui teal button m-mobile-wide"><i class="edit icon"></i>发布</button>-->
-<#--                    </div>-->
-
-<#--                </div>-->
-<#--            </div>-->
-
-        </div>
         </#if>
     </div>
 </div>
 <!--中间内容结束-->
 
 
-
 <#--隐藏域-->
-<input type="text" id="blogId" value="${blog.id}">
-<input type="text" id="blogId" value="${blog.id}">
+<input type="text" id="blogId" hidden value="${blog.id}">
+<input type="text" id="blogId" hidden value="${blog.id}">
 <#--隐藏域结束-->
 
 
@@ -310,7 +311,6 @@
         console.log(window.location.href)
 
     });
-
 
 
     $(".menu.toggle").click(function () {
@@ -392,7 +392,7 @@
     //回复表单验证
     $(".ui.reply.form").form({
         inline: true,
-        fields:{
+        fields: {
             repltContent: {
                 identifier: 'repltContent',
                 rules: [{

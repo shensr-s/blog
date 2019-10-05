@@ -21,9 +21,11 @@
                 <!--stackable 可以堆叠 响应手机端-->
                 <div class="ui mobile reversed stackable grid">
                     <div class="eleven wide column">
-                        <h3 class="ui header">${blog.title!}</h3>
+                        <a href="${request.contextPath}/blog/blog/${blog.id}" target="_blank">
+                            <h3 class="ui header">${blog.title!}</h3>
+                        </a>
                         <p class="m-text">
-                           ${blog.description!}</p>
+                            ${blog.description!}</p>
                         <div class="ui stackable grid">
                             <div class="eleven wide column">
                                 <div class="ui mini link list horizontal">
@@ -43,14 +45,16 @@
                                 </div>
                             </div>
                             <div class="right aligned five wide column">
-                                <a href="#" target="_blank" class="ui label teal  mini m-text-thin">${blog.typeName!}</a>
+                                <a href="#" target="_blank"
+                                   class="ui label teal  mini m-text-thin">${blog.typeName!}</a>
                             </div>
                         </div>
                         <!--标签-->
                         <div class="row">
                             <i class="ui tags icon"></i>
                             <#list blog.tagList as tag>
-                                <a href="#" class="ui  teal  m-padded-mini m-margin-tb-tiny m-text-thin label">${tag.name!}</a>
+                                <a href="#"
+                                   class="ui  teal  m-padded-mini m-margin-tb-tiny m-text-thin label">${tag.name!}</a>
                             </#list>
                         </div>
                     </div>
@@ -138,7 +142,6 @@
 
         homeBlogList(pageNum);
     });
-
 
 
 </script>

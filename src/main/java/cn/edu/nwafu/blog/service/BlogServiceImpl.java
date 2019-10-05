@@ -128,4 +128,9 @@ public class BlogServiceImpl implements IBlogService {
         return map;
     }
 
+    @Override
+    public void updateBlogViews(Long id) {
+        blogMapper.updateBlogViews(id);
+    }
+
 }

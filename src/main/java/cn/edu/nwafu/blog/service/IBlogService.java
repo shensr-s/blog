@@ -31,4 +31,6 @@ public interface IBlogService {
 
 //    List<> selectBlogHomeList(int pageNum, int pageSize);
     Map<String,List<Blog>> archiveBlog();
+
+    void updateBlogViews(Long id);
 }

@@ -31,5 +31,7 @@ public interface BlogMapper {
     List<String> selectGroupByYears();
 
     List<Blog> selectBlogByYear(String year);
+
+    void updateBlogViews(Long id);
 }
 
