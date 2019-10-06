@@ -1,13 +1,7 @@
 package cn.edu.nwafu.blog.controller;
 
-import cn.edu.nwafu.blog.NotFoundPageException;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author shensr
@@ -22,7 +16,7 @@ public class IndexController {
 //    public String index(){
 ////        String blog=null;
 ////        if (blog==null){
-////            throw  new NotFoundPageException("博客不存在");
+////            throw  new CustomizeException("博客不存在");
 ////        }
 //        return "home";
 //    }
@@ -31,7 +25,7 @@ public class IndexController {
 //    public String login(){
 ////        String blog=null;
 ////        if (blog==null){
-////            throw  new NotFoundPageException("博客不存在");
+////            throw  new CustomizeException("博客不存在");
 ////        }
 //        return "admin/login";
 //    }

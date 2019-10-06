@@ -34,7 +34,7 @@
   function cleanup(error) {
     // All problems are warnings by default
     fixWith(error, warnings, "warning", true);
-    fixWith(error, errors, "error");
+    fixWith(error, errors, "templates.home.error");
 
     return isBogus(error) ? null : error;
   }

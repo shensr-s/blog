@@ -15,7 +15,7 @@ CodeMirror.defineMode("http", function() {
   function failFirstLine(stream, state) {
     stream.skipToEnd();
     state.cur = header;
-    return "error";
+    return "templates.home.error";
   }
 
   function start(stream, state) {
@@ -47,7 +47,7 @@ CodeMirror.defineMode("http", function() {
     } else if (status >= 500 && status < 600) {
       return "negative server-error";
     } else {
-      return "error";
+      return "templates.home.error";
     }
   }
 
@@ -78,7 +78,7 @@ CodeMirror.defineMode("http", function() {
         return "atom";
       } else {
         stream.skipToEnd();
-        return "error";
+        return "templates.home.error";
       }
     } else {
       stream.skipToEnd();

@@ -17,6 +17,7 @@
         <result property="flag" column="flag" jdbcType="VARCHAR"/>
         <result property="description" column="description" jdbcType="VARCHAR"/>
         <result property="views" column="views" jdbcType="INTEGER"/>
+        <result property="published" column="published" jdbcType="BIT"/>
         <collection property="tagList" column="id" ofType="cn.edu.nwafu.blog.entity.Tag" javaType="java.util.List"
                     select="selectTagByBlogId">
 
@@ -107,11 +108,13 @@
                tb.update_time,
                tb.content,
                tb.user_id,
+               tb.published,
                tu.username,
                tu.avatar as avatar
         FROM t_blog tb
                  LEFT JOIN t_type tt ON tb.type_id = tt.id
                  LEFT JOIN t_user tu ON tb.user_id = tu.id
+        where tb.published=1
         ORDER BY update_time DESC
     </select>
     <select id="selectBlogById" resultMap="blogResultMap">
@@ -131,7 +134,8 @@
                tb.description,
                tu.username as userName,
                tb.user_id  as userId,
-               tb.views
+               tb.views,
+               tb.published
         FROM t_blog tb
                  LEFT JOIN t_type tt ON tb.type_id = tt.id
                  LEFT JOIN t_user tu ON tb.user_id = tu.id

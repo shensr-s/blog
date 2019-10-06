@@ -1,10 +1,8 @@
 package cn.edu.nwafu.blog.controller;
 
-import cn.edu.nwafu.blog.entity.Blog;
 import cn.edu.nwafu.blog.entity.User;
 import cn.edu.nwafu.blog.entity.vo.ResultVO;
 import cn.edu.nwafu.blog.entity.vo.UserVO;
-import cn.edu.nwafu.blog.service.BlogServiceImpl;
 import cn.edu.nwafu.blog.service.UserServiceImpl;
 import cn.edu.nwafu.blog.util.MD5Utils;
 import cn.edu.nwafu.blog.util.UserSessionUtils;
@@ -12,16 +10,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.xml.soap.Name;
-import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author shensr
@@ -32,8 +27,6 @@ public class LoginAndSignUpController {
 
     @Autowired
     private UserServiceImpl userService;
-    @Autowired
-    private BlogServiceImpl blogService;
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 

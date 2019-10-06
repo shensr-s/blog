@@ -46,7 +46,7 @@
       {
         // Line comment without instruction arguments is an error
         regex: /#.*$/,
-        token: "error",
+        token: "templates.home.error",
         next: "start"
       },
       {

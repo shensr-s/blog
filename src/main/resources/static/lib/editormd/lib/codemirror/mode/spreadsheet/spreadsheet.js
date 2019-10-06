@@ -89,7 +89,7 @@
         }
 
         if (stream.match(/\d+/)) {
-          if (stream.match(/^\w+/)) return "error";
+          if (stream.match(/^\w+/)) return "templates.home.error";
           return "number";
         } else if (stream.match(/^[a-zA-Z_]\w*/)) {
           if (stream.match(/(?=[\(.])/, false)) return "keyword";

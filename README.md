@@ -6,9 +6,11 @@
 3. MySQL
 
 ### 技术框架
-1. SpringBoot
-2. SpringMvc
-3. Mybatis
+1. [SpringBoot](https://docs.spring.io/spring-boot/docs/current/reference/html/)
+2. [SpringMvc](https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html)
+3. [Mybatis](https://mybatis.org/mybatis-3/zh/index.html)
+4. [freemarker](https://freemarker.apache.org/)
+5. [log4j2](https://logging.apache.org/log4j/2.x/)
 
 ### 快速启动
 1. 使用Intellij IDEA clone项目到本地

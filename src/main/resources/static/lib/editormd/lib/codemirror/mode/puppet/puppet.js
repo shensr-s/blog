@@ -86,7 +86,7 @@ CodeMirror.defineMode("puppet", function () {
         return state.continueString ? 'variable-2' : 'variable';
       }
       // Otherwise return an invalid variable
-      return "error";
+      return "templates.home.error";
     }
     // Should we still be looking for the end of a string?
     if (state.continueString) {

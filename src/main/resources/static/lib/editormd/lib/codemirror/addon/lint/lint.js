@@ -95,7 +95,7 @@
   }
 
   function getMaxSeverity(a, b) {
-    if (a == "error") return a;
+    if (a == "templates.home.error") return a;
     else return b;
   }
 
@@ -110,7 +110,7 @@
 
   function annotationTooltip(ann) {
     var severity = ann.severity;
-    if (!severity) severity = "error";
+    if (!severity) severity = "templates.home.error";
     var tip = document.createElement("div");
     tip.className = "CodeMirror-lint-message-" + severity;
     tip.appendChild(document.createTextNode(ann.message));
@@ -142,7 +142,7 @@
       for (var i = 0; i < anns.length; ++i) {
         var ann = anns[i];
         var severity = ann.severity;
-        if (!severity) severity = "error";
+        if (!severity) severity = "templates.home.error";
         maxSeverity = getMaxSeverity(maxSeverity, severity);
 
         if (options.formatAnnotation) ann = options.formatAnnotation(ann);

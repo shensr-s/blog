@@ -25,7 +25,7 @@ CodeMirror.defineMode("octave", function() {
   var identifiers = new RegExp("^[_A-Za-z\xa1-\uffff][_A-Za-z0-9\xa1-\uffff]*");
 
   var builtins = wordRegexp([
-    'error', 'eval', 'function', 'abs', 'acos', 'atan', 'asin', 'cos',
+    'templates.home.error', 'eval', 'function', 'abs', 'acos', 'atan', 'asin', 'cos',
     'cosh', 'exp', 'log', 'prod', 'sum', 'log10', 'max', 'min', 'sign', 'sin', 'sinh',
     'sqrt', 'tan', 'reshape', 'break', 'zeros', 'default', 'margin', 'round', 'ones',
     'rand', 'syn', 'ceil', 'floor', 'size', 'clear', 'zeros', 'eye', 'mean', 'std', 'cov',
@@ -109,7 +109,7 @@ CodeMirror.defineMode("octave", function() {
 
     // Handle non-detected items
     stream.next();
-    return 'error';
+    return 'templates.home.error';
   };
 
 

@@ -176,7 +176,7 @@
 
             },
             error: function () {
-                console.log("error")
+                console.log("templates.home.error")
             }
         });
     });
@@ -207,7 +207,7 @@
 
             },
             error: function () {
-                console.log("error")
+                console.log("templates.home.error")
             }
         });
     });

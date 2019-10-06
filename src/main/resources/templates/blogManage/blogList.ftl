@@ -7,6 +7,7 @@
             <th>类型</th>
             <th>推荐</th>
             <th>更新时间</th>
+            <th>博客状态</th>
             <th>操作</th>
         </tr>
         </thead>
@@ -32,7 +33,14 @@
                     </#if>
                 </td>
                 <td>
-<#--                    TODO-->
+                    <#if blog.published==false>
+                        未发布
+                    <#else >
+                        已发布
+                    </#if>
+                </td>
+                <td>
+                    <#--                    TODO-->
                     <a href="${request.contextPath}/blog/edit/${blog.id}" class="ui mini teal m-text-thin button"
                        value="${blog.id}">编辑</a>
                     <button type="button" class="ui mini red m-text-thin button delBlogClass" value="${blog.id}">删除
@@ -96,7 +104,7 @@
                                 </#if>
                             </#if>
                         <#else >
-                            <a href="${request.contextPath}/blog/add" class="ui teal basic mini button" >新增</a>
+                            <a href="${request.contextPath}/blog/add" class="ui teal basic mini button">新增</a>
                         </#if >
                     </div>
 

@@ -236,7 +236,7 @@ function element(type) {
     } else {
       err = true;
     }
-    if (err) setStyle = "error";
+    if (err) setStyle = "templates.home.error";
     return cont(endcloseplugin(err));
   }
   else if (type == "string") {
@@ -261,7 +261,7 @@ function endplugin(startOfLine) {
 
 function endcloseplugin(err) {
   return function(type) {
-    if (err) setStyle = "error";
+    if (err) setStyle = "templates.home.error";
     if (type == "endPlugin") return cont();
     return pass();
   };

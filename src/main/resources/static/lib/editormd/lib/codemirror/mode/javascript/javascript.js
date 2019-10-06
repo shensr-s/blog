@@ -129,7 +129,7 @@ CodeMirror.defineMode("javascript", function(config, parserConfig) {
       return tokenQuasi(stream, state);
     } else if (ch == "#") {
       stream.skipToEnd();
-      return ret("error", "error");
+      return ret("templates.home.error", "templates.home.error");
     } else if (isOperatorChar.test(ch)) {
       stream.eatWhile(isOperatorChar);
       return ret("operator", "operator", stream.current());

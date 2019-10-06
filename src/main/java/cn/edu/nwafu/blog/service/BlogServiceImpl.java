@@ -5,6 +5,7 @@ import cn.edu.nwafu.blog.dao.TagMapper;
 import cn.edu.nwafu.blog.entity.Blog;
 import cn.edu.nwafu.blog.entity.BlogTag;
 import cn.edu.nwafu.blog.entity.vo.BlogVO;
+import cn.edu.nwafu.blog.exception.CustomizeException;
 import cn.edu.nwafu.blog.util.MarkdownUtils;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.BeanUtils;
@@ -46,6 +47,8 @@ public class BlogServiceImpl implements IBlogService {
 
         return blogMapper.selectBlogPageList(blog);
     }
+
+
 
     //保存博客
     @Override
@@ -100,10 +103,20 @@ public class BlogServiceImpl implements IBlogService {
         return blogMapper.selectBlogPageList(null);
     }
 
+
+
+
+
     //根据id查询博客 并将markdown转化为HTML在页面展示
     @Override
     public Blog getAndConvert(Long id) {
         Blog blog = blogMapper.selectBlogById(id);
+
+        //博客不存在,抛出自定义异常
+        if (blog == null) {
+            throw new CustomizeException("当前博客不存在！！");
+        }
+
         Blog b = new Blog();
         //复制新查询的值到新建的blog
         BeanUtils.copyProperties(blog,b);
@@ -132,5 +145,6 @@ public class BlogServiceImpl implements IBlogService {
     public void updateBlogViews(Long id) {
         blogMapper.updateBlogViews(id);
     }
+
 
 }

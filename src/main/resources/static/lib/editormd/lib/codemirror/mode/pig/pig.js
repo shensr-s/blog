@@ -60,7 +60,7 @@ CodeMirror.defineMode("pig", function(_config, parserConfig) {
       }
       if (end || !(escaped || multiLineStrings))
         state.tokenize = tokenBase;
-      return ret("string", "error");
+      return ret("string", "templates.home.error");
     };
   }
 

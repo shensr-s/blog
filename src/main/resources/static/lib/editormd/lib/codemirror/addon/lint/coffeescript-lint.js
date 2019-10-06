@@ -32,7 +32,7 @@ CodeMirror.registerHelper("lint", "coffeescript", function(text) {
   } catch(e) {
     found.push({from: CodeMirror.Pos(e.location.first_line, 0),
                 to: CodeMirror.Pos(e.location.last_line, e.location.last_column),
-                severity: 'error',
+                severity: 'templates.home.error',
                 message: e.message});
   }
   return found;

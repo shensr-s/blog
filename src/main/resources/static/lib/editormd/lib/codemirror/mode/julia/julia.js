@@ -12,7 +12,7 @@
 "use strict";
 
 CodeMirror.defineMode("julia", function(_conf, parserConf) {
-  var ERRORCLASS = 'error';
+  var ERRORCLASS = 'templates.home.error';
 
   function wordRegexp(words) {
     return new RegExp("^((" + words.join(")|(") + "))\\b");
@@ -24,7 +24,7 @@ CodeMirror.defineMode("julia", function(_conf, parserConf) {
   var blockOpeners = ["begin", "function", "type", "immutable", "let", "macro", "for", "while", "quote", "if", "else", "elseif", "try", "finally", "catch", "do"];
   var blockClosers = ["end", "else", "elseif", "catch", "finally"];
   var keywordList = ['if', 'else', 'elseif', 'while', 'for', 'begin', 'let', 'end', 'do', 'try', 'catch', 'finally', 'return', 'break', 'continue', 'global', 'local', 'const', 'export', 'import', 'importall', 'using', 'function', 'macro', 'module', 'baremodule', 'type', 'immutable', 'quote', 'typealias', 'abstract', 'bitstype', 'ccall'];
-  var builtinList = ['true', 'false', 'enumerate', 'open', 'close', 'nothing', 'NaN', 'Inf', 'print', 'println', 'Int', 'Int8', 'Uint8', 'Int16', 'Uint16', 'Int32', 'Uint32', 'Int64', 'Uint64', 'Int128', 'Uint128', 'Bool', 'Char', 'Float16', 'Float32', 'Float64', 'Array', 'Vector', 'Matrix', 'String', 'UTF8String', 'ASCIIString', 'error', 'warn', 'info', '@printf'];
+  var builtinList = ['true', 'false', 'enumerate', 'open', 'close', 'nothing', 'NaN', 'Inf', 'print', 'println', 'Int', 'Int8', 'Uint8', 'Int16', 'Uint16', 'Int32', 'Uint32', 'Int64', 'Uint64', 'Int128', 'Uint128', 'Bool', 'Char', 'Float16', 'Float32', 'Float64', 'Array', 'Vector', 'Matrix', 'String', 'UTF8String', 'ASCIIString', 'templates.home.error', 'warn', 'info', '@printf'];
 
   //var stringPrefixes = new RegExp("^[br]?('|\")")
   var stringPrefixes = /^(`|'|"{3}|([br]?"))/;

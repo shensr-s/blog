@@ -40,7 +40,7 @@ CodeMirror.defineMode("commonlisp", function (config) {
     else if (/['`,@]/.test(ch)) return null;
     else if (ch == "|") {
       if (stream.skipTo("|")) { stream.next(); return "symbol"; }
-      else { stream.skipToEnd(); return "error"; }
+      else { stream.skipToEnd(); return "templates.home.error"; }
     } else if (ch == "#") {
       var ch = stream.next();
       if (ch == "[") { type = "open"; return "bracket"; }
@@ -48,7 +48,7 @@ CodeMirror.defineMode("commonlisp", function (config) {
       else if (/\d/.test(ch) && stream.match(/^\d*#/)) return null;
       else if (ch == "|") return (state.tokenize = inComment)(stream, state);
       else if (ch == ":") { readSym(stream); return "meta"; }
-      else return "error";
+      else return "templates.home.error";
     } else {
       var name = readSym(stream);
       if (name == ".") return null;

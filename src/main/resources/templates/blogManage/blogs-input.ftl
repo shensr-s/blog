@@ -173,7 +173,13 @@
                     <button class="ui button teal saveBlogBtn" type="button">保存</button>
                 </#if>
                 <#if blog??>
-                    <button class="ui teal button publishBlogBtn" type="button">发布</button>
+                    <button class="ui teal button publishBlogBtn" type="button">
+                        <#if blog.published==false>
+                            发布
+                        <#else >
+                            更新发布
+                        </#if>
+                    </button>
                 </#if>
                 <!--button不指定type  那么默认为submit-->
             </div>
@@ -345,48 +351,48 @@
                     if (XMLHttpRequest.status == 303) {
                         window.location.href = "/login";
                     } else {
+                        console.log("templates.home.error");
+                    }
+                }
+            });
+        }
+        if (type === 2) {
+            $.ajax({
+                type: "post",
+                url: "/blog/ajax/save",
+                data: JSON.stringify(data),
+                dataType: "json",
+                contentType: 'application/json;charset=UTF-8',
+                success: function (data) {
+
+                    if (data.code === 200) {
+                        //成功跳转到我的博客页面
+                        console.log(data.msg);
+                        console.log(data);
+                        var blogId = data.data;
+                        window.location.href = "/blog/blog/" + blogId;
+                        $(".success.message.field p").html(data.msg);
+                        $(".success.message.field").closest('.message').transition('show');
+
+                    } else if (data.code === 601) {
+                        console.log(data.msg);
+                        $(".success.message.field p").html(data.msg);
+                        $(".success.message.field").closest('.message').transition('show');
+                    } else if (data.code === 301) {
+                        console.log(data.msg);
+                        $(".success.message.field p").html(data.msg);
+                        $(".success.message.field").closest('.message').transition('show');
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    if (XMLHttpRequest.status == 303) {
+                        window.location.href = "/login";
+                    } else {
                         console.log("error");
                     }
                 }
             });
         }
-        // if(type===2){
-        //     $.ajax({
-        //         type: "post",
-        //         url: "/blog/ajax/save",
-        //         data: JSON.stringify(data),
-        //         dataType: "json",
-        //         contentType: 'application/json;charset=UTF-8',
-        //         success: function (data) {
-        //
-        //             if (data.code === 200) {
-        //                 //成功跳转到我的博客页面
-        //                 console.log(data.msg);
-        //                 console.log(data);
-        //                 var blogId = data.data;
-        //                 window.location.href = "/blog/edit/" + blogId;
-        //                 $(".success.message.field p").html(data.msg);
-        //                 $(".success.message.field").closest('.message').transition('show');
-        //
-        //             } else if (data.code === 601) {
-        //                 console.log(data.msg);
-        //                 $(".success.message.field p").html(data.msg);
-        //                 $(".success.message.field").closest('.message').transition('show');
-        //             } else if (data.code === 301) {
-        //                 console.log(data.msg);
-        //                 $(".success.message.field p").html(data.msg);
-        //                 $(".success.message.field").closest('.message').transition('show');
-        //             }
-        //         },
-        //         error: function (XMLHttpRequest, textStatus, errorThrown) {
-        //             if (XMLHttpRequest.status == 303) {
-        //                 window.location.href = "/login";
-        //             } else {
-        //                 console.log("error");
-        //             }
-        //         }
-        //     });
-        // }
     };
 </script>
 

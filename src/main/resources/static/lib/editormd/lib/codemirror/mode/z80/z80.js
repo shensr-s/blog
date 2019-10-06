@@ -55,7 +55,7 @@ CodeMirror.defineMode('z80', function() {
           }
 
           if (errors.test(w))
-            return 'error';
+            return 'templates.home.error';
         } else if (numbers.test(w)) {
           return 'number';
         } else {

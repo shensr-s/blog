@@ -56,7 +56,7 @@ CodeMirror.defineMode("haskell", function(_config, modeConfig) {
       if (source.eat('\'')) {
         return "string";
       }
-      return "error";
+      return "templates.home.error";
     }
 
     if (ch == '"') {
@@ -119,7 +119,7 @@ CodeMirror.defineMode("haskell", function(_config, modeConfig) {
       return t;
     }
 
-    return "error";
+    return "templates.home.error";
   }
 
   function ncomment(type, nest) {
@@ -166,7 +166,7 @@ CodeMirror.defineMode("haskell", function(_config, modeConfig) {
       }
     }
     setState(normal);
-    return "error";
+    return "templates.home.error";
   }
 
   function stringGap(source, setState) {
@@ -175,7 +175,7 @@ CodeMirror.defineMode("haskell", function(_config, modeConfig) {
     }
     source.next();
     setState(normal);
-    return "error";
+    return "templates.home.error";
   }
 
 
@@ -214,7 +214,7 @@ CodeMirror.defineMode("haskell", function(_config, modeConfig) {
       "compare", "concat", "concatMap", "const", "cos", "cosh", "curry",
       "cycle", "decodeFloat", "div", "divMod", "drop", "dropWhile", "either",
       "elem", "encodeFloat", "enumFrom", "enumFromThen", "enumFromThenTo",
-      "enumFromTo", "error", "even", "exp", "exponent", "fail", "filter",
+      "enumFromTo", "templates.home.error", "even", "exp", "exponent", "fail", "filter",
       "flip", "floatDigits", "floatRadix", "floatRange", "floor", "fmap",
       "foldl", "foldl1", "foldr", "foldr1", "fromEnum", "fromInteger",
       "fromIntegral", "fromRational", "fst", "gcd", "getChar", "getContents",

@@ -6,9 +6,7 @@ import cn.edu.nwafu.blog.entity.vo.ResultVO;
 import cn.edu.nwafu.blog.service.BlogServiceImpl;
 import cn.edu.nwafu.blog.service.TagServiceImpl;
 import cn.edu.nwafu.blog.service.TypeServiceImpl;
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.jws.WebParam;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
@@ -183,6 +180,7 @@ public class BlogController {
 
     /**
      * 查询博客列表
+     *
      * @param pageNum
      * @param pageSize
      * @param model
@@ -195,59 +193,62 @@ public class BlogController {
         PageInfo pageInfo = new PageInfo(blogList);
         model.addAttribute("blogList", pageInfo.getList());
         model.addAttribute("total", pageInfo.getTotal());
-        model.addAttribute("page",pageInfo);
+        model.addAttribute("page", pageInfo);
 
         return "home/blogHomeList";
     }
 
     /**
      * 首页查询博客标签
+     *
      * @param model
      * @return
      */
     @RequestMapping("/ajax/home/tag")
-    public String selectTags(Model model){
+    public String selectTags(Model model) {
         //参数为1 只查询前六条
         List<Tag> tagList = tagService.selectTagsAndCount(1);
-        model.addAttribute("tagList",tagList);
+        model.addAttribute("tagList", tagList);
         return "home/tagHomeList";
     }
 
     /**
      * 首页查询博客类型
+     *
      * @param model
      * @return
      */
 
     @RequestMapping("/ajax/home/type")
-    public String selectType(Model model){
+    public String selectType(Model model) {
         //参数为1 只查询前六条
         List<Type> typeList = typeService.selectTypesAndCount(1);
-        model.addAttribute("typeList",typeList);
+        model.addAttribute("typeList", typeList);
         return "home/typeHomeList";
     }
 
     /**
      * 首页获取最新博客推荐
+     *
      * @param model
      * @return
      */
 
     @RequestMapping("/ajax/home/newBlog")
-    public String selectNewBlog(Model model){
+    public String selectNewBlog(Model model) {
         List<Blog> blogList = blogService.selectBlogHomeList(1, 6);
-        model.addAttribute("blogList",blogList);
+        model.addAttribute("blogList", blogList);
         return "home/newHomeList";
     }
 
     @RequestMapping("/blog/{id}")
-    public String locBlogById(@PathVariable Long id,Model model) {
+    public String locBlogById(@PathVariable Long id, Model model) {
         //浏览器访问当前页面时，浏览量加一，
         blogService.updateBlogViews(id);
 
-
         Blog blog = blogService.getAndConvert(id);
-        model.addAttribute("blog",blog);
+
+        model.addAttribute("blog", blog);
         return "blog";
     }
 

@@ -28,7 +28,7 @@ CodeMirror.defineMode("lua", function(config, parserConfig) {
 
   // long list of standard functions from lua manual
   var builtins = wordRE([
-    "_G","_VERSION","assert","collectgarbage","dofile","error","getfenv","getmetatable","ipairs","load",
+    "_G","_VERSION","assert","collectgarbage","dofile","templates.home.error","getfenv","getmetatable","ipairs","load",
     "loadfile","loadstring","module","next","pairs","pcall","print","rawequal","rawget","rawset","require",
     "select","setfenv","setmetatable","tonumber","tostring","type","unpack","xpcall",
 

@@ -136,7 +136,7 @@
           plug.closeBracket(ch);
           setState(state, beginParams);
         } else {
-          return "error";
+          return "templates.home.error";
         }
         return "bracket";
       } else if (ch == '{' || ch == '[') {
@@ -199,7 +199,7 @@
         source.skipToEnd();
         return "comment";
       }
-      return "error";
+      return "templates.home.error";
     }
 
     function beginParams(source, state) {

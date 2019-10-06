@@ -72,7 +72,7 @@ CodeMirror.defineMode("dylan", function(_config) {
            ],
 
     // Condition signaling function calls
-    signalingCalls: ["signal", "error", "cerror",
+    signalingCalls: ["signal", "templates.home.error", "cerror",
                      "break", "check-type", "abort"
                     ]
   };

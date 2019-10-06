@@ -49,7 +49,7 @@ CodeMirror.defineMode("q",function(config){
       || stream.match(/^\d+[chijn]{1}/)
       || stream.match(/-?\d*(\.\d*)?(e[+\-]?\d+)?(e|f)?/))
         t="number";
-      return(t&&(!(c=stream.peek())||E.test(c)))?t:(stream.next(),"error");
+      return(t&&(!(c=stream.peek())||E.test(c)))?t:(stream.next(),"templates.home.error");
     }
     if(/[A-Z|a-z]|\./.test(c))
       return stream.eatWhile(/[A-Z|a-z|\.|_|\d]/),keywords.test(stream.current())?"keyword":"variable";
@@ -57,7 +57,7 @@ CodeMirror.defineMode("q",function(config){
       return null;
     if(/[{}\(\[\]\)]/.test(c))
       return null;
-    return"error";
+    return"templates.home.error";
   }
   function tokenLineComment(stream,state){
     return stream.skipToEnd(),/\/\s*$/.test(stream.current())?(state.tokenize=tokenBlockComment)(stream,state):(state.tokenize=tokenBase),"comment";

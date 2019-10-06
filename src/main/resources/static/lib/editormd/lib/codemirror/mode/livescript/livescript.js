@@ -31,7 +31,7 @@
             }
           }
           stream.next();
-          return 'error';
+          return 'templates.home.error';
         }
         if (stream.match(r = Rules[next_rule])) {
           if (r.regex && stream.match(r.regex)) {
@@ -39,12 +39,12 @@
             return r.token;
           } else {
             stream.next();
-            return 'error';
+            return 'templates.home.error';
           }
         }
       }
       stream.next();
-      return 'error';
+      return 'templates.home.error';
     };
     var external = {
       startState: function(){

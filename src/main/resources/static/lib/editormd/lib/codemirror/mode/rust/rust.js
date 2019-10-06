@@ -52,10 +52,10 @@ CodeMirror.defineMode("rust", function() {
       tcat = "atom";
       if (stream.eat("\\")) {
         if (stream.skipTo("'")) { stream.next(); return "string"; }
-        else { return "error"; }
+        else { return "templates.home.error"; }
       } else {
         stream.next();
-        return stream.eat("'") ? "string" : "error";
+        return stream.eat("'") ? "string" : "templates.home.error";
       }
     }
     if (ch == "/") {

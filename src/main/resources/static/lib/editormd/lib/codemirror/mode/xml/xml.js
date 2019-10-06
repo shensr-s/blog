@@ -103,7 +103,7 @@ CodeMirror.defineMode("xml", function(config, parserConfig) {
       } else {
         ok = stream.eatWhile(/[\w\.\-:]/) && stream.eat(";");
       }
-      return ok ? "atom" : "error";
+      return ok ? "atom" : "templates.home.error";
     } else {
       stream.eatWhile(/[^&<]/);
       return null;
@@ -224,7 +224,7 @@ CodeMirror.defineMode("xml", function(config, parserConfig) {
       setStyle = "tag";
       return attrState;
     } else {
-      setStyle = "error";
+      setStyle = "templates.home.error";
       return tagNameState;
     }
   }
@@ -242,21 +242,21 @@ CodeMirror.defineMode("xml", function(config, parserConfig) {
         return closeStateErr;
       }
     } else {
-      setStyle = "error";
+      setStyle = "templates.home.error";
       return closeStateErr;
     }
   }
 
   function closeState(type, _stream, state) {
     if (type != "endTag") {
-      setStyle = "error";
+      setStyle = "templates.home.error";
       return closeState;
     }
     popContext(state);
     return baseState;
   }
   function closeStateErr(type, stream, state) {
-    setStyle = "error";
+    setStyle = "templates.home.error";
     return closeState(type, stream, state);
   }
 
@@ -276,18 +276,18 @@ CodeMirror.defineMode("xml", function(config, parserConfig) {
       }
       return baseState;
     }
-    setStyle = "error";
+    setStyle = "templates.home.error";
     return attrState;
   }
   function attrEqState(type, stream, state) {
     if (type == "equals") return attrValueState;
-    if (!Kludges.allowMissing) setStyle = "error";
+    if (!Kludges.allowMissing) setStyle = "templates.home.error";
     return attrState(type, stream, state);
   }
   function attrValueState(type, stream, state) {
     if (type == "string") return attrContinuedState;
     if (type == "word" && Kludges.allowUnquoted) {setStyle = "string"; return attrState;}
-    setStyle = "error";
+    setStyle = "templates.home.error";
     return attrState(type, stream, state);
   }
   function attrContinuedState(type, stream, state) {
@@ -315,7 +315,7 @@ CodeMirror.defineMode("xml", function(config, parserConfig) {
         setStyle = null;
         state.state = state.state(type || style, stream, state);
         if (setStyle)
-          style = setStyle == "error" ? style + " error" : setStyle;
+          style = setStyle == "templates.home.error" ? style + " templates.home.error" : setStyle;
       }
       return style;
     },

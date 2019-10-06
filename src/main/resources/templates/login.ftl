@@ -161,7 +161,7 @@
 
             },
             error: function () {
-                console.log("error")
+                console.log("templates.home.error")
             }
 
 
