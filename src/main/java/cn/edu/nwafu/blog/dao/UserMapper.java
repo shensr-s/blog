@@ -18,4 +18,9 @@ public interface UserMapper {
     User selectUserByUserFlags(@Param("username") String username,@Param("email") String email);
 
     int saveUser(User user);
+
+    //第三方用户注册 登录校验 根据accountID查看用户是否已经注册，注册就直接登录
+    User checkUserByAccountId(Long accountId);
+
+    User findUserByToken(String token);
 }

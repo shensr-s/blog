@@ -45,9 +45,9 @@
                 <#else >
                 <#--没有登陆就提示登陆-->
                     <div class="right item m-mobile-hide m-item">
-                        <a class="ui inverted button teal small " href="${base}/login"><#--Log in-->登陆</a>
+                        <a class="ui inverted button blue small " href="${base}/login"><#--Log in-->登陆</a>
                         &nbsp;
-                        <a class="ui inverted button teal small " href="${base}/signup"><#--Sign Up-->注册</a>
+                        <a class="ui inverted button blue small " href="${base}/signup"><#--Sign Up-->注册</a>
                     </div>
                 </#if>
 

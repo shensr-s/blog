@@ -64,7 +64,9 @@
 
         <div class="ui message">
             Have account? <a href="${base}/login">Log In</a> <br>
-            <a href="/">游客浏览</a>
+            <a href="/">游客浏览</a> <br>
+            第三方：<a href="https://github.com/login/oauth/authorize?client_id=59982e9704e9a99b7808&redirect_uri=http://localhost:8080/callback&scope=user&state=1" class="ui circular icon button github"><i
+                        class="github black icon"></i></a>
         </div>
     </div>
 </div>

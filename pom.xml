@@ -58,6 +58,13 @@
             <version>1.2.10</version>
         </dependency>
 
+        <!--okhttp-->
+        <!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp -->
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>4.2.0</version>
+        </dependency>
         <!--Markdown 转换 HTML-->
         <dependency>
             <groupId>com.atlassian.commonmark</groupId>

@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 
@@ -31,9 +33,27 @@ public class LoginAndSignUpController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
-
+    /**
+     * 通过cookie第三方登录
+     * @param request
+     * @return
+     */
     @RequestMapping("/")
-    public String index(){
+    public String index(HttpServletRequest request){
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if(cookie.getName().equals("token")){
+                    String token = cookie.getValue();
+                    User user = userService.findUserByToken(token);
+                    if (user != null) {
+                        request.getSession().setAttribute("user",user);
+                    }
+                    break;
+                }
+            }
+        }
+
 
         return "home/home";
     }
@@ -93,16 +113,7 @@ public class LoginAndSignUpController {
         return resultVO;
     }
 
-    /**
-     * 注销用户
-     * @param request
-     * @return
-     */
-    @RequestMapping("/logout")
-    public String logOut(HttpServletRequest request){
-        UserSessionUtils.logOut(request);
-        return "redirect:/";
-    }
+
 
     /**
      * 用户注册
@@ -143,6 +154,22 @@ public class LoginAndSignUpController {
     }
 
 
-
+    /**
+     * 注销用户
+     * @param request
+     * @return
+     */
+    @RequestMapping("/logout")
+    public String logOut(HttpServletRequest request, HttpServletResponse response){
+        UserSessionUtils.logOut(request);
+        Cookie[] cookies = request.getCookies();
+        for (Cookie cookie : cookies) {
+            if(cookie.getName().equals("token")){
+                cookie.setMaxAge(0);//Cookie不能根本意义上删除，设置为0即可
+                response.addCookie(cookie);
+            }
+        }
+        return "redirect:/";
+    }
 
 }

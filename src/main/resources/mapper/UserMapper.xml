@@ -14,6 +14,8 @@
         <result property="isDeletedFlag" column="is_deleted_flag" jdbcType="BIT"/>
         <result property="sex" column="sex" jdbcType="INTEGER"/>
         <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="accountId" column="account_id" jdbcType="BIGINT"/>
+        <result property="token" column="token" jdbcType="CHAR"/>
     </resultMap>
 
     <select id="selectUserByUserFlags" resultMap="UserResultMap">
@@ -33,12 +35,22 @@
         where username = #{username}
            or email = #{email}
     </select>
+    <select id="checkUserByAccountId" resultType="cn.edu.nwafu.blog.entity.User">
+        select *
+        from t_user
+        where account_id = #{accountId}
+    </select>
+    <select id="findUserByToken" resultType="cn.edu.nwafu.blog.entity.User">
+        select *
+        from t_user
+        where token = #{token}
+    </select>
 
 
-    <insert id="saveUser"  useGeneratedKeys="true" keyProperty="id">
+    <insert id="saveUser" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_user
-            ( username, password, create_time, update_time, is_deleted_flag, role_id )
-        VALUES
-        (#{username}, #{password},#{createTime},#{updateTime},#{isDeletedFlag},#{roleId})
+        (username, password, create_time, update_time, is_deleted_flag, role_id, account_id, token)
+        VALUES (#{username}, #{password}, #{createTime}, #{updateTime}, #{isDeletedFlag}, #{roleId}, #{accountId},
+                #{token})
     </insert>
 </mapper>

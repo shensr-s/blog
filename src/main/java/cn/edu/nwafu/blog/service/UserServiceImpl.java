@@ -38,4 +38,25 @@ public class UserServiceImpl implements IUserService {
     public int saveUser(User user) {
         return userMapper.saveUser(user);
     }
+
+
+    /**
+     * 第三方用户注册 登录校验
+     * @param accountId
+     * @return
+     */
+    @Override
+    public User checkUserByAccountId(Long accountId) {
+        return userMapper.checkUserByAccountId(accountId);
+    }
+
+    /**
+     * 通过cookie第三方登录
+     * @param token
+     * @return
+     */
+    @Override
+    public User findUserByToken(String token) {
+        return userMapper.findUserByToken(token);
+    }
 }

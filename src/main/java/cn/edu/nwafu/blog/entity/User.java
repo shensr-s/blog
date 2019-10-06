@@ -39,5 +39,10 @@ public class User {
 
     private String description;//个人简介
 
+    private Long accountId;//第三方账户ID
+
+    private String token;//token
+
+
 
 }
