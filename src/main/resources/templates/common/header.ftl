@@ -32,7 +32,7 @@
                                 <img src="https://picsum.photos/100/100?image=1027" alt="" class="ui avatar image">
                             </#if>
                             <#--获取session中的用户名-->
-                            &nbsp;${user.username}
+                            &nbsp;${user.username!}
                             <i class="ui dropdown icon"></i>
                             <div class="menu">
                                 <a href="${base}/blog/user/center" class="item">个人中心</a>
