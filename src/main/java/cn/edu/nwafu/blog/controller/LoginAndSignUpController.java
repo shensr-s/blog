@@ -101,7 +101,7 @@ public class LoginAndSignUpController {
     @RequestMapping("/logout")
     public String logOut(HttpServletRequest request){
         UserSessionUtils.logOut(request);
-        return "/";
+        return "redirect:/";
     }
 
     /**

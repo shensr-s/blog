@@ -208,6 +208,12 @@
 <#--</div>-->
 <#--发布情况提示结束-->
 
+<#--隐藏域-->
+<#if blog??>
+<#--    编辑博客时出现-->
+    <input type="text" value="${blog.published?string('true','false')}" hidden id="published">
+</#if>
+<#--隐藏域结束-->
 
 <!--页面底部-->
 
@@ -274,21 +280,29 @@
 
     //保存博客
     $(".saveBlogBtn").click(function () {
-        saveOrUpdateBlog(1);
+        if($("#published")=="false"){
+            saveOrUpdateBlog(1,false);
+        }else {
+            saveOrUpdateBlog(1,true);
+        }
     });
 
     //更新博客
     $(".updateBlogBtn").click(function () {
-        saveOrUpdateBlog(1);
+        if($("#published")=="false"){
+            saveOrUpdateBlog(1,false);
+        }else {
+            saveOrUpdateBlog(1,true);
+        }
     })
     //发布博客
     $(".publishBlogBtn").click(function () {
-        saveOrUpdateBlog(2);
+        saveOrUpdateBlog(2,true);
     });
 
 
-    //blog保存 与更新
-    function saveOrUpdateBlog(type) {
+    //blog新增 与更新
+    function saveOrUpdateBlog(type,published) {
         //校验表单
         var check = $(".ui.form").form("validate form");
 
@@ -312,13 +326,14 @@
             }
         });
         if (type === 1) {
-            data.published = false;
+            data.published = published;
         }
         if (type === 2) {
-            data.published = true;
+            data.published = published;
         }
         console.log(data);
 
+        //保存按钮
         if (type === 1) {
             $.ajax({
                 type: "post",
@@ -333,7 +348,10 @@
                         console.log(data.msg);
                         console.log(data);
                         var blogId = data.data;
-                        window.location.href = "/blog/edit/" + blogId;
+                        var loc=window.location.pathname;
+                        if(loc.indexOf("edit")==-1){
+                            window.location.href = "/blog/edit/" + blogId;
+                        }
                         $(".success.message.field p").html(data.msg);
                         $(".success.message.field").closest('.message').transition('show');
 
@@ -356,6 +374,7 @@
                 }
             });
         }
+        //发布按钮
         if (type === 2) {
             $.ajax({
                 type: "post",
@@ -425,6 +444,9 @@
     });
     // $(".saveFlagBtn").click(function () {
     //     $(".saveBlogBtn").click();
+    // })
+    // $(function () {
+    //     alert(window.location.pathname);
     // })
 </script>
 </body>

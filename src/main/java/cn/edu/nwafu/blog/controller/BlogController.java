@@ -147,15 +147,10 @@ public class BlogController {
                 try {
                     blogService.updateBlogById(blog);
 
-                    if (blog.getPublished() == false) {
-                        //保存成功
-                        resultVO.setMsg("保存成功");
-                        resultVO.setData(blog.getId());
-                    } else if (blog.getPublished() == true) {
-                        //发布成功
-                        resultVO.setMsg("发布成功");
-                        resultVO.setData(blog.getId());
-                    }
+                    //保存成功
+                    resultVO.setMsg("保存成功");
+                    resultVO.setData(blog.getId());
+
                 } catch (Exception e) {
                     if (blog.getPublished() == false) {
                         //保存失败

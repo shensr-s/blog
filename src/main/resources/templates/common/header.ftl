@@ -22,7 +22,7 @@
                 <#--用户信息:如果登陆了就显示-->
                 <#if user??>
                     <div class="right item m-mobile-hide m-item">
-                        <a href="${base}/blog/add" class="ui basic grey inverted mini button circular m-blog-btn">写博客</a>
+                        <a href="${base}/blog/add" class="ui basic teal  mini button ">写博客</a>
                     </div>
                     <div class="right  menu m-mobile-hide m-item">
                         <div class="ui dropdown item">
@@ -45,9 +45,9 @@
                 <#else >
                 <#--没有登陆就提示登陆-->
                     <div class="right item m-mobile-hide m-item">
-                        <a class="ui inverted button m-blog-btn circular" href="${base}/login">Log in</a>
+                        <a class="ui inverted button teal small " href="${base}/login"><#--Log in-->登陆</a>
                         &nbsp;
-                        <a class="ui inverted button m-blog-btn circular" href="${base}/signup">Sign Up</a>
+                        <a class="ui inverted button teal small " href="${base}/signup"><#--Sign Up-->注册</a>
                     </div>
                 </#if>
 
