@@ -307,7 +307,8 @@
 
     });
 
-
+    //头像下拉
+    $(".ui.dropdown").dropdown();
     // $("#type").addClass("active");
     $(".menu.toggle").click(function () {
         $(".m-item").toggleClass('m-mobile-hide');

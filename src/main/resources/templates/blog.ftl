@@ -30,31 +30,47 @@
     <div class="ui container">
         <div class="ui top attached segment">
             <!--头部-->
-            <div class="ui  link list horizontal">
-                <div class="item">
-                    <#if blog.avatar??>
-                        <img src="${blog.avatar}" alt=""
-                             class="ui avatar image">
-                    <#else >
-                        <img src="https://picsum.photos/100/100?image=1027" alt=""
-                             class="ui avatar image">
-                    </#if>
+            <div class="ui stackable  grid">
+                <div class="ui fourteen wide column">
+                    <div class="ui  link list horizontal">
+                        <div class="item">
+                            <#if blog.avatar??>
+                                <img src="${blog.avatar}" alt=""
+                                     class="ui avatar image">
+                            <#else >
+                                <img src="https://picsum.photos/100/100?image=1027" alt=""
+                                     class="ui avatar image">
+                            </#if>
 
-                    <div class="content">
-                        <a href="#" class="header">${blog.userName!}</a>
+                            <div class="content">
+                                <a href="#" class="header">${blog.userName!}</a>
+                            </div>
+
+                        </div>
+                        <div class="item">
+                            <i class="calendar icon"></i>
+                            <#if blog.updateTime??>
+                                ${blog.updateTime?string("yyyy-MM-dd")}
+                            </#if>
+                        </div>
+                        <div class="item">
+                            <i class="eye icon"></i>${blog.views!}
+                        </div>
+
                     </div>
+                </div>
+                <div class="ui two wide column">
 
-                </div>
-                <div class="item">
-                    <i class="calendar icon"></i>
-                    <#if blog.updateTime??>
-                        ${blog.updateTime?string("yyyy-MM-dd")}
+                    <#if user??>
+                        <#if  blog.userId==user.id>
+                            <a href="${base}/blog/edit/${blog.id}" class="ui right aligned teal mini button">编辑</a>
+                        </#if>
                     </#if>
-                </div>
-                <div class="item">
-                    <i class="eye icon"></i>${blog.views!}
+
                 </div>
             </div>
+
+
         </div>
         <div class="ui attached segment" style="height: 200px;">
             <!--图片区域-->

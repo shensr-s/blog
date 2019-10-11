@@ -36,12 +36,10 @@ public class BlogNavController {
     private BlogServiceImpl blogService;
 
 
-
-
-
     /**
      * 跳转到相应的页面
-     *     博客管理页面
+     * 博客管理页面
+     *
      * @param model
      * @return
      */
@@ -61,12 +59,13 @@ public class BlogNavController {
 
         // 查询标签
         List<Tag> tagList = tagService.selectTags();
-        model.addAttribute("tagList",tagList);
+        model.addAttribute("tagList", tagList);
         return "blogManage/blogs-input";
     }
 
     /**
      * 博客类型页面
+     *
      * @param model
      * @return
      */
@@ -76,12 +75,13 @@ public class BlogNavController {
         // flag为空 查询全部
         List<Type> typeList = typeService.selectTypesAndCount(0);
         model.addAttribute("typeList", typeList);
-        model.addAttribute("total",typeList.size());
+        model.addAttribute("total", typeList.size());
         return "type/types";
     }
 
     /**
      * 博客标签页面
+     *
      * @param model
      * @return
      */
@@ -90,8 +90,8 @@ public class BlogNavController {
 
         // flag为0 查询所有标签
         List<Tag> tagList = tagService.selectTagsAndCount(0);
-        model.addAttribute("tagList",tagList);
-        model.addAttribute("total",tagList.size());
+        model.addAttribute("tagList", tagList);
+        model.addAttribute("total", tagList.size());
         return "tag/tags";
     }
 
@@ -102,6 +102,7 @@ public class BlogNavController {
 
     /**
      * 定位定归档页面，并完成相应数据查询
+     *
      * @param model
      * @return
      */
@@ -112,24 +113,18 @@ public class BlogNavController {
 
         //TODO 计算博客总数 待优化
         AtomicInteger count = new AtomicInteger();
-        archiveBlog.forEach((key,value)->{
-            value.forEach(item->{
-                if(item!=null){
+        archiveBlog.forEach((key, value) -> {
+            value.forEach(item -> {
+                if (item != null) {
                     count.getAndIncrement();
                 }
             });
         });
-        model.addAttribute("archiveBlog",archiveBlog);
+        model.addAttribute("archiveBlog", archiveBlog);
 
-        model.addAttribute("count",count.toString());
+        model.addAttribute("count", count.toString());
         return "archives/archives";
     }
-
-
-
-
-
-
 
 
 }

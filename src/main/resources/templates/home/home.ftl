@@ -127,8 +127,6 @@
                         <div class="ui teal segment">
                             <!--fluid填充满父类div-->
                             <div class="ui vertical fluid menu typeFlag">
-
-
                                 <#--博客分类插入 -->
                                 <#--   博客分类插入 -->
                                 <#--     博客分类插入 -->
