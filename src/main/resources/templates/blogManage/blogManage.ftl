@@ -35,12 +35,12 @@
                 <!--第一行-->
                 <div class="inline fields">
                     <div class="field">
-                        <input type="text" name="title" placeholder="请输入标题" id="blogTitle">
+                        <input type="text" name="title" placeholder="请输入标题" id="title">
                     </div>
                     <div class="field">
                         <div class="ui search selection dropdown">
                             <!--隐藏域：用于存放选择的值-->
-                            <input type="text" class="hidden" name="type">
+                            <input type="hidden"  name="typeId" id="typeId">
                             <i class="ui dropdown icon"></i>
                             <div class="default text" id="blogType">请选择分类</div>
                             <div class="menu">
@@ -55,7 +55,7 @@
                     </div>
                     <div class="field">
                         <div class="ui checkbox">
-                            <input type="checkbox" name="recommend" id="BlogRecommend" value="">
+                            <input type="checkbox" name="recommend" id="recommend"  class="hidden">
                             <!--for="recommend" 关联checkbox 点击文字的时候也可以关联-->
                             <label for="recommend">推荐</label>
                         </div>
@@ -157,16 +157,17 @@
         $("#currentPage").val(currentPage);
 
         //搜索的值
-        var title = $("#blogTitle").val();
-        var type = $("#blogType").text();
-        var recommend = 1;
-        if ($("#BlogRecommend").val() == "on") {
-            recommend = 0;
-        };
+
+        var t = $(".ui.form").serializeArray();
         var data = {};
-        data.title = title;
-        data.type = type;
-        data.recommend = recommend;
+        //form表单数据转json
+        $.each(t, function () {
+            if (this.name === "recommend" && this.value === "on") {
+                data [this.name] = true;
+            }else {
+                data [this.name] = this.value;
+            }
+        });
         data.pageNum = $("#currentPage").val();
         data.pageSize = $("#pageSize").val();
         console.log(data);
@@ -192,6 +193,8 @@
         });
 
     };
+
+
 
 </script>
 </body>

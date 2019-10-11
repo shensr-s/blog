@@ -9,6 +9,8 @@ import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -23,13 +25,19 @@ import java.io.IOException;
 @Component
 public class GitHubProvider {
 
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+
+    @SuppressWarnings("AliDeprecation")
     public String getAccessToken(AccessTokenDTO accessTokenDTO) {
         MediaType mediaType = MediaType.get("application/json; charset=utf-8");
 
         String url = "https://github.com/login/oauth/access_token";
 
         OkHttpClient client = new OkHttpClient();
-        okhttp3.RequestBody body = okhttp3.RequestBody.create(mediaType, JSON.toJSONString(accessTokenDTO));
+        // okhttp3.RequestBody body = okhttp3.RequestBody.create(mediaType, JSON.toJSONString(accessTokenDTO));
+        // 上边的create方法已过时
+        okhttp3.RequestBody body = okhttp3.RequestBody.create(JSON.toJSONString(accessTokenDTO), mediaType);
         Request request = new Request.Builder()
                 .url(url)
                 .post(body)
@@ -38,7 +46,8 @@ public class GitHubProvider {
         try (okhttp3.Response response = client.newCall(request).execute()) {
             String string = response.body().string();
             String token = string.split("&")[0].split("=")[1];
-//            System.out.println(string);//查看string中到底是什么内容，然后进行split
+            // System.out.println(string);//查看string中到底是什么内容，然后进行split
+            logger.info("第三方登陆返回的数据：{}",string);
             return token;
         } catch (IOException e) {
             e.printStackTrace();

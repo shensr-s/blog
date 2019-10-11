@@ -46,13 +46,19 @@
                 <div class="field">
                     <div class="ui left icon input">
                         <i class="user icon"></i>
-                        <input type="text" name="username" id="username" placeholder="Username" data-content="">
+                        <input type="text" name="username" id="username" placeholder="用户名" data-content="">
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="mail icon"></i>
+                        <input type="text" name="email" id="email" placeholder="邮箱" data-content="">
                     </div>
                 </div>
                 <div class="field">
                     <div class="ui left icon input">
                         <i class="lock icon"></i>
-                        <input type="password" name="password" id="password" placeholder="Password" data-content="">
+                        <input type="password" name="password" id="password" placeholder="密码" data-content="">
                     </div>
                 </div>
                 <button type="button" class="ui fluid large teal button" id="signUpBtn">Sign Up</button>
@@ -119,12 +125,26 @@
         on: "blur",
         inline: true,
         fields: {
-            email: {
+            username: {
                 identifier: 'username',
                 rules: [
                     {
                         type: 'empty',
                         prompt: '请输入用户名'
+                    }
+
+                ]
+            },
+            email: {
+                identifier: 'email',
+                rules: [
+                    {
+                        type: 'empty',
+                        prompt: '请输入邮箱'
+                    },
+                    {
+                        type   : 'email',
+                        prompt : '请输入正确的邮箱'
                     }
 
                 ]
@@ -145,11 +165,13 @@
     //注册
     $("#signUpBtn").click(function () {
         var username = $("#username").val();
+        var email = $("#email").val();
         var password = $("#password").val();
 
         var data = {};
 
         data.username = username;
+        data.email = email;
         data.password = password;
         console.log(data);
         $.ajax({
@@ -161,19 +183,19 @@
             dataType: "json",
             success: function (data) {
                 // console.log("success")
-                if (data.code == 200) {
+                if (data.code === 200) {
                     //注册成功
                     $('.ui.modal.mini.signUp').modal('show');
                 }
-                if (data.code == 300) {
-                    console.log(data.msg)
+                if (data.code === 300) {
+                    // console.log(data.msg);
                     //用户名存在
-                    $messageForm.form('add prompt', "username", data.msg);
+                    $messageForm.form('add prompt', "email", data.msg);
                 }
-                if (data.code = 301) {
-                    console.log(data.msg)
+                if (data.code === 301) {
+                    // console.log(data.msg);
                     //注册失败
-                    $messageForm.form('add prompt', "username", data.msg);
+                    $messageForm.form('add prompt', "email", data.msg);
                 }
 
             },
@@ -182,16 +204,17 @@
             }
         });
     });
-    //登录
+
+    //注册后可直接登录
     $("#loginBtn").click(function () {
-        var username = $("#username").val();
+        var email = $("#email").val();
         var password = $("#password").val();
 
-        $("#username").attr("data-content", "");
+        $("#email").attr("data-content", "");
         $("#password").attr("data-content", "");
         var data = {};
 
-        data.username = username;
+        data.email = email;
         data.password = password;
         console.log(data);
         $.ajax({

@@ -41,7 +41,7 @@ public class UserSessionUtils {
      * @param request
      */
     public static void logOut(HttpServletRequest request) {
-        request.getSession().removeAttribute("user");
+        request.getSession().invalidate();
     }
 
     /**

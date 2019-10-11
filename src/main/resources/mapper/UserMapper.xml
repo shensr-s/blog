@@ -17,6 +17,11 @@
         <result property="accountId" column="account_id" jdbcType="BIGINT"/>
         <result property="token" column="token" jdbcType="CHAR"/>
     </resultMap>
+    <update id="updateUser">
+        update t_user
+        set token=#{token}
+        where account_id = #{accountId}
+    </update>
 
     <select id="selectUserByUserFlags" resultMap="UserResultMap">
         SELECT id,
@@ -32,8 +37,7 @@
                sex,
                description
         FROM t_user
-        where username = #{username}
-           or email = #{email}
+        where email = #{email}
     </select>
     <select id="checkUserByAccountId" resultType="cn.edu.nwafu.blog.entity.User">
         select *
@@ -49,8 +53,8 @@
 
     <insert id="saveUser" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_user
-        (username, password, create_time, update_time, is_deleted_flag, role_id, account_id, token)
+        (username, password, create_time, update_time, is_deleted_flag, role_id, account_id, token, avatar, email)
         VALUES (#{username}, #{password}, #{createTime}, #{updateTime}, #{isDeletedFlag}, #{roleId}, #{accountId},
-                #{token})
+                #{token}, #{avatar}, #{email})
     </insert>
 </mapper>

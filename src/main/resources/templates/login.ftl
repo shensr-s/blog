@@ -46,13 +46,13 @@
                 <div class="field">
                     <div class="ui left icon input">
                         <i class="user icon"></i>
-                        <input type="text" name="username" id="username" placeholder="E-mail address" data-content="">
+                        <input type="text" name="email" id="email" placeholder="请输入邮箱" data-content="">
                     </div>
                 </div>
                 <div class="field">
                     <div class="ui left icon input">
                         <i class="lock icon"></i>
-                        <input type="password" name="password" id="password" placeholder="Password" data-content="">
+                        <input type="password" name="password" id="password" placeholder="请输入密码" data-content="">
                     </div>
                 </div>
                 <button type="button" class="ui fluid large teal button" id="loginBtn">Login</button>
@@ -106,11 +106,15 @@
             inline: true,
             fields: {
                 email: {
-                    identifier: 'username',
+                    identifier: 'email',
                     rules: [
                         {
                             type: 'empty',
-                            prompt: '请输入用户名/邮箱'
+                            prompt: '请输入邮箱'
+                        },
+                        {
+                            type   : 'email',
+                            prompt : '请输入正确的邮箱'
                         }
 
                     ]
@@ -128,14 +132,14 @@
         });
 
     $("#loginBtn").click(function () {
-        var username = $("#username").val();
+        var email = $("#email").val();
         var password = $("#password").val();
         
-        $("#username").attr("data-content", "");
+        $("#email").attr("data-content", "");
         $("#password").attr("data-content", "");
         var data = {};
 
-        data.username = username;
+        data.email = email;
         data.password = password;
         console.log(data);
         $.ajax({

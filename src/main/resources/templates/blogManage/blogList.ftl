@@ -34,15 +34,18 @@
                 </td>
                 <td>
                     <#if blog.published==false>
-                        未发布
+                        <span style="color: red"> 未发布</span>
                     <#else >
-                        已发布
+                        <span style="color: teal">  已发布</span>
                     </#if>
                 </td>
                 <td>
-                    <#--                    TODO-->
+
                     <a href="${request.contextPath}/blog/edit/${blog.id}" class="ui mini teal m-text-thin button"
-                       value="${blog.id}">编辑</a>
+                       value="${blog.id}">编辑
+                    </a>
+                    <a href="${request.contextPath}/blog/blog/${blog.id}" class="ui mini teal m-text-thin button"
+                       value="${blog.id}">查看</a>
                     <button type="button" class="ui mini red m-text-thin button delBlogClass" value="${blog.id}">删除
                     </button>
 
@@ -54,7 +57,7 @@
         <tfoot>
         <tr>
             <!--合并单元格-->
-            <th colspan="6">
+            <th colspan="7">
                 <div class="ui middle aligned three column grid">
 
                     <div class="column">
@@ -121,6 +124,11 @@
     </table>
 <#else >
     <div align="center">
+        <div class="ui teal message">
+            <div class="header">
+                <div style="color: grey">暂无数据</div>
+            </div>
+        </div>
         <img src="${request.contextPath}/images/noData.jpg" alt="" class="ui rounded image">
     </div>
 </#if>

@@ -158,7 +158,8 @@
                             <!--标签插入的地方-->
                             <!--标签插入的地方-->
                             <!--标签插入的地方-->
-
+                            暂无数据,点击
+                            <a href="${request.contextPath}/blog/tag/manage" class=" item">新建</a>
 
                         </div>
                     </div>

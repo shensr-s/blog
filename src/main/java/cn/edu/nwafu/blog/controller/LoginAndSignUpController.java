@@ -4,7 +4,7 @@ import cn.edu.nwafu.blog.entity.User;
 import cn.edu.nwafu.blog.entity.vo.ResultVO;
 import cn.edu.nwafu.blog.entity.vo.UserVO;
 import cn.edu.nwafu.blog.service.UserServiceImpl;
-import cn.edu.nwafu.blog.util.MD5Utils;
+import cn.edu.nwafu.blog.util.Md5Utils;
 import cn.edu.nwafu.blog.util.UserSessionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * @author shensr
@@ -30,7 +31,7 @@ public class LoginAndSignUpController {
     @Autowired
     private UserServiceImpl userService;
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
     /**
@@ -43,7 +44,7 @@ public class LoginAndSignUpController {
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
-                if(cookie.getName().equals("token")){
+                if("token".equals(cookie.getName())){
                     String token = cookie.getValue();
                     User user = userService.findUserByToken(token);
                     if (user != null) {
@@ -90,15 +91,15 @@ public class LoginAndSignUpController {
                           HttpServletRequest request) {
 
 
-        User user = userService.checkUser(userVO.getUsername());
+        User user = userService.checkUser(userVO.getEmail());
 
         ResultVO resultVO = new ResultVO(200, "登陆成功");
 
         HttpSession session = request.getSession();
 
         if (user != null) {
-            //DM5加密后比较
-            if (MD5Utils.codeMD5(userVO.getPassword()).equals(user.getPassword())) {
+            // DM5加密后比较
+            if (Md5Utils.codeMD5(userVO.getPassword()).equals(user.getPassword())) {
                 session.setAttribute("user", user);
                 resultVO.setData(user);
             } else {
@@ -125,21 +126,22 @@ public class LoginAndSignUpController {
     public ResultVO signUp(@RequestBody UserVO userVO){
         ResultVO resultVO = new ResultVO(200, "注册成功");
 
-        User checkUser = userService.checkUser(userVO.getUsername());
+        User checkUser = userService.checkUser(userVO.getEmail());
 
         if(checkUser!=null){
-            //用户存在-->返回
+            // 用户存在-->返回
             resultVO.setCode(300);
-            resultVO.setMsg("用户名已经存在");
+            resultVO.setMsg(checkUser.getEmail()+"用户已经存在");
         }else {
-            //用户不存在-->注册
+            // 用户不存在-->注册
             User user = new User();
             user.setUsername(userVO.getUsername());
-            user.setPassword(MD5Utils.codeMD5(userVO.getPassword()));
+            user.setEmail(userVO.getEmail());
+            user.setPassword(Md5Utils.codeMD5(userVO.getPassword()));
             user.setCreateTime(new Date());
-            user.setUpdateTime(new Date());
+            user.setUpdateTime(user.getCreateTime());
             user.setIsDeletedFlag(false);
-            //默认为普通用户
+            // 默认为普通用户
             user.setRoleId(2L);
             try {
                 userService.saveUser(user);
@@ -164,8 +166,9 @@ public class LoginAndSignUpController {
         UserSessionUtils.logOut(request);
         Cookie[] cookies = request.getCookies();
         for (Cookie cookie : cookies) {
-            if(cookie.getName().equals("token")){
-                cookie.setMaxAge(0);//Cookie不能根本意义上删除，设置为0即可
+            if("token".equals(cookie.getName())){
+                // Cookie不能根本意义上删除，设置为0即可
+                cookie.setMaxAge(0);
                 response.addCookie(cookie);
             }
         }

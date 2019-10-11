@@ -6,8 +6,10 @@ import freemarker.template.TemplateExceptionHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+
 import java.io.IOException;
 import java.io.Writer;
+
 /**
  * @author shensr
  * @Date 2019/9/5
@@ -23,10 +25,12 @@ public class FreemarkerExceptionHandler implements TemplateExceptionHandler {
         String missingVariable = "undefined";
         try {
             String[] tmp = te.getMessageWithoutStackTop().split("\n");
-            if (tmp.length > 1)
+            if (tmp.length > 1) {
                 tmp = tmp[1].split(" ");
-            if (tmp.length > 1)
+            }
+            if (tmp.length > 1) {
                 missingVariable = tmp[1];
+            }
             writer.write("");
             log.error("[出错了，请联系网站管理员]", te);
         } catch (IOException e) {

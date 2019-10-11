@@ -33,6 +33,45 @@
                 #{published}, #{recommend}, #{shareStatement}, #{title}, #{updateTime}, #{views}, #{typeId}, #{userId},
                 #{isDeletedFlag})
     </insert>
+    <select id="selectBlogPageList" resultMap="blogResultMap">
+        SELECT tb.id,
+        tb.title,
+        tb.content,
+        tb.first_picture,
+        tb.description,
+        tb.recommend,
+        tb.views,
+        tt.id     AS typeId,
+        tt.NAME   AS typeName,
+        tb.update_time,
+        tb.content,
+        tb.user_id,
+        tb.published,
+        tu.username,
+        tu.avatar as avatar
+        FROM t_blog tb
+        LEFT JOIN t_type tt ON tb.type_id = tt.id
+        LEFT JOIN t_user tu ON tb.user_id = tu.id
+        where 1=1
+        <if test="userId ==null">
+            and tb.published=1
+        </if>
+
+        <if test="title!=null and title!=''">
+            and  tb.title like  CONCAT('%',#{title},'%')
+        </if>
+        <if test="recommend!=null">
+            and tb.recommend=#{recommend}
+        </if>
+        <if test="typeId!=null">
+            and tb.type_id=#{typeId}
+        </if>
+        <if test="userId!=null">
+            and tb.user_id=#{userId}
+
+        </if>
+        ORDER BY update_time DESC
+    </select>
     <update id="updateBlogById">
         update t_blog
         <set>
@@ -95,28 +134,6 @@
         from t_blog
         where id = #{id}
     </delete>
-    <select id="selectBlogPageList" resultMap="blogResultMap">
-        SELECT tb.id,
-               tb.title,
-               tb.content,
-               tb.first_picture,
-               tb.description,
-               tb.recommend,
-               tb.views,
-               tt.id     AS typeId,
-               tt.NAME   AS typeName,
-               tb.update_time,
-               tb.content,
-               tb.user_id,
-               tb.published,
-               tu.username,
-               tu.avatar as avatar
-        FROM t_blog tb
-                 LEFT JOIN t_type tt ON tb.type_id = tt.id
-                 LEFT JOIN t_user tu ON tb.user_id = tu.id
-        where tb.published=1
-        ORDER BY update_time DESC
-    </select>
     <select id="selectBlogById" resultMap="blogResultMap">
         SELECT tb.id,
                tb.title,

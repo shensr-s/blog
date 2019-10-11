@@ -59,17 +59,26 @@ public class TypeServiceImpl implements ITypeService {
         return typeMapper.selectTypes();
     }
 
+    /**
+     * 查询博客类型
+     *
+     * @param flag 1 ：查询首页最新推荐 0 ：查询全部
+     * @return
+     */
     @Override
     public List<Type> selectTypesAndCount(Integer flag) {
         List<Type> typeList = null;
-        if(flag==1){
-            //flag为1分页查询
-            PageHelper.startPage(1,6);
-            typeList =typeMapper.selectTypesAndCount();
-        }else {
+
+        if (flag == 1) {
+            //flag为1 查询首页最新推荐
+            PageHelper.startPage(1, 6);
+            typeList = typeMapper.selectTypesAndCount();
+        } else {
             //flag为0查询全部
-            typeList =typeMapper.selectTypesAndCount();
+            typeList = typeMapper.selectTypesAndCount();
         }
+
+
         return typeList;
     }
 

@@ -6,10 +6,11 @@ import cn.edu.nwafu.blog.dto.GitHubUser;
 import cn.edu.nwafu.blog.entity.User;
 import cn.edu.nwafu.blog.provider.GitHubProvider;
 import cn.edu.nwafu.blog.service.UserServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -36,6 +37,8 @@ public class AuthorizeController {
     @Autowired
     private UserServiceImpl userService;
 
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Value("${github.client.id}")
     private String client_id;
 
@@ -52,19 +55,18 @@ public class AuthorizeController {
                            HttpServletResponse response) {
 
         AccessTokenDTO accessTokenDTO = new AccessTokenDTO();
-        accessTokenDTO.setClient_id(client_id);
-        accessTokenDTO.setClient_secret(client_secret);
+        accessTokenDTO.setClientId(client_id);
+        accessTokenDTO.setClientSecret(client_secret);
         accessTokenDTO.setCode(code);
-        accessTokenDTO.setRedirect_uri(redirect_uri);
+        accessTokenDTO.setRedirectUri(redirect_uri);
         accessTokenDTO.setState(state);
 
 
         String accessToken = gitHubProvider.getAccessToken(accessTokenDTO);
         GitHubUser gitHubUser = gitHubProvider.getUser(accessToken);
         if (gitHubUser != null && gitHubUser.getId() != null) {
-            //登录成功，
-            System.out.println("\n\n\n--------------------"
-                    + gitHubUser.getName() + "---------------\n\n\n");
+            // 登录成功，
+            logger.info("------{}登陆成功----", gitHubUser.getName());
 
             User user = new User();
             String token = UUID.randomUUID().toString();
@@ -74,23 +76,18 @@ public class AuthorizeController {
             user.setCreateTime(new Date());
             user.setUpdateTime(user.getCreateTime());
             user.setRoleId(2L);
+            user.setAvatar(gitHubUser.getAvatarUrl());
 
-
-            Long accountId = user.getAccountId();
-            User checkUser = userService.checkUserByAccountId(accountId);
-            //用户不存在就添加到数据库
-            if (checkUser == null) {
-                userService.saveUser(user);
-            }
+            userService.saveOrUpdateUser(user);
 
             response.addCookie(new Cookie("token", token));
             request.getSession().setAttribute("user", user);
-            //重定向到主页面，地址栏的地址会改变，不影响用户体验
+            // 重定向到主页面，地址栏的地址会改变，不影响用户体验
             return "redirect:/";
 
 
         } else {
-            //登录失败，重新登录
+            // 登录失败，重新登录
             return "redirect:/";
         }
 

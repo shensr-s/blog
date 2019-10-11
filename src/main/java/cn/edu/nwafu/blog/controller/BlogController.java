@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
@@ -44,17 +45,42 @@ public class BlogController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
-    //获取博客列表
+    /**
+     * 获取博客列表
+     *
+     * @param blog
+     * @param model
+     * @param request
+     * @return
+     */
     @RequestMapping("/ajax/list")
-    public String selectBlogPageList(@RequestBody BlogVO blog, Model model) {
+    public String selectBlogPageList(@RequestBody BlogVO blog, Model model, HttpServletRequest request) {
 
+        User user = (User) request.getSession().getAttribute("user");
+        Long userId = null;
+        if (user != null) {
+            userId = user.getId();
+        }
         Blog searchBlog = new Blog();
+        searchBlog.setTitle(blog.getTitle());
+        searchBlog.setRecommend(blog.getRecommend());
+        searchBlog.setTypeId(blog.getTypeId());
+        List<Blog> blogList = null;
+        if (userId == null) {
 
-        List<Blog> blogList = blogService.selectBlogPageList(blog.getPageNum(), blog.getPageSize(), searchBlog);
+            blogList = blogService.selectBlogPageList(blog.getPageNum(), blog.getPageSize(), searchBlog);
+        } else {
+            searchBlog.setUserId(userId);
+            blogList = blogService.selectBlogPageList(blog.getPageNum(), blog.getPageSize(), searchBlog);
+        }
 
-        PageInfo pageInfo = new PageInfo(blogList);
-        model.addAttribute("blogList", pageInfo.getList());
-        model.addAttribute("page", pageInfo);
+        // 查询结果不为空
+        if (blogList.size() != 0) {
+            PageInfo pageInfo = new PageInfo(blogList);
+            model.addAttribute("blogList", pageInfo.getList());
+            model.addAttribute("page", pageInfo);
+        }
+
         return "blogManage/blogList";
     }
 
@@ -111,10 +137,10 @@ public class BlogController {
             blog.setUserId(user.getId());
 
             blog.setUpdateTime(new Date());
-            //未删除
+            // 未删除
             blog.setIsDeletedFlag(false);
 
-            //推荐 转载 赞赏 评论
+            // 推荐 转载 赞赏 评论
             if (blog.getRecommend() == null) {
                 blog.setRecommend(false);
             }
@@ -128,7 +154,8 @@ public class BlogController {
                 blog.setCommentAbled(false);
             }
 
-            if (blog.getId() == null) {//新增
+            if (blog.getId() == null) {
+                //新增
                 blog.setCreateTime(new Date());
                 //设置浏览次数
                 blog.setViews(0);
@@ -216,6 +243,7 @@ public class BlogController {
 
     @RequestMapping("/ajax/home/type")
     public String selectType(Model model) {
+
         //参数为1 只查询前六条
         List<Type> typeList = typeService.selectTypesAndCount(1);
         model.addAttribute("typeList", typeList);
@@ -236,12 +264,25 @@ public class BlogController {
         return "home/newHomeList";
     }
 
+    /**
+     * 跳转博客界面
+     *
+     * @param id
+     * @param request
+     * @param model
+     * @return
+     */
     @RequestMapping("/blog/{id}")
-    public String locBlogById(@PathVariable Long id, Model model) {
-        //浏览器访问当前页面时，浏览量加一，
-        blogService.updateBlogViews(id);
+    public String locBlogById(@PathVariable Long id, HttpServletRequest request, Model model) {
+
 
         Blog blog = blogService.getAndConvert(id);
+
+        User user = (User) request.getSession().getAttribute("user");
+        //浏览器访问当前页面时，浏览量加一（非当前用户操作）
+        if (user == null || !blog.getUserId().equals(user.getId())) {
+            blogService.updateBlogViews(id);
+        }
 
         model.addAttribute("blog", blog);
         return "blog";

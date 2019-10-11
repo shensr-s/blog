@@ -37,7 +37,12 @@
         </tbody>
     </table>
 <#else >
-    <div class="ui center aligned">
+    <div align="center">
+        <div class="ui teal message">
+            <div class="header">
+                <div style="color: grey">暂无数据</div>
+            </div>
+        </div>
         <img src="${request.contextPath}/images/noData.jpg" alt="" class="ui rounded image">
     </div>
 </#if>

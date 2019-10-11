@@ -18,4 +18,8 @@ public class BaseVO implements Serializable {
         return JSON.toJSONString(this);
     }
 
+    @Override
+    public String toString() {
+        return "BaseVO{}";
+    }
 }

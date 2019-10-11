@@ -14,7 +14,7 @@ public interface IUserService {
      * @param username
      * @return
      */
-    User checkUser(String username);
+    User checkUser(String email);
 
     int saveUser(User user);
 
@@ -31,4 +31,10 @@ public interface IUserService {
      * @return
      */
     User findUserByToken(String token);
+
+    /**
+     * 用户不存在插入用户信息，用户存在就更新用户token
+     * @param user
+     */
+    public void saveOrUpdateUser(User user);
 }

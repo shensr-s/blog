@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <!--termianl命令：mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate-->
+
+    <context id="MysqlTables" targetRuntime="MyBatis3">
+        <!--解决读取数据库中的comments中文乱码-->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!--分页-->
+        <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"></plugin>
+
+        <commentGenerator type="cn.edu.nwafu.blog.generator.MyCommentGenerator">
+            <property name="addRemarkComments" value="true"/>
+        </commentGenerator>
+        <!--jdbcConnection: 数据库连接的属性
+                            必选属性-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/blog?serverTimezone=UTC"
+                        userId="root"
+                        password="123456">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <!--javaModelGenerator: Java模型生成器的属性 此元素是<context>元素的必需子元素。
+                                enableSubPackages: value为true时，包不存在会自动创建-->
+        <javaModelGenerator targetPackage="cn.edu.nwafu.blog.generator" targetProject="src\main\java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!--Mapper.xml生成-->
+        <sqlMapGenerator targetPackage="generator.mapper" targetProject="src\main\resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!--XXXMapper.java生成-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="cn.edu.nwafu.blog.generator.dao"
+                             targetProject="src\main\java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!--  useActualColumnNames:如果为true，则MBG将使用从数据库元数据返回的列名作为生成的域对象的属性。
+                                   如果为false（默认），则MBG将尝试以驼峰式表示返回的名称。
+                                   默认值为false。-->
+        <table schema="DB2ADMIN" tableName="t_user" domainObjectName="User">
+            <!--<property name="useActualColumnNames" value="true"/>-->
+        </table>
+
+
+    </context>
+</generatorConfiguration>

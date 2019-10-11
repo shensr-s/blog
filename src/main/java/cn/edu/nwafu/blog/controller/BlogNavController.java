@@ -37,8 +37,14 @@ public class BlogNavController {
 
 
 
-    //跳转到相应的页面
-    //博客管理页面
+
+
+    /**
+     * 跳转到相应的页面
+     *     博客管理页面
+     * @param model
+     * @return
+     */
     @RequestMapping("/manage")
     public String locHome(Model model) {
         List<Type> typeList = typeService.selectTypes();
@@ -48,33 +54,41 @@ public class BlogNavController {
     }
 
     @RequestMapping("/add")
-    public String LocEditBlog(Model model) {
-        //查询分类
+    public String locEditBlog(Model model) {
+        // 查询分类
         List<Type> typeList = typeService.selectTypes();
         model.addAttribute("typeList", typeList);
 
-        //查询标签
+        // 查询标签
         List<Tag> tagList = tagService.selectTags();
         model.addAttribute("tagList",tagList);
         return "blogManage/blogs-input";
     }
 
-    //博客类型页面
+    /**
+     * 博客类型页面
+     * @param model
+     * @return
+     */
     @RequestMapping("/type")
     public String locTypes(Model model) {
 
-        //flag为空 查询全部
+        // flag为空 查询全部
         List<Type> typeList = typeService.selectTypesAndCount(0);
         model.addAttribute("typeList", typeList);
         model.addAttribute("total",typeList.size());
         return "type/types";
     }
 
-    //博客标签页面
+    /**
+     * 博客标签页面
+     * @param model
+     * @return
+     */
     @RequestMapping("/tag")
     public String locTags(Model model) {
 
-        //flag为0 查询所有标签
+        // flag为0 查询所有标签
         List<Tag> tagList = tagService.selectTagsAndCount(0);
         model.addAttribute("tagList",tagList);
         model.addAttribute("total",tagList.size());

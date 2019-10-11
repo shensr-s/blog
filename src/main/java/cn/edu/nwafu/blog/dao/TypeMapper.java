@@ -31,4 +31,6 @@ public interface TypeMapper {
     List<Type> selectTypes();
 
     List<Type> selectTypesAndCount();
+
+
 }

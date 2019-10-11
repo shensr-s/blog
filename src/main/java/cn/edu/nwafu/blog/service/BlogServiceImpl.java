@@ -32,14 +32,24 @@ public class BlogServiceImpl implements IBlogService {
     @Autowired
     private TagMapper tagMapper;
 
-    //根据Id查询博客
+    /**
+     * 根据Id查询博客
+     * @param id
+     * @return
+     */
     @Override
     public Blog selectBlogById(Long id) {
 
         return blogMapper.selectBlogById(id);
     }
 
-    //返回博客列表
+    /**
+     * 返回博客列表
+     * @param pageNum
+     * @param pageSize
+     * @param blog
+     * @return
+     */
     @Override
     public List<Blog> selectBlogPageList(Integer pageNum, Integer pageSize, Blog blog) {
 
@@ -49,8 +59,11 @@ public class BlogServiceImpl implements IBlogService {
     }
 
 
-
-    //保存博客
+    /**
+     * 保存博客
+     * @param blog
+     * @return
+     */
     @Override
     public Long saveBlog(BlogVO blog) {
 
@@ -61,7 +74,11 @@ public class BlogServiceImpl implements IBlogService {
 
     }
 
-    //根据id更新博客
+    /**
+     * 根据id更新博客
+     * @param blog
+     * @return
+     */
     @Override
     public int updateBlogById(BlogVO blog) {
         int i = blogMapper.updateBlogById(blog);
@@ -83,12 +100,16 @@ public class BlogServiceImpl implements IBlogService {
             BlogTag blogTag = new BlogTag(blogId, tagId[i]);
             list.add(blogTag);
         }
-        //保存标签
+        // 保存标签
         tagMapper.saveBlogTag(list);
         return blogId;
     }
 
-    //删除博客（彻底删除）
+    /**
+     * 删除博客（彻底删除）
+     * @param id
+     * @return
+     */
     @Override
     public int deleteBlogById(Long id) {
         int count = blogMapper.deleteBlogById(id);
@@ -96,7 +117,12 @@ public class BlogServiceImpl implements IBlogService {
     }
 
 
-    //首页查询博客
+    /**
+     *
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
     @Override
     public List<Blog> selectBlogHomeList(Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum,pageSize);
@@ -104,10 +130,11 @@ public class BlogServiceImpl implements IBlogService {
     }
 
 
-
-
-
-    //根据id查询博客 并将markdown转化为HTML在页面展示
+    /**
+     * 根据id查询博客 并将markdown转化为HTML在页面展示
+     * @param id
+     * @return
+     */
     @Override
     public Blog getAndConvert(Long id) {
         Blog blog = blogMapper.selectBlogById(id);
@@ -126,7 +153,10 @@ public class BlogServiceImpl implements IBlogService {
         return  b;
     }
 
-    //归档页面 根据年份显示当前年份的博客
+    /**
+     * 归档页面 根据年份显示当前年份的博客
+     * @return
+     */
     @Override
     public Map<String, List<Blog>> archiveBlog() {
         List<String> years = blogMapper.selectGroupByYears();

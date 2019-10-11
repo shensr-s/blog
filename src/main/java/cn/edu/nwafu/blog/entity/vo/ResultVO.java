@@ -1,26 +1,38 @@
 package cn.edu.nwafu.blog.entity.vo;
 
 
+import lombok.ToString;
+
 /**
  * @author shensr
  * @version V1.0
  * @description: 后台返回前端的数据
  * @create 2019/9/5
  */
+@ToString
 public class ResultVO extends BaseVO {
 
-    private int code;//编码200为成功，其余为失败,编码取自：ResultEnum
+    /**
+     * 编码200为成功，其余为失败,编码取自：ResultEnum
+     */
+    private Integer code;
 
-    private String msg;//提示信息
+    /**
+     * 提示信息
+     */
+    private String msg;
 
-    private Object data; //业务数据
+    /**
+     * 业务数据
+     */
+    private Object data;
 
-    public ResultVO(int code, String msg) {
+    public ResultVO(Integer code, String msg) {
         this.code = code;
         this.msg = msg;
     }
 
-    public ResultVO(int code, String msg, Object data) {
+    public ResultVO(Integer code, String msg, Object data) {
         this.code = code;
         this.msg = msg;
         this.data = data;
