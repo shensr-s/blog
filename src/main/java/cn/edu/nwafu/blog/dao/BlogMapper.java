@@ -16,9 +16,9 @@ import java.util.List;
 
 @Repository
 public interface BlogMapper {
-    Blog selectBlogById(Long id);
+    BlogVO selectBlogById(Long id);
 
-    List<Blog> selectBlogPageList( Blog blog);
+    List<BlogVO> selectBlogPageList( Blog blog);
 
     int saveBlog(BlogVO blog);
 
@@ -30,8 +30,15 @@ public interface BlogMapper {
 
     List<String> selectGroupByYears();
 
-    List<Blog> selectBlogByYear(String year);
+    List<BlogVO> selectBlogByYear(String year);
 
     void updateBlogViews(Long id);
+
+    /**
+     * 更新博客
+     * @param blog
+     * @return
+     */
+    int updateByPrimaryKeySelective(Blog blog);
 }
 

@@ -21,11 +21,11 @@
                 </div>
             </div>
             <div class="three wide column">
-                <h4 class="ui inverted header">联系我</h4>
+                <h4 class="ui inverted header">联系作者</h4>
                 <div class="ui inverted link list">
                     QQ:<a href="#" class="item" style="display: inline-block">11111</a> <br>
                     微信:<a href="#" class="item" style="display: inline-block">1111</a><br>
-                    GitHub:<a href="https://github.com/HansGerry" target="_blank" class="item" style="display: inline-block">HansGerry</a>
+                    GitHub:<a href="https://github.com/HansGerry" target="_blank" class="item" style="display: inline-block">shensr</a>
                 </div>
             </div>
             <div class="seven wide column">

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.edu.nwafu.blog.dao.BlogMapper">
-    <resultMap id="blogResultMap" type="cn.edu.nwafu.blog.entity.Blog">
+    <resultMap id="blogResultMap" type="cn.edu.nwafu.blog.entity.vo.BlogVO">
         <result property="id" column="id" jdbcType="BIGINT"/>
         <result property="title" column="title" jdbcType="VARCHAR"/>
         <result property="recommend" column="recommend" jdbcType="BIT"/>
@@ -18,6 +18,7 @@
         <result property="description" column="description" jdbcType="VARCHAR"/>
         <result property="views" column="views" jdbcType="INTEGER"/>
         <result property="published" column="published" jdbcType="BIT"/>
+        <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
         <collection property="tagList" column="id" ofType="cn.edu.nwafu.blog.entity.Tag" javaType="java.util.List"
                     select="selectTagByBlogId">
 
@@ -52,7 +53,7 @@
         FROM t_blog tb
         LEFT JOIN t_type tt ON tb.type_id = tt.id
         LEFT JOIN t_user tu ON tb.user_id = tu.id
-        where 1=1
+        where tb.is_deleted_flag=0
         <if test="userId ==null">
             and tb.published=1
         </if>
@@ -192,5 +193,60 @@
         update t_blog
         set views=views + 1
         where id = #{id}
+    </update>
+
+    <update id="updateByPrimaryKeySelective">
+        update t_blog
+        <set>
+            <if test="appreciation != null">
+                appreciation = #{appreciation,jdbcType=BIT},
+            </if>
+            <if test="commentAbled != null">
+                commentabled = #{commentAbled,jdbcType=BIT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="firstPicture != null">
+                first_picture = #{firstPicture,jdbcType=VARCHAR},
+            </if>
+            <if test="flag != null">
+                flag = #{flag,jdbcType=VARCHAR},
+            </if>
+            <if test="published != null">
+                published = #{published,jdbcType=BIT},
+            </if>
+            <if test="recommend != null">
+                recommend = #{recommend,jdbcType=BIT},
+            </if>
+            <if test="shareStatement != null">
+                share_statement = #{shareStatement,jdbcType=BIT},
+            </if>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="views != null">
+                views = #{views,jdbcType=INTEGER},
+            </if>
+            <if test="typeId != null">
+                type_id = #{typeId,jdbcType=BIGINT},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="isDeletedFlag != null">
+                is_deleted_flag = #{isDeletedFlag,jdbcType=BIT},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
     </update>
 </mapper>

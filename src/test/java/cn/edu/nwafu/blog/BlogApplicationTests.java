@@ -1,6 +1,6 @@
 package cn.edu.nwafu.blog;
 
-import cn.edu.nwafu.blog.entity.Blog;
+import cn.edu.nwafu.blog.entity.vo.BlogVO;
 import cn.edu.nwafu.blog.service.BlogServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +18,7 @@ public class BlogApplicationTests {
 
     @Test
     public void contextLoads() {
-        List<Blog> blogs = blogService.selectBlogHomeList(1, 6);
+        List<BlogVO> blogs = blogService.selectBlogHomeList(1, 6);
         System.out.println(blogs);
     }
 

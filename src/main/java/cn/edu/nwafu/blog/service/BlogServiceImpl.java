@@ -38,7 +38,7 @@ public class BlogServiceImpl implements IBlogService {
      * @return
      */
     @Override
-    public Blog selectBlogById(Long id) {
+    public BlogVO selectBlogById(Long id) {
 
         return blogMapper.selectBlogById(id);
     }
@@ -51,7 +51,7 @@ public class BlogServiceImpl implements IBlogService {
      * @return
      */
     @Override
-    public List<Blog> selectBlogPageList(Integer pageNum, Integer pageSize, Blog blog) {
+    public List<BlogVO> selectBlogPageList(Integer pageNum, Integer pageSize, Blog blog) {
 
         PageHelper.startPage(pageNum, pageSize);
 
@@ -106,13 +106,13 @@ public class BlogServiceImpl implements IBlogService {
     }
 
     /**
-     * 删除博客（彻底删除）
-     * @param id
+     * 删除博客（物理删除）
+     * @param blog
      * @return
      */
     @Override
-    public int deleteBlogById(Long id) {
-        int count = blogMapper.deleteBlogById(id);
+    public int deleteBlogById(Blog blog) {
+        int count = blogMapper.updateByPrimaryKeySelective(blog);
         return count;
     }
 
@@ -124,7 +124,7 @@ public class BlogServiceImpl implements IBlogService {
      * @return
      */
     @Override
-    public List<Blog> selectBlogHomeList(Integer pageNum, Integer pageSize) {
+    public List<BlogVO> selectBlogHomeList(Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum,pageSize);
         return blogMapper.selectBlogPageList(null);
     }
@@ -136,15 +136,15 @@ public class BlogServiceImpl implements IBlogService {
      * @return
      */
     @Override
-    public Blog getAndConvert(Long id) {
-        Blog blog = blogMapper.selectBlogById(id);
+    public BlogVO getAndConvert(Long id) {
+        BlogVO blog = blogMapper.selectBlogById(id);
 
         //博客不存在,抛出自定义异常
         if (blog == null) {
             throw new CustomizeException("当前博客不存在！！");
         }
 
-        Blog b = new Blog();
+        BlogVO b = new BlogVO();
         //复制新查询的值到新建的blog
         BeanUtils.copyProperties(blog,b);
         String content = b.getContent();
@@ -158,13 +158,13 @@ public class BlogServiceImpl implements IBlogService {
      * @return
      */
     @Override
-    public Map<String, List<Blog>> archiveBlog() {
+    public Map<String, List<BlogVO>> archiveBlog() {
         List<String> years = blogMapper.selectGroupByYears();
 
-        Map<String, List<Blog>> map = new HashMap<>();
+        Map<String, List<BlogVO>> map = new HashMap<>();
         //TODO 待优化
         for (int i = 0; i <years.size() ; i++) {
-            List<Blog> blogList = blogMapper.selectBlogByYear(years.get(i));
+            List<BlogVO> blogList = blogMapper.selectBlogByYear(years.get(i));
             map.put(years.get(i),blogList);
         }
 

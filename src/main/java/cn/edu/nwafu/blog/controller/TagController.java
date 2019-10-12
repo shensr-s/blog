@@ -45,7 +45,11 @@ public class TagController {
     }
 
 
-    //新增tag
+    /**
+     * 新增tag
+     * @param Tag
+     * @return
+     */
     @RequestMapping("/add")
     @ResponseBody
     public ResultVO saveTag(@RequestBody TagVO Tag) {
@@ -75,7 +79,14 @@ public class TagController {
     }
 
 
-    //获取Tag列表
+    /**
+     * 获取Tag列表
+     * @param pageNum
+     * @param pageSize
+     * @param name
+     * @param model
+     * @return
+     */
     @RequestMapping("/ajax/list")
     public String selectTagPageList(@RequestParam(defaultValue = "1") Integer pageNum,
                                      @RequestParam(defaultValue = "10") Integer pageSize,
@@ -91,7 +102,11 @@ public class TagController {
     }
 
 
-    //更新tag
+    /**
+     * 更新tag
+     * @param Tag
+     * @return
+     */
     @RequestMapping("/edit")
     @ResponseBody
     public ResultVO updateTagById(@RequestBody TagVO Tag) {

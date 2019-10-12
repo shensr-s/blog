@@ -12,13 +12,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.List;
 
@@ -65,7 +63,7 @@ public class BlogController {
         searchBlog.setTitle(blog.getTitle());
         searchBlog.setRecommend(blog.getRecommend());
         searchBlog.setTypeId(blog.getTypeId());
-        List<Blog> blogList = null;
+        List<BlogVO> blogList = null;
         if (userId == null) {
 
             blogList = blogService.selectBlogPageList(blog.getPageNum(), blog.getPageSize(), searchBlog);
@@ -105,7 +103,7 @@ public class BlogController {
         //TODO
 
         //查询博客
-        Blog blog = blogService.selectBlogById(id);
+        BlogVO blog = blogService.selectBlogById(id);
         List<BlogTag> blogTags = tagService.selectTagByBlogId(id);
         StringBuffer tagStr = new StringBuffer();
         blogTags.forEach(item -> tagStr.append(item.getTagId() + ","));
@@ -179,11 +177,11 @@ public class BlogController {
                     resultVO.setData(blog.getId());
 
                 } catch (Exception e) {
-                    if (blog.getPublished() == false) {
+                    if (!blog.getPublished()) {
                         //保存失败
                         resultVO.setMsg("保存失败");
                         resultVO.setCode(601);
-                    } else if (blog.getPublished() == true) {
+                    } else {
                         //发布失败
                         resultVO.setMsg("发布失败");
                         resultVO.setCode(601);
@@ -195,9 +193,29 @@ public class BlogController {
 
         }
 
-
         return resultVO;
 
+    }
+
+    /**
+     * 删除博客
+     * @param id
+     */
+    @RequestMapping(value = "/delete/{id}",method = RequestMethod.DELETE)
+    @ResponseBody
+    public ResultVO deleteBlogById(@PathVariable("id") Long id){
+        ResultVO resultVO = new ResultVO(200, "删除成功");
+        Blog blog = new Blog();
+        blog.setId(id);
+        blog.setIsDeletedFlag(true);
+        try {
+            blogService.deleteBlogById(blog);
+        }catch (Exception e){
+            resultVO.setMsg("删除失败");
+            resultVO.setCode(601);
+            logger.error("错误：{}；Exception：{}",resultVO.getMsg(),e);
+        }
+        return resultVO;
     }
 
     /**
@@ -211,7 +229,7 @@ public class BlogController {
     @RequestMapping("/ajax/home/list")
     public String selectBlogPageHome(Integer pageNum, Integer pageSize, Model model) {
         //查询博客
-        List<Blog> blogList = blogService.selectBlogHomeList(pageNum, pageSize);
+        List<BlogVO> blogList = blogService.selectBlogHomeList(pageNum, pageSize);
         PageInfo pageInfo = new PageInfo(blogList);
         model.addAttribute("blogList", pageInfo.getList());
         model.addAttribute("total", pageInfo.getTotal());
@@ -259,7 +277,7 @@ public class BlogController {
 
     @RequestMapping("/ajax/home/newBlog")
     public String selectNewBlog(Model model) {
-        List<Blog> blogList = blogService.selectBlogHomeList(1, 6);
+        List<BlogVO> blogList = blogService.selectBlogHomeList(1, 6);
         model.addAttribute("blogList", blogList);
         return "home/newHomeList";
     }
@@ -276,7 +294,7 @@ public class BlogController {
     public String locBlogById(@PathVariable Long id, HttpServletRequest request, Model model) {
 
 
-        Blog blog = blogService.getAndConvert(id);
+        BlogVO blog = blogService.getAndConvert(id);
 
         User user = (User) request.getSession().getAttribute("user");
         //浏览器访问当前页面时，浏览量加一（非当前用户操作）

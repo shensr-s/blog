@@ -146,8 +146,11 @@
     // });
     $(".delBlogClass").click(function () {
         //删除类型弹窗
+        $("#blogId").val($(this).val());
         $('.ui.modal.mini.del').modal('show');
     });
+
+
 
     //    翻页
     //上一页

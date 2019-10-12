@@ -48,7 +48,7 @@
         <!--  useActualColumnNames:如果为true，则MBG将使用从数据库元数据返回的列名作为生成的域对象的属性。
                                    如果为false（默认），则MBG将尝试以驼峰式表示返回的名称。
                                    默认值为false。-->
-        <table schema="DB2ADMIN" tableName="t_user" domainObjectName="User">
+        <table schema="DB2ADMIN" tableName="t_blog" domainObjectName="Blog">
             <!--<property name="useActualColumnNames" value="true"/>-->
         </table>
 

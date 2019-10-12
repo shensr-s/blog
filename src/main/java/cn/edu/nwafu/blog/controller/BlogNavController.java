@@ -3,6 +3,7 @@ package cn.edu.nwafu.blog.controller;
 import cn.edu.nwafu.blog.entity.Blog;
 import cn.edu.nwafu.blog.entity.Tag;
 import cn.edu.nwafu.blog.entity.Type;
+import cn.edu.nwafu.blog.entity.vo.BlogVO;
 import cn.edu.nwafu.blog.service.BlogServiceImpl;
 import cn.edu.nwafu.blog.service.TagServiceImpl;
 import cn.edu.nwafu.blog.service.TypeServiceImpl;
@@ -109,7 +110,7 @@ public class BlogNavController {
     @RequestMapping("/archives")
     public String locArchives(Model model) {
 
-        Map<String, List<Blog>> archiveBlog = blogService.archiveBlog();
+        Map<String, List<BlogVO>> archiveBlog = blogService.archiveBlog();
 
         //TODO 计算博客总数 待优化
         AtomicInteger count = new AtomicInteger();

@@ -13,13 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * 自定义异常处理类
+ * 拦截所有带有@Controller注解的异常
+ * // @ControllerAdvice的使用参考：https://blog.csdn.net/zxfryp909012366/article/details/82955259
+ * //    官网：https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-developing-web-applications.html#boot-features-error-handling
  *
  * @author shensr
  * @Date 2019/9/5
  */
-//拦截所有带有@Controller注解的异常
-// @ControllerAdvice的使用参考：https://blog.csdn.net/zxfryp909012366/article/details/82955259
-//    官网：https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-developing-web-applications.html#boot-features-error-handling
 @ControllerAdvice
 public class CustomizeExceptionHandler extends ResponseEntityExceptionHandler {
 

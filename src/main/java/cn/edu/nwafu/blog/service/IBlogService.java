@@ -15,22 +15,22 @@ import java.util.Map;
 
 public interface IBlogService {
 
-    Blog selectBlogById(Long id);
+    BlogVO  selectBlogById(Long id);
 
-    List<Blog> selectBlogPageList(Integer pageNum, Integer pageSize,Blog blog);
+    List<BlogVO> selectBlogPageList(Integer pageNum, Integer pageSize,Blog blog);
 
     Long saveBlog(BlogVO blog);
 
     int updateBlogById(BlogVO blog);
 
-    int deleteBlogById(Long id);
+    int deleteBlogById(Blog blog);
 
-    List<Blog> selectBlogHomeList(Integer pageNum, Integer pageSize);
+    List<BlogVO> selectBlogHomeList(Integer pageNum, Integer pageSize);
 
-    Blog getAndConvert(Long id);
+    BlogVO getAndConvert(Long id);
 
 //    List<> selectBlogHomeList(int pageNum, int pageSize);
-    Map<String,List<Blog>> archiveBlog();
+    Map<String,List<BlogVO>> archiveBlog();
 
     void updateBlogViews(Long id);
 }

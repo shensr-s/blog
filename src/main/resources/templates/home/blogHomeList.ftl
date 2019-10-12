@@ -30,7 +30,7 @@
                             <div class="eleven wide column">
                                 <div class="ui mini link list horizontal">
                                     <div class="item">
-                                        <img src="${blog.firstPicture!}" alt=""
+                                        <img src="${blog.avatar!}" alt=""
                                              class="ui avatar image">
                                         <div class="content">
                                             <a href="#" class="header">${blog.userName!}</a>

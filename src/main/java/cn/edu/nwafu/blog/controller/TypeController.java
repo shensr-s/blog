@@ -31,7 +31,7 @@ public class TypeController {
     @Autowired
     private TypeServiceImpl typeService;
 
-    private final Logger logger= LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
      * 跳转到type管理页面
@@ -43,7 +43,12 @@ public class TypeController {
         return "type/typesManage";
     }
 
-    //新增Type
+    /**
+     * 新增Type
+     *
+     * @param type
+     * @return
+     */
     @RequestMapping("/add")
     @ResponseBody
     public ResultVO saveType(@RequestBody TypeVO type) {
@@ -58,11 +63,11 @@ public class TypeController {
             try {
                 typeService.saveType(type);
 
-            }catch (Exception e){
+            } catch (Exception e) {
 
                 resultVO.setCode(601);
                 resultVO.setMsg("新增类型失败");
-                logger.error("错误：{}；Exception：{}",resultVO.getMsg(),e);
+                logger.error("错误：{}；Exception：{}", resultVO.getMsg(), e);
             }
 
         } else {
@@ -73,7 +78,15 @@ public class TypeController {
     }
 
 
-    //获取type列表
+    /**
+     * 获取type列表
+     *
+     * @param pageNum
+     * @param pageSize
+     * @param name
+     * @param model
+     * @return
+     */
     @RequestMapping("/ajax/list")
     public String selectTypePageList(@RequestParam(defaultValue = "1") Integer pageNum,
                                      @RequestParam(defaultValue = "10") Integer pageSize,
@@ -89,6 +102,12 @@ public class TypeController {
     }
 
 
+    /**
+     * 删除博客
+     *
+     * @param type
+     * @return
+     */
     @RequestMapping("/edit")
     @ResponseBody
     public ResultVO updateTypeById(@RequestBody TypeVO type) {
@@ -101,10 +120,10 @@ public class TypeController {
             type.setIsDeletedFlag(true);
             try {
                 typeService.updateTypeById(type);
-            }catch (Exception e) {
+            } catch (Exception e) {
                 resultVO.setMsg("删除失败");
                 resultVO.setCode(601);
-                logger.error("错误：{}；Exception：{}",resultVO.getMsg(),e);
+                logger.error("错误：{}；Exception：{}", resultVO.getMsg(), e);
             }
         } else {
             //修改
@@ -112,10 +131,10 @@ public class TypeController {
             type.setUpdateTime(new Date());
             try {
                 typeService.updateTypeById(type);
-            }catch (Exception e) {
+            } catch (Exception e) {
                 resultVO.setMsg("修改失败");
                 resultVO.setCode(601);
-                logger.error("错误：{}；Exception：{}",resultVO.getMsg(),e);
+                logger.error("错误：{}；Exception：{}", resultVO.getMsg(), e);
             }
         }
 
@@ -123,6 +142,12 @@ public class TypeController {
     }
 
 
+    /**
+     * 彻底删除博客
+     *
+     * @param id
+     * @return
+     */
     @RequestMapping("/delete")
     @ResponseBody
     public ResultVO deleteTypeById(Long id) {
@@ -134,6 +159,10 @@ public class TypeController {
             resultVO.setMsg("删除失败");
         }
         return resultVO;
+    }
+
+    public String listBlogByTypeId(Long typeId){
+        return "home/blogHomeList";
     }
 
 }

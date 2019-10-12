@@ -29,6 +29,13 @@
 <div class="m-padded-tb-large<#-- m-container-small-->" <#--style="margin-top: 30px;"-->>
 
     <div class="ui container">
+        <#--消息提示:默认隐藏-->
+        <div class="ui success message" hidden>
+            <i class="close icon"></i>
+            <div class="header center-pill">提示:</div>
+            <p></p>
+        </div>
+
         <!--搜索栏-->
         <div class="ui top attached segment">
             <form action="#" method="post" class="ui padded segment form">
@@ -98,11 +105,13 @@
         提示
     </div>
     <div class="content">
+        <#--删除Id隐藏域-->
+        <input type="hidden" value="" id="blogId">
         <i class="archive icon large"></i> 确定要删除吗？
     </div>
 
     <div class="actions " style="text-align: center;">
-        <button class="ui approve red button">确定</button>
+        <button type="button" class="ui approve red button" id="delBtn" >确定</button>
         <button class="ui cancel button">取消</button>
     </div>
 </div>
@@ -186,14 +195,45 @@
                 if (XMLHttpRequest.status == 303) {
                     window.location.href = "/login";
                 } else {
-                    //layer.msg("获取需求列表失败");
-                    console.log("获取博客类型列表失败")
+                    $(".success.message p").html("获取博客列表失败");
+                    $(".success.message").closest('.message').transition('show');
+                    console.log("获取博客列表失败")
                 }
             }
         });
 
     };
 
+    //删除博客
+    $("#delBtn").click(function () {
+        var blogId = $("#blogId").val();
+        $.ajax({
+            type: "delete",
+            url: "/blog/delete/"+blogId,
+            dataType: "json",
+            contentType: 'application/json;charset=UTF-8',
+            success: function (data) {
+                if (data.code == 200) {
+                    blogList(1);
+                    $(".success.message p").html(data.msg);
+                    $(".success.message").closest('.message').transition('show');
+
+                } else if (data.code == 601) {
+                    $(".success.message p").html(data.msg);
+                    $(".success.message").closest('.message').transition('show');
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $(".loading-box").hide();
+                if (XMLHttpRequest.status == 303) {
+                    window.location.href = "/login";
+                } else {
+                    $(".success.message p").html("删除博客列表失败");
+                    $(".success.message").closest('.message').transition('show');
+                }
+            }
+        });
+    });
 
 
 </script>
