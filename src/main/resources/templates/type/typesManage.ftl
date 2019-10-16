@@ -144,6 +144,8 @@
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 <#--引入通用js-->
 <script src="${base}/js/common.js"></script>
+<#--引入layer.js-->
+<script src="${base}/lib/layer/layer.js"></script>
 <script>
 
     $(function () {
@@ -163,14 +165,22 @@
 
         var data = "pageNum=" + currentPage + "&pageSize=" + $("#pageSize").val() + "&search=" + search;
         // console.log(data);
+        var loading=null;
         $.ajax({
             type: "get",
             url: "/blog/type/ajax/list",
             data: data,
             dataType: "html",
+            beforeSend:function(){
+                loading= layer.load(1);
+            },
+            complete:function(){
+                layer.close(loading);
+            },
             success: function (data) {
                 $("#typeListTable").empty();
                 $("#typeListTable").html(data);
+
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 $(".loading-box").hide();
@@ -191,7 +201,7 @@
         var typeId = $("#delId").val();
         var data = {};
         data.id = typeId;
-        console.log(data)
+        console.log(data);
         $.ajax({
             type: "post",
             url: "/blog/type/edit",
@@ -205,9 +215,13 @@
                     $(".success.message p").html(data.msg);
                     $(".success.message").closest('.message').transition('show');
 
+                    layer.msg(data.msg,{icon:1});
+
                 } else if (data.code == 601) {
                     $(".success.message p").html(data.msg);
                     $(".success.message").closest('.message').transition('show');
+
+                    layer.msg(data.msg,{icon:2});
                 }
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -231,7 +245,7 @@
         var data = {};
         data.id = typeId;
         data.name = typeName;
-        console.log(data)
+        console.log(data);
         $.ajax({
             type: "post",
             url: "/blog/type/edit",
@@ -275,6 +289,7 @@
             data: JSON.stringify(data),
             dataType: "json",
             contentType: 'application/json;charset=UTF-8',
+
             success: function (data) {
                 if (data.code == 200) {
                     //成功

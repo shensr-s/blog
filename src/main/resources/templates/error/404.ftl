@@ -10,22 +10,22 @@
     <!--CDN 引入semantic-ui -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
     <title>出错啦!!!-404</title>
-    <style>
-        .Layer1 {
-            position:absolute;
-            top:30%;
-            left:30%;
-            margin:-100px 0 0 -100px;
-            zoom:0.5;
-            /* 要设置这个div的宽度 */
-            width: 50%;
-        }
-        /*占满整个屏幕*/
-        /*.masthead.segment {*/
-        /*    min-height: 700px;*/
-        /*    padding: 1em 0em;*/
-        /*}*/
-    </style>
+<#--    <style>-->
+<#--        .Layer1 {-->
+<#--            position:absolute;-->
+<#--            top:30%;-->
+<#--            left:30%;-->
+<#--            margin:-100px 0 0 -100px;-->
+<#--            zoom:0.5;-->
+<#--            /* 要设置这个div的宽度 */-->
+<#--            width: 50%;-->
+<#--        }-->
+<#--        /*占满整个屏幕*/-->
+<#--        /*.masthead.segment {*/-->
+<#--        /*    min-height: 700px;*/-->
+<#--        /*    padding: 1em 0em;*/-->
+<#--        /*}*/-->
+<#--    </style>-->
 </head>
 <body>
 <!--导航-->
@@ -65,7 +65,8 @@
 <#include "${base}/common/footer.ftl">
 <!--页面底部结束-->
 
-
+<!--CDN 引入jquery-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
 <!--CDN 引入semantic-ui-->
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 </body>

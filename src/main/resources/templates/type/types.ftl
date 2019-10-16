@@ -70,6 +70,8 @@
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 <#--引入通用js-->
 <script src="${base}/js/common.js"></script>
+<#--引入layer.js-->
+<script src="${base}/lib/layer/layer.js"></script>
 <script>
     $("#type").addClass("active");
     $(".menu.toggle").click(function () {
@@ -92,12 +94,19 @@
         data.pageNum = $("#currentPage").val();
         data.pageSize = $("#pageSize").val();
         console.log(data);
+        var loading= null;
         $.ajax({
             type: "get",
             url: "/blog/ajax/home/list",
             data: data,
             dataType: "html",
             contentType: 'application/json;charset=UTF-8',
+            beforeSend:function(){
+                loading= layer.load(1);
+            },
+            complete:function(){
+                layer.close(loading);
+            },
             success: function (data) {
                 $(".ui.attached.segment.contentBlog").empty();
                 $(".ui.attached.segment.contentBlog").html(data);

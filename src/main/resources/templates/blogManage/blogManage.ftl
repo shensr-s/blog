@@ -137,6 +137,8 @@
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 <#--引入通用js-->
 <script src="${base}/js/common.js"></script>
+<#--引入layer.js-->
+<script src="${base}/lib/layer/layer.js"></script>
 <script>
 
     $(function () {
@@ -180,12 +182,19 @@
         data.pageNum = $("#currentPage").val();
         data.pageSize = $("#pageSize").val();
         console.log(data);
+        var loading =null;
         $.ajax({
             type: "post",
             url: "/blog/ajax/list",
             data: JSON.stringify(data),
             dataType: "html",
             contentType: 'application/json;charset=UTF-8',
+            beforeSend:function(){
+                loading= layer.load(1);
+            },
+            complete:function(){
+                layer.close(loading);
+            },
             success: function (data) {
                 $(".blogListTable").empty();
                 $(".blogListTable").html(data);
@@ -218,9 +227,12 @@
                     $(".success.message p").html(data.msg);
                     $(".success.message").closest('.message').transition('show');
 
+                    layer.msg(data.msg,{icon:1});
+
                 } else if (data.code == 601) {
                     $(".success.message p").html(data.msg);
                     $(".success.message").closest('.message').transition('show');
+                    layer.msg(data.msg,{icon:2});
                 }
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {

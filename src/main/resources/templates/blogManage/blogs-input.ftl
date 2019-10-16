@@ -209,10 +209,10 @@
 <#--发布情况提示结束-->
 
 <#--隐藏域-->
-<#if blog??>
+
 <#--    编辑博客时出现-->
-    <input type="text" value="${blog.published?string('true','false')}" hidden id="published">
-</#if>
+<input type="text" <#if blog??>value="${blog.published?string('true','false')}"<#else >value="false"</#if> hidden id="published">
+
 <#--隐藏域结束-->
 
 <!--页面底部-->
@@ -226,6 +226,9 @@
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 <!--引入markdown的js-->
 <script src="${base}/lib/editormd/editormd.min.js"></script>
+
+<#--引入layer.js-->
+<script src="${base}/lib/layer/layer.js"></script>
 <script>
     $(".menu.toggle").click(function () {
         $(".m-item").toggleClass('m-mobile-hide');
@@ -280,29 +283,29 @@
 
     //保存博客
     $(".saveBlogBtn").click(function () {
-        if($("#published")=="false"){
-            saveOrUpdateBlog(1,false);
-        }else {
-            saveOrUpdateBlog(1,true);
+        if ($("#published").val() == "false") {
+            saveOrUpdateBlog(1, false);
+        } else {
+            saveOrUpdateBlog(1, true);
         }
     });
 
     //更新博客
     $(".updateBlogBtn").click(function () {
-        if($("#published")=="false"){
-            saveOrUpdateBlog(1,false);
-        }else {
-            saveOrUpdateBlog(1,true);
+        if ($("#published").val() == "false") {
+            saveOrUpdateBlog(1, false);
+        } else {
+            saveOrUpdateBlog(1, true);
         }
     })
     //发布博客
     $(".publishBlogBtn").click(function () {
-        saveOrUpdateBlog(2,true);
+        saveOrUpdateBlog(2, true);
     });
 
 
     //blog新增 与更新
-    function saveOrUpdateBlog(type,published) {
+    function saveOrUpdateBlog(type, published) {
         //校验表单
         var check = $(".ui.form").form("validate form");
 
@@ -341,6 +344,10 @@
                 data: JSON.stringify(data),
                 dataType: "json",
                 contentType: 'application/json;charset=UTF-8',
+
+                complete: function () {
+                    layer.msg("保存成功", {icon: 1});
+                },
                 success: function (data) {
 
                     if (data.code === 200) {
@@ -348,8 +355,8 @@
                         console.log(data.msg);
                         console.log(data);
                         var blogId = data.data;
-                        var loc=window.location.pathname;
-                        if(loc.indexOf("edit")==-1){
+                        var loc = window.location.pathname;
+                        if (loc.indexOf("edit") == -1) {
                             window.location.href = "/blog/edit/" + blogId;
                         }
                         $(".success.message.field p").html(data.msg);
@@ -382,6 +389,9 @@
                 data: JSON.stringify(data),
                 dataType: "json",
                 contentType: 'application/json;charset=UTF-8',
+                complete: function () {
+                    layer.msg("发布成功", {icon: 1});
+                },
                 success: function (data) {
 
                     if (data.code === 200) {
